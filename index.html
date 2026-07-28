@@ -4,480 +4,663 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhakti Mobile & Repairing Center, Udgir</title>
-    
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: { brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' } }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
+        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .hover-scale { transition: transform 0.3s ease; }
+        .hover-scale:hover { transform: scale(1.03); }
+        
+        /* Modal Animation */
+        .modal-active { display: flex !important; animation: fadeIn 0.2s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800 antialiased overflow-x-hidden">
+<body class="text-slate-800">
 
-    <!-- Top Contact Bar -->
-    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 sm:px-8 flex justify-between items-center">
+    <div class="bg-slate-900 text-white text-xs sm:text-sm py-2 px-4 flex justify-between items-center z-50 relative">
         <div class="flex gap-4">
-            <span><i class="fa-solid fa-phone text-brand-500"></i> +91 9049555270, +91 8788131515</span>
-            <span class="hidden sm:inline"><i class="fa-solid fa-location-dot text-brand-500"></i> Udgir, Maharashtra</span>
+            <span class="hidden sm:inline" data-lang="call-us">📞 +91 9049555270 | +91 8788131515</span>
+            <span class="sm:hidden">📞 +91 9049555270</span>
+            <span data-lang="location">📍 Udgir, Maharashtra</span>
         </div>
         <div class="flex gap-4 items-center">
-            <button onclick="window.openModal('trackingModal')" class="hover:text-white transition-colors font-bold text-brand-400" data-translate="top_track"><i class="fa-solid fa-truck-fast"></i> Track Repair</button>
-            <button id="langToggle" onclick="window.toggleLanguage()" class="bg-slate-800 hover:bg-slate-700 text-white px-3 py-1 rounded-full border border-slate-700 transition-colors">मराठी (MR)</button>
+            <button onclick="toggleLanguage()" class="font-bold text-blue-400 hover:text-blue-300 transition" id="lang-toggle">[EN | मराठी]</button>
         </div>
     </div>
 
-    <!-- Main Navigation -->
-    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <div class="w-10 h-10 bg-brand-600 text-white rounded-xl flex items-center justify-center text-xl font-bold shadow-lg shadow-brand-500/30">
-                        <i class="fa-solid fa-wrench"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl leading-tight text-slate-900 tracking-tight">Bhakti Mobile</h1>
-                        <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Repairing Center</p>
-                    </div>
+    <nav class="glass-nav sticky top-0 z-40 border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">BM</div>
+                <div>
+                    <h1 class="text-xl font-bold text-slate-900 leading-tight">Bhakti Mobile</h1>
+                    <p class="text-xs text-blue-600 font-semibold" data-lang="subtitle">Repairing Center</p>
                 </div>
+            </div>
+            
+            <div class="hidden md:flex gap-6 items-center font-semibold text-sm">
+                <a href="#home" class="hover:text-blue-600 transition" data-lang="nav-home">Home</a>
+                <a href="#about" class="hover:text-blue-600 transition" data-lang="nav-about">About Us</a>
+                <a href="#services" class="hover:text-blue-600 transition" data-lang="nav-repairs">Repairs</a>
+                <a href="#accessories" class="hover:text-blue-600 transition" data-lang="nav-accessories">Accessories</a>
+                <a href="#reviews" class="hover:text-blue-600 transition" data-lang="nav-reviews">Reviews</a>
+            </div>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#about" class="text-slate-600 hover:text-brand-600 font-semibold text-sm transition-colors" data-translate="nav_about">About Us</a>
-                    <a href="#services" class="text-slate-600 hover:text-brand-600 font-semibold text-sm transition-colors" data-translate="nav_services">Repairs</a>
-                    <a href="#accessories" class="text-slate-600 hover:text-brand-600 font-semibold text-sm transition-colors" data-translate="nav_accessories">Accessories</a>
-                    <a href="#reviews" class="text-slate-600 hover:text-brand-600 font-semibold text-sm transition-colors" data-translate="nav_reviews">Reviews</a>
-                    <button onclick="window.openModal('rateModal')" class="text-yellow-500 hover:text-yellow-600 font-bold text-sm transition-colors" data-translate="nav_rate"><i class="fa-solid fa-star"></i> Rate Us</button>
-                </div>
+            <div class="flex gap-3">
+                <button onclick="openModal('trackModal')" class="hidden sm:block px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold text-sm transition shadow-sm" data-lang="nav-track">Track Repair</button>
+                <button onclick="openModal('rateModal')" class="px-4 py-2 bg-amber-400 hover:bg-amber-500 text-amber-900 rounded-lg font-semibold text-sm transition shadow-sm" data-lang="nav-rate">Rate Us ⭐</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="relative bg-slate-900 h-[75vh] flex items-center justify-center">
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1597740985671-2a8a3b80502e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Mobile Repair" class="w-full h-full object-cover opacity-30">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
-        </div>
+    <section id="home" class="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1597740985671-2a8a3b80502e?q=80&w=1200&auto=format&fit=crop" alt="Mobile Repair Background" class="absolute inset-0 w-full h-full object-cover brightness-50">
         <div class="relative z-10 text-center px-4 max-w-3xl">
-            <span class="bg-brand-500/20 text-brand-400 border border-brand-500/30 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-widest mb-4 inline-block" data-translate="hero_badge">15+ Years of Excellence</span>
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight" data-translate="hero_title">Revive Your Device.<br>Enhance Your Tech.</h1>
-            <p class="text-lg md:text-xl text-slate-300 mb-8 font-light" data-translate="hero_subtitle">Expert doorstep repairs & premium accessories in Udgir.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="window.openModal('bookingModal')" class="bg-brand-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-500 hover:-translate-y-1 transition-all shadow-lg shadow-brand-600/30" data-translate="btn_book">Book Repair</button>
-                <a href="#accessories" class="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all" data-translate="btn_shop">Shop Accessories</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- About Us Section -->
-    <section id="about" class="py-20 bg-white">
-        <!-- ... existing layout for about ... -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1581092921461-7031e4bf0e11?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Repair Lab" class="rounded-2xl shadow-2xl">
-                    <div class="absolute -bottom-6 -right-6 bg-brand-600 text-white p-6 rounded-2xl shadow-xl hidden md:block">
-                        <h3 class="text-3xl font-bold" data-translate="about_years">15+</h3>
-                        <p class="text-sm font-semibold opacity-80" data-translate="about_years_text">Years Experience</p>
-                    </div>
-                </div>
-                <div>
-                    <h2 class="text-brand-600 font-bold uppercase tracking-widest text-sm mb-2" data-translate="nav_about">About Us</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6" data-translate="about_title">Trusted by Thousands in Udgir</h3>
-                    <p class="text-slate-600 mb-6 text-lg leading-relaxed" data-translate="about_desc">At Bhakti Mobile & Repairing Center, we blend technical expertise with absolute transparency. Since our inception, we have successfully revived over 50,000 devices, ensuring you stay connected to what matters most.</p>
-                </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg" data-lang="hero-title">Expert Mobile Repairs & Premium Accessories</h1>
+            <p class="text-lg md:text-xl text-slate-200 mb-8 drop-shadow-md" data-lang="hero-desc">Fast, reliable doorstep repairs and high-quality accessories in Udgir.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="openModal('bookModal')" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-1" data-lang="hero-book">Book Repair Now</button>
+                <button onclick="openModal('trackModal')" class="sm:hidden px-8 py-4 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white rounded-xl font-bold text-lg shadow-lg transition" data-lang="nav-track">Track Repair</button>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4" data-translate="srv_title">Expert Repair Services</h2>
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12 mb-12">
+                <div class="w-full md:w-1/2 relative">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop" alt="Expert Technician" class="rounded-2xl shadow-xl">
+                    <div class="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-xl hidden sm:block">
+                        <h3 class="text-4xl font-bold">15+</h3>
+                        <p class="font-semibold" data-lang="years-exp">Years Experience</p>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4" data-lang="about-title">Trusted Mobile Experts in Udgir</h2>
+                    <p class="text-slate-600 mb-6 text-lg" data-lang="about-desc">With over 15 years of dedicated service, Bhakti Mobile has been repairing, upgrading, and reviving smartphones for thousands of happy customers. We use genuine parts and advanced micro-soldering techniques to ensure your device runs perfectly.</p>
+                </div>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Services -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 group cursor-pointer" onclick="window.openModal('bookingModal')">
-                    <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1592890278913-7d7211beaf1f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Screen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
-                    <div class="p-6"><h3 class="text-lg font-bold text-slate-900 mb-2" data-translate="srv_1">Screen Replacement</h3></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition">
+                    <div class="text-3xl mb-3">👁️</div>
+                    <h3 class="font-bold text-xl mb-2" data-lang="vision-title">Our Vision</h3>
+                    <p class="text-slate-600 text-sm" data-lang="vision-desc">To be the most trusted and advanced tech repair hub in Maharashtra, known for unparalleled transparency.</p>
                 </div>
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 group cursor-pointer" onclick="window.openModal('bookingModal')">
-                    <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1601784551446-20c9e07cd8d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Battery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
-                    <div class="p-6"><h3 class="text-lg font-bold text-slate-900 mb-2" data-translate="srv_2">Battery Replacement</h3></div>
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition">
+                    <div class="text-3xl mb-3">🚀</div>
+                    <h3 class="font-bold text-xl mb-2" data-lang="mission-title">Our Mission</h3>
+                    <p class="text-slate-600 text-sm" data-lang="mission-desc">To provide lightning-fast, high-quality, and affordable mobile repair solutions while educating our customers.</p>
                 </div>
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 group cursor-pointer" onclick="window.openModal('bookingModal')">
-                    <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1588508065123-287b28e01397?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Motherboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
-                    <div class="p-6"><h3 class="text-lg font-bold text-slate-900 mb-2" data-translate="srv_3">Motherboard Repair</h3></div>
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <h3 class="font-bold text-xl mb-2" data-lang="goal-title">Our Goal</h3>
+                    <p class="text-slate-600 text-sm" data-lang="goal-desc">To ensure 100% customer satisfaction by returning every broken device to its original factory-fresh condition.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h3 class="text-white font-bold text-xl mb-4">Bhakti Mobile</h3>
-                <p class="mb-4 text-sm leading-relaxed" data-translate="ftr_desc">Premium mobile repair services and quality accessories in Udgir. Your trusted tech partner for over 15 years.</p>
+    <section id="services" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="services-title">Expert Repair Services</h2>
+            <p class="text-slate-500 mb-10" data-lang="services-subtitle">Professional fixes for all brands (Apple, Samsung, OnePlus, Vivo, Oppo, Xiaomi)</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1605170439002-90845e8c0137?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Screen">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s1-title">Screen Replacement</h3>
+                    <p class="text-sm text-slate-500" data-lang="s1-desc">Original LCD & OLED displays.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Battery">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s2-title">Battery Replacement</h3>
+                    <p class="text-sm text-slate-500" data-lang="s2-desc">100% Health & fast charging fix.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1592833259051-16eb1d120a10?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Water Damage">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s3-title">Water Damage</h3>
+                    <p class="text-sm text-slate-500" data-lang="s3-desc">Chemical wash & short-circuit repair.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Motherboard">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s4-title">Motherboard IC Repair</h3>
+                    <p class="text-sm text-slate-500" data-lang="s4-desc">Micro-soldering & dead boot fix.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Software">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s5-title">Software Unlocking</h3>
+                    <p class="text-sm text-slate-500" data-lang="s5-desc">FRP Bypass, Flashing & OS Restore.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Speaker">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s6-title">Speaker & Mic Fix</h3>
+                    <p class="text-sm text-slate-500" data-lang="s6-desc">Clear audio restoration.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Camera">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s7-title">Camera Repair</h3>
+                    <p class="text-sm text-slate-500" data-lang="s7-desc">Lens replacement & focus fix.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1616423641443-470a273b4009?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Charging Port">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s8-title">Charging Port Fix</h3>
+                    <p class="text-sm text-slate-500" data-lang="s8-desc">Loose port & connection repair.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1589492477829-5e65395b66cc?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Back Panel">
+                    <h3 class="font-bold text-lg mb-1" data-lang="s9-title">Body Panel Replacement</h3>
+                    <p class="text-sm text-slate-500" data-lang="s9-desc">Glass back & housing replacement.</p>
+                </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800 text-center text-sm">
-            <p>&copy; 2026 Bhakti Mobile & Repairing Center. All rights reserved.</p>
+    </section>
+
+    <section id="accessories" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="acc-title">Premium Accessories</h2>
+            <p class="text-slate-500 mb-10" data-lang="acc-subtitle">Top brands available in-store.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale relative">
+                    <span class="absolute top-2 left-2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-sale">Sale</span>
+                    <img src="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Case">
+                    <h3 class="font-bold text-sm mb-1" data-lang="a1-title">Tough Armor Cases</h3>
+                    <p class="text-blue-600 font-bold text-sm">₹ 299</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale relative">
+                    <span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-new">New</span>
+                    <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Earbuds">
+                    <h3 class="font-bold text-sm mb-1" data-lang="a2-title">TWS Earbuds</h3>
+                    <p class="text-blue-600 font-bold text-sm">₹ 999</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Charger">
+                    <h3 class="font-bold text-sm mb-1" data-lang="a3-title">65W Fast Chargers</h3>
+                    <p class="text-blue-600 font-bold text-sm">₹ 499</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Powerbank">
+                    <h3 class="font-bold text-sm mb-1" data-lang="a4-title">10000mAh Powerbank</h3>
+                    <p class="text-blue-600 font-bold text-sm">₹ 899</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1622480669146-24e525164d26?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Glass">
+                    <h3 class="font-bold text-sm mb-1" data-lang="a5-title">11D Tempered Glass</h3>
+                    <p class="text-blue-600 font-bold text-sm">₹ 149</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1588665099307-28fb7b243fc4?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Cable">
+                    <h3 class="font-bold text-sm mb-1" data-lang="a6-title">Braided Data Cables</h3>
+                    <p class="text-blue-600 font-bold text-sm">₹ 199</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1587635607316-3e7ad66d4f95?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Car Holder">
+                    <h3 class="font-bold text-sm mb-1" data-lang="a7-title">Magnetic Car Holders</h3>
+                    <p class="text-blue-600 font-bold text-sm">₹ 349</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
+                    <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Speaker">
+                    <h3 class="font-bold text-sm mb-1" data-lang="a8-title">Bluetooth Speakers</h3>
+                    <p class="text-blue-600 font-bold text-sm">₹ 799</p>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <section id="reviews" class="py-16 bg-blue-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-1" data-lang="rev-title">Customer Feedback</h2>
+                    <p class="text-slate-600 text-sm" data-lang="rev-subtitle">See what Udgir thinks of us.</p>
+                </div>
+                <button onclick="openModal('rateModal')" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm shadow-sm hover:bg-blue-700" data-lang="rev-btn">Write a Review</button>
+            </div>
+            
+            <div class="flex overflow-x-auto gap-4 hide-scrollbar snap-x pb-4" id="review-container">
+                <!-- Reviews injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center">
+        <h2 class="text-2xl font-bold text-white mb-2">Bhakti Mobile & Repairing Center</h2>
+        <p class="mb-4">Udgir, Maharashtra - 413517</p>
+        <p class="mb-4">📞 +91 9049555270 | 📞 +91 8788131515</p>
+        <div class="flex justify-center gap-4 mb-6">
+            <a href="https://wa.me/919049555270" class="text-green-500 hover:text-green-400 font-bold">WhatsApp Chat</a>
+        </div>
+        <p class="text-sm">&copy; 2026 Bhakti Mobile. All rights reserved.</p>
     </footer>
 
-    <!-- Firebase Connection Status Badge -->
-    <div id="firebaseStatus" class="fixed bottom-4 left-4 z-50 bg-red-100 text-red-700 border border-red-300 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-2">
-        <i class="fa-solid fa-circle text-[8px] animate-pulse"></i> <span id="statusText">Connecting to Database...</span>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919049555270" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 hover:scale-110 transition z-50 group flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.005-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+        <span class="hidden group-hover:block font-bold text-sm mr-1" data-lang="wa-chat">Chat with us</span>
+    </a>
+
+    <!-- Database Status Indicator -->
+    <div id="db-status" class="fixed bottom-6 left-6 bg-slate-900 text-white text-xs font-mono px-3 py-1.5 rounded-full shadow-lg z-50 flex items-center gap-2 opacity-80">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse" id="db-dot"></span>
+        <span id="db-text">Connecting to Firebase...</span>
     </div>
 
-    <!-- TRACKING MODAL -->
-    <div id="trackingModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="font-bold text-lg text-slate-900" data-translate="modal_track_title">Track Repair Status</h3>
-                <button onclick="window.closeModal('trackingModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
-            </div>
-            <!-- Added event.preventDefault() to absolutely block silent page reloads -->
-            <form onsubmit="event.preventDefault(); window.searchRepair ? window.searchRepair() : alert('System loading...');" class="flex gap-2 mb-4">
-                <input type="text" id="trackingIdInput" data-translate="track_id_ph" placeholder="Enter ID (e.g., BMR-1001)" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500 uppercase font-mono" oninput="this.value = this.value.toUpperCase()" required>
-                <button type="submit" class="bg-brand-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-brand-700"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <div id="bookModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
+            <button onclick="closeModal('bookModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold mb-4" data-lang="modal-book-title">Book a Repair</h2>
+            <form id="bookForm" class="flex flex-col gap-4">
+                <input type="text" id="b-name" placeholder="Full Name" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500" required>
+                <input type="text" id="b-phone" placeholder="Phone Number" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500" required>
+                <input type="text" id="b-device" placeholder="Device (e.g. iPhone 13)" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500" required>
+                <textarea id="b-issue" placeholder="Describe the issue..." class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500 h-24" required></textarea>
+                <div id="bookError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition" id="bookSubmitBtn" data-lang="modal-submit">Submit Booking</button>
             </form>
-            <p id="trackingError" class="text-red-500 text-sm hidden font-bold"></p>
-            <div id="trackingResult" class="hidden mt-6 bg-slate-50 p-4 rounded-xl border border-slate-100">
-                <p class="text-xs text-slate-500 mb-1">Status for <span id="r_id_display" class="font-bold text-slate-900"></span>:</p>
-                <div class="flex items-center gap-3 mb-4">
-                    <div id="r_icon" class="w-10 h-10 rounded-full flex items-center justify-center text-lg"></div>
-                    <div>
-                        <h4 id="r_status_text" class="font-bold text-slate-900"></h4>
-                    </div>
-                </div>
+            <div id="bookResult" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-center">
+                <p class="font-bold" data-lang="book-success">Repair Booked!</p>
+                <p class="text-sm mt-1" data-lang="book-save-id">Save this Tracking ID:</p>
+                <p class="text-xl font-mono font-bold mt-2" id="generatedId"></p>
             </div>
         </div>
     </div>
 
-    <!-- BOOKING MODAL -->
-    <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="font-bold text-lg text-slate-900" data-translate="modal_book_title">Book Repair</h3>
-                <button onclick="window.closeModal('bookingModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
-            </div>
-            <!-- Prevent Default to block reload -->
-            <form id="bookingForm" onsubmit="event.preventDefault(); window.submitBooking ? window.submitBooking(event) : alert('System loading...');" class="space-y-4">
-                <input type="text" id="b_name" required data-translate="b_name_ph" placeholder="Full Name" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500">
-                <input type="tel" id="b_phone" required data-translate="b_phone_ph" placeholder="Phone Number" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500">
-                <select id="b_brand" required class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500 text-slate-600">
-                    <option value="">Select Device Brand</option>
-                    <option>Apple</option><option>Samsung</option><option>OnePlus</option><option>Xiaomi/Redmi</option><option>Vivo/Oppo</option><option>Other</option>
-                </select>
-                <textarea id="b_issue" required rows="2" data-translate="b_issue_ph" placeholder="Describe the issue" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500"></textarea>
-                <p id="bookingDbError" class="text-red-600 text-xs hidden font-bold bg-red-50 p-3 rounded border border-red-200"></p>
-                <button type="submit" id="b_submit_btn" class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold hover:bg-brand-700 shadow-lg shadow-brand-500/30 transition-all">Submit Request</button>
+    <div id="trackModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
+            <button onclick="closeModal('trackModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold mb-4" data-lang="modal-track-title">Track Repair Status</h2>
+            <form id="trackForm" class="flex flex-col gap-4">
+                <input type="text" id="t-id" placeholder="Enter Tracking ID (e.g. BMR-1234)" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500 font-mono uppercase" required>
+                <div id="trackError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
+                <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-lg transition" id="trackSubmitBtn" data-lang="modal-search">Search</button>
             </form>
-            <div id="bookingSuccess" class="hidden text-center py-6">
-                <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fa-solid fa-check"></i></div>
-                <h4 class="font-bold text-slate-900 text-lg mb-2">Request Received!</h4>
-                <div class="bg-slate-100 p-3 rounded-lg font-mono font-bold text-xl text-brand-600 tracking-wider mb-4" id="generatedTrackingId"></div>
+            <div id="trackResult" class="hidden mt-6 text-center border-t border-slate-100 pt-4">
+                <p class="text-slate-500 text-sm mb-1" data-lang="track-status">Current Status:</p>
+                <p class="text-2xl font-bold text-blue-600" id="statusDisplay">Checking...</p>
+                <p class="text-slate-600 mt-2 text-sm" id="deviceDisplay"></p>
             </div>
         </div>
     </div>
 
-    <!-- RATE US MODAL -->
-    <div id="rateModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="font-bold text-lg text-slate-900" data-translate="modal_rate_title">Rate Your Experience</h3>
-                <button onclick="window.closeModal('rateModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
-            </div>
-            <!-- Prevent Default to block reload -->
-            <form id="rateForm" onsubmit="event.preventDefault(); window.submitReview ? window.submitReview(event) : alert('System loading...');" class="space-y-4">
-                <div class="text-center mb-4">
-                    <div class="flex justify-center gap-2 text-2xl text-slate-200 cursor-pointer" id="starContainer">
-                        <i class="fa-solid fa-star hover:text-yellow-400 transition-colors" data-val="1"></i>
-                        <i class="fa-solid fa-star hover:text-yellow-400 transition-colors" data-val="2"></i>
-                        <i class="fa-solid fa-star hover:text-yellow-400 transition-colors" data-val="3"></i>
-                        <i class="fa-solid fa-star hover:text-yellow-400 transition-colors" data-val="4"></i>
-                        <i class="fa-solid fa-star hover:text-yellow-400 transition-colors" data-val="5"></i>
-                    </div>
-                    <p id="rateError" class="text-red-500 text-xs hidden mt-2 font-bold">Please select a star rating.</p>
+    <div id="rateModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
+            <button onclick="closeModal('rateModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold mb-1" data-lang="modal-rate-title">Rate Our Service</h2>
+            <p class="text-slate-500 text-sm mb-4" data-lang="modal-rate-sub">Your feedback helps us grow.</p>
+            <form id="rateForm" class="flex flex-col gap-4">
+                <div class="flex justify-center gap-2 text-3xl cursor-pointer mb-2" id="star-container">
+                    <span class="star text-slate-300 hover:text-yellow-400" data-val="1">★</span>
+                    <span class="star text-slate-300 hover:text-yellow-400" data-val="2">★</span>
+                    <span class="star text-slate-300 hover:text-yellow-400" data-val="3">★</span>
+                    <span class="star text-slate-300 hover:text-yellow-400" data-val="4">★</span>
+                    <span class="star text-slate-300 hover:text-yellow-400" data-val="5">★</span>
                 </div>
-                <p id="rateDbError" class="text-red-600 text-xs hidden mb-2 font-bold bg-red-50 p-3 rounded border border-red-200"></p>
-                <input type="text" id="r_name" required data-translate="r_name_ph" placeholder="Your Name" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500">
-                <textarea id="r_text" required rows="3" data-translate="r_text_ph" placeholder="Your Feedback" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500"></textarea>
-                <button type="submit" id="r_submit_btn" class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold hover:bg-brand-700 shadow-lg shadow-brand-500/30 transition-all" data-translate="btn_submit_review">Submit Review</button>
+                <input type="hidden" id="r-stars" value="0" required>
+                <input type="text" id="r-name" placeholder="Your Name" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50" required>
+                <textarea id="r-text" placeholder="Write your review..." class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 h-20" required></textarea>
+                <div id="rateError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg transition" id="rateSubmitBtn" data-lang="modal-submit-rev">Submit Review</button>
             </form>
-            <div id="rateSuccess" class="hidden text-center py-6">
-                <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fa-solid fa-check"></i></div>
-                <h4 class="font-bold text-slate-900 text-lg mb-2">Thank You!</h4>
-                <p class="text-slate-600 text-sm">Your review has been saved to the cloud.</p>
-            </div>
+            <div id="rateSuccess" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-center font-bold" data-lang="rate-thanks">Thank you! Your review is live.</div>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, collection, query, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Guaranteed App ID for your custom project rules
-        window.appId = 'bhakti-app-production';
-        let db, auth;
-        let selectedRating = 0;
+        // Hardcoded custom config for hosting
+        const firebaseConfig = {
+          apiKey: "AIzaSyBu1kxGU6-JtHlyfT2qDaaznTOD8gMZQDI",
+          authDomain: "bhakti-mobile-eaeff.firebaseapp.com",
+          projectId: "bhakti-mobile-eaeff",
+          storageBucket: "bhakti-mobile-eaeff.firebasestorage.app",
+          messagingSenderId: "626681125968",
+          appId: "1:626681125968:web:c9843e8e59d946a0b78555",
+          measurementId: "G-0DX7Y85TPX"
+        };
 
-        // UI Helpers bound to window IMMEDIATELY so buttons always work
-        window.openModal = function(id) { document.getElementById(id).classList.remove('hidden'); }
-        window.closeModal = function(id) { 
-            document.getElementById(id).classList.add('hidden'); 
-            // Reset forms safely
-            if(id === 'bookingModal') {
-                document.getElementById('bookingForm').reset();
-                document.getElementById('bookingForm').classList.remove('hidden');
-                document.getElementById('bookingSuccess').classList.add('hidden');
-                document.getElementById('bookingDbError').classList.add('hidden');
-            }
-            if(id === 'rateModal') {
-                document.getElementById('rateForm').reset();
-                document.getElementById('rateForm').classList.remove('hidden');
-                document.getElementById('rateSuccess').classList.add('hidden');
-                document.getElementById('rateDbError').classList.add('hidden');
-                selectedRating = 0; highlightStars(0);
-            }
-        }
+        const appIdName = "bhakti-mobile"; 
 
-        // Star Rating Logic
-        const stars = document.querySelectorAll('#starContainer i');
-        function highlightStars(val) {
-            stars.forEach(s => {
-                if (parseInt(s.dataset.val) <= val) { s.classList.replace('text-slate-200', 'text-yellow-400'); } 
-                else { s.classList.replace('text-yellow-400', 'text-slate-200'); }
-            });
-        }
-        stars.forEach(star => {
-            star.addEventListener('mouseover', function() { highlightStars(this.dataset.val); });
-            star.addEventListener('mouseout', function() { highlightStars(selectedRating); });
-            star.addEventListener('click', function() { 
-                selectedRating = parseInt(this.dataset.val); 
-                highlightStars(selectedRating);
-                document.getElementById('rateError').classList.add('hidden');
-            });
-        });
-
-        // ==========================================
-        // FIREBASE INITIALIZATION & SAFETY CATCHES
-        // ==========================================
-        function updateStatus(isSuccess, msg) {
-            const badge = document.getElementById('firebaseStatus');
-            const text = document.getElementById('statusText');
-            if(isSuccess) {
-                badge.className = "fixed bottom-4 left-4 z-50 bg-green-100 text-green-700 border border-green-300 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-2";
-                badge.innerHTML = `<i class="fa-solid fa-check"></i> <span id="statusText">Database Live</span>`;
-                setTimeout(() => { badge.classList.add('hidden'); }, 4000); // Hide after success
-            } else {
-                badge.className = "fixed bottom-4 left-4 z-50 bg-red-100 text-red-700 border border-red-300 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-2";
-                text.innerText = msg;
-            }
-        }
+        let app, db, auth;
+        const statusText = document.getElementById('db-text');
+        const statusDot = document.getElementById('db-dot');
 
         try {
-            // YOUR EXACT CONFIGURATION
-            const firebaseConfig = {
-                apiKey: "AIzaSyBu1kxGU6-JtHlyfT2qDaaznTOD8gMZQDI",
-                authDomain: "bhakti-mobile-eaeff.firebaseapp.com",
-                projectId: "bhakti-mobile-eaeff",
-                storageBucket: "bhakti-mobile-eaeff.firebasestorage.app",
-                messagingSenderId: "626681125968",
-                appId: "1:626681125968:web:c9843e8e59d946a0b78555",
-                measurementId: "G-0DX7Y85TPX"
-            };
-
-            const app = initializeApp(firebaseConfig);
+            app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             auth = getAuth(app);
-
-            // Attempt Login
-            signInAnonymously(auth).catch((error) => {
-                console.error("Auth Failed:", error);
-                if (error.code === 'auth/unauthorized-domain') {
-                    updateStatus(false, "Error: Add this domain in Firebase > Auth > Settings > Authorized Domains.");
-                } else if (error.code === 'auth/operation-not-allowed') {
-                    updateStatus(false, "Error: Enable 'Anonymous' login in Firebase Auth settings.");
-                } else {
-                    updateStatus(false, "Auth Error: " + error.code);
-                }
+            
+            signInAnonymously(auth).catch(err => {
+                showDbError(`Auth Error: ${err.message}`);
+                console.error(err);
             });
 
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    console.log("Logged in anonymously to Firebase.");
-                    updateStatus(true, "");
+                    statusText.innerText = "Firebase Connected";
+                    statusDot.classList.remove('bg-red-500', 'animate-pulse');
+                    statusDot.classList.add('bg-green-500');
+                    loadLiveReviews();
                 }
             });
-
-        } catch (e) {
-            updateStatus(false, "Setup Error: " + e.message);
+        } catch (error) {
+            showDbError("Init Error: Check Config");
         }
 
-        // ==========================================
-        // SUBMIT BOOKING (100% CATCHES ERRORS)
-        // ==========================================
-        window.submitBooking = async function(e) {
-            e.preventDefault(); // Forces page NOT to reload
-            const btn = document.getElementById('b_submit_btn');
-            const err = document.getElementById('bookingDbError');
+        function showDbError(msg) {
+            statusText.innerText = msg;
+            statusText.classList.add('text-red-400');
+            statusDot.classList.remove('animate-pulse');
+        }
+
+        window.openModal = function(id) {
+            document.getElementById(id).classList.add('modal-active');
+            document.getElementById(id).classList.remove('hidden');
+        }
+        window.closeModal = function(id) {
+            document.getElementById(id).classList.remove('modal-active');
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function showFormError(boxId, errorMsg) {
+            const box = document.getElementById(boxId);
+            box.classList.remove('hidden');
+            box.innerText = `Firebase Error: ${errorMsg}`;
+        }
+        function hideFormError(boxId) {
+            document.getElementById(boxId).classList.add('hidden');
+        }
+
+        document.getElementById('bookForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            hideFormError('bookError');
+            if(!auth.currentUser) return showFormError('bookError', "Not connected to Firebase Auth yet. Please wait or check settings.");
             
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving to Cloud...';
-            err.classList.add('hidden');
-
-            if(!auth || !auth.currentUser) {
-                err.innerHTML = "<b>Connection Blocked:</b> Website is not logged into your Firebase. Please check the status pill at the bottom left.";
-                err.classList.remove('hidden');
-                btn.innerHTML = 'Submit Request';
-                return;
-            }
-
-            const id = 'BMR-' + Math.floor(1000 + Math.random() * 9000);
+            const btn = document.getElementById('bookSubmitBtn');
+            btn.innerText = "Saving to Cloud...";
+            
+            const tid = "BMR-" + Math.floor(1000 + Math.random() * 9000);
             const data = {
-                id: id,
-                name: document.getElementById('b_name').value,
-                phone: document.getElementById('b_phone').value,
-                brand: document.getElementById('b_brand').value,
-                issue: document.getElementById('b_issue').value,
-                status: 'Received',
+                name: document.getElementById('b-name').value,
+                phone: document.getElementById('b-phone').value,
+                device: document.getElementById('b-device').value,
+                issue: document.getElementById('b-issue').value,
+                status: "Received",
                 date: new Date().toISOString()
             };
 
             try {
-                // Attempt to save to cloud
-                await setDoc(doc(db, 'artifacts', window.appId, 'public', 'data', 'repairs', id), data);
+                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid);
+                await setDoc(docRef, data);
                 
-                // If successful:
-                document.getElementById('bookingForm').classList.add('hidden');
-                document.getElementById('generatedTrackingId').innerText = id;
-                document.getElementById('bookingSuccess').classList.remove('hidden');
-                
-            } catch (error) {
-                console.error("Firestore Save Error:", error);
-                
-                // If it fails, print the exact reason visibly on the form!
-                if(error.code === 'permission-denied') {
-                    err.innerHTML = `<b>Database Locked:</b> Firebase is blocking the save.<br>Go to Firebase -> Firestore -> Rules and ensure they are published exactly as provided.`;
+                document.getElementById('bookForm').classList.add('hidden');
+                document.getElementById('bookResult').classList.remove('hidden');
+                document.getElementById('generatedId').innerText = tid;
+            } catch (err) {
+                showFormError('bookError', err.message);
+                btn.innerText = "Submit Booking";
+            }
+        });
+
+        document.getElementById('trackForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            hideFormError('trackError');
+            if(!auth.currentUser) return showFormError('trackError', "Not connected to Firebase Auth yet.");
+
+            const btn = document.getElementById('trackSubmitBtn');
+            btn.innerText = "Searching Cloud...";
+            const tid = document.getElementById('t-id').value.toUpperCase();
+
+            try {
+                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('statusDisplay').innerText = data.status || "In Progress";
+                    document.getElementById('deviceDisplay').innerText = `Device: ${data.device}`;
                 } else {
-                    err.innerHTML = `<b>Error Saving:</b> ${error.message}`;
+                    document.getElementById('statusDisplay').innerText = "Not Found";
+                    document.getElementById('deviceDisplay').innerText = "Check ID and try again.";
                 }
-                err.classList.remove('hidden');
+                document.getElementById('trackResult').classList.remove('hidden');
+            } catch (err) {
+                showFormError('trackError', err.message);
             }
-            btn.innerHTML = 'Submit Request';
-        }
+            btn.innerText = "Search";
+        });
 
-        // ==========================================
-        // SUBMIT REVIEW
-        // ==========================================
-        window.submitReview = async function(e) {
+        let selectedStars = 0;
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                selectedStars = this.getAttribute('data-val');
+                document.getElementById('r-stars').value = selectedStars;
+                document.querySelectorAll('.star').forEach(s => {
+                    s.classList.remove('text-yellow-400');
+                    if (s.getAttribute('data-val') <= selectedStars) {
+                        s.classList.add('text-yellow-400');
+                    }
+                });
+            });
+        });
+
+        document.getElementById('rateForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('r_submit_btn');
-            const err = document.getElementById('rateDbError');
-            
-            if (selectedRating === 0) {
-                document.getElementById('rateError').classList.remove('hidden');
-                return;
-            }
+            hideFormError('rateError');
+            if(selectedStars == 0) { alert("Please select a star rating!"); return; }
+            if(!auth.currentUser) return showFormError('rateError', "Not connected to Firebase Auth yet.");
 
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
-            err.classList.add('hidden');
+            const btn = document.getElementById('rateSubmitBtn');
+            btn.innerText = "Publishing to Cloud...";
 
-            if(!auth || !auth.currentUser) {
-                err.innerHTML = "<b>Connection Blocked:</b> Not logged into Firebase.";
-                err.classList.remove('hidden');
-                btn.innerHTML = 'Submit Review';
-                return;
-            }
-
-            const reviewId = 'rev_' + Date.now();
-            const data = {
-                n: document.getElementById('r_name').value,
-                text: document.getElementById('r_text').value,
-                rating: selectedRating,
-                timestamp: Date.now()
+            const rid = "REV-" + Date.now();
+            const reviewData = {
+                name: document.getElementById('r-name').value,
+                text: document.getElementById('r-text').value,
+                stars: parseInt(selectedStars),
+                date: Date.now()
             };
 
             try {
-                await setDoc(doc(db, 'artifacts', window.appId, 'public', 'data', 'reviews', reviewId), data);
+                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'reviews', rid);
+                await setDoc(docRef, reviewData);
+                
                 document.getElementById('rateForm').classList.add('hidden');
                 document.getElementById('rateSuccess').classList.remove('hidden');
-            } catch (error) {
-                console.error("Review Error:", error);
-                if(error.code === 'permission-denied') {
-                    err.innerHTML = `<b>Rules Error:</b> You need to publish the Firestore Rules inside your Firebase console to allow saving.`;
-                } else {
-                    err.innerHTML = `<b>Error:</b> ${error.message}`;
-                }
-                err.classList.remove('hidden');
+                
+                injectReviewCard(reviewData, true);
+            } catch (err) {
+                showFormError('rateError', err.message);
+                btn.innerText = "Submit Review";
             }
-            btn.innerHTML = 'Submit Review';
+        });
+
+        const staticReviews = [
+            {n:"Rahul S.", t:"Fixed my iPhone 13 screen in 30 mins! Genuine parts and great behavior.", s:5},
+            {n:"Priya D.", t:"Best mobile shop in Udgir. Got a good deal on earbuds.", s:5},
+            {n:"Amit K.", t:"My Samsung was dead due to water. Bhakti Mobile revived it completely.", s:5},
+            {n:"Sneha P.", t:"Very polite owner and reasonable pricing for accessories.", s:4},
+            {n:"Sagar M.", t:"Battery replacement was quick. Working fine now.", s:5},
+            {n:"Ramesh B.", t:"Excellent micro-soldering work on my dead motherboard.", s:5},
+            {n:"Kavita J.", t:"Trustworthy shop. They explain the issue clearly.", s:5},
+            {n:"Vishal T.", t:"Purchased a power bank. Good quality and warranty provided.", s:4},
+            {n:"Neha R.", t:"Highly recommended for any software or unlocking issues.", s:5},
+            {n:"Ganesh K.", t:"Fast service and polite staff.", s:5},
+            {n:"Pooja V.", t:"My phone speaker was cracking, now it sounds brand new.", s:5},
+            {n:"Vikram S.", t:"Best repair center in Latur district. Genuine work.", s:5},
+            {n:"संतोष प.", t:"माझा मोबाईल पाण्यात पडला होता, इथे लगेच दुरुस्त करून मिळाला. खूप छान सर्व्हिस.", s:5},
+            {n:"प्रशांत कु.", t:"उदगीर मधील सर्वात भारी मोबाईल दुकान. दर पण योग्य आहेत.", s:5},
+            {n:"दीपाली म.", t:"स्क्रीन बदलून घेतली, ओरिजिनल लावली आहे. खूप धन्यवाद.", s:5},
+            {n:"अमोल रा.", t:"माझ्या फोनचा चार्जिंग प्रॉब्लेम 15 मिनिटात सॉल्व्ह केला. सुपर फास्ट!", s:4},
+            {n:"सुवर्णा जा.", t:"कव्हर आणि इयरफोन घेतले, क्वालिटी एकदम मस्त आहे.", s:5}
+        ];
+
+        function getStars(count) {
+            return "⭐".repeat(count);
         }
 
-        // ==========================================
-        // SEARCH TRACKING
-        // ==========================================
-        window.searchRepair = async function() {
-            const id = document.getElementById('trackingIdInput').value.trim().toUpperCase();
-            if(!id) return;
+        function injectReviewCard(rev, isNew = false) {
+            const container = document.getElementById('review-container');
+            const card = document.createElement('div');
+            card.className = "min-w-[300px] max-w-[300px] bg-white p-5 rounded-2xl shadow-sm border border-slate-100 snap-center relative";
+            let badge = isNew ? `<span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>` : '';
             
-            const err = document.getElementById('trackingError');
-            const res = document.getElementById('trackingResult');
-            err.classList.add('hidden');
-            res.classList.add('hidden');
+            // Critical fix for missing names
+            const rName = rev.name || rev.n || 'User';
+            const rText = rev.text || rev.t || '';
+            const rStars = rev.stars || rev.s || 5;
+            const initial = rName.charAt(0) || 'U';
 
-            if(!auth || !auth.currentUser) {
-                err.innerHTML = "Not connected to cloud database.";
-                err.classList.remove('hidden');
-                return;
+            card.innerHTML = `
+                ${badge}
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center">${initial}</div>
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-800">${rName}</h4>
+                        <div class="text-xs tracking-widest">${getStars(rStars)}</div>
+                    </div>
+                </div>
+                <p class="text-slate-600 text-sm italic">"${rText}"</p>
+            `;
+            if (isNew) {
+                container.prepend(card);
+            } else {
+                container.appendChild(card);
             }
+        }
 
+        async function loadLiveReviews() {
+            const container = document.getElementById('review-container');
+            container.innerHTML = ""; 
+            
             try {
-                const docSnap = await getDoc(doc(db, 'artifacts', window.appId, 'public', 'data', 'repairs', id));
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    document.getElementById('r_id_display').innerText = data.id;
-                    document.getElementById('r_status_text').innerText = data.status;
-                    
-                    const icon = document.getElementById('r_icon');
-                    if(data.status === 'Received') { icon.innerHTML = '<i class="fa-solid fa-box"></i>'; icon.className = 'w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg'; } 
-                    else { icon.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'; icon.className = 'w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center text-lg'; }
-                    res.classList.remove('hidden');
-                } else {
-                    err.innerHTML = "Tracking ID not found in database.";
-                    err.classList.remove('hidden');
-                }
-            } catch (error) {
-                err.innerHTML = `Database Read Error: ${error.message}`;
-                err.classList.remove('hidden');
+                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'reviews');
+                const querySnapshot = await getDocs(q);
+                
+                let cloudReviews = [];
+                querySnapshot.forEach((doc) => { cloudReviews.push(doc.data()); });
+                
+                // Sort in memory to avoid needing complex Firestore indexes
+                cloudReviews.sort((a,b) => b.date - a.date);
+                
+                cloudReviews.forEach(rev => injectReviewCard(rev, true));
+            } catch (err) {
+                console.log("Could not load cloud reviews:", err.message);
             }
+
+            staticReviews.forEach(rev => injectReviewCard(rev));
         }
         
-        // Translation Dictionary (Placeholder for completeness)
-        window.isMarathi = false;
+        staticReviews.forEach(rev => injectReviewCard(rev));
+
+        let currentLang = 'en';
+        const dict = {
+            'call-us': { mr: '📞 +९१ ९०४९५५५२७० | +९१ ८७८८१३१५१५' },
+            'location': { mr: '📍 उदगीर, महाराष्ट्र' },
+            'subtitle': { mr: 'रिपेअरिंग सेंटर' },
+            'nav-home': { mr: 'मुख्यपृष्ठ' },
+            'nav-about': { mr: 'आमच्याबद्दल' },
+            'nav-repairs': { mr: 'दुरुस्ती' },
+            'nav-accessories': { mr: 'अॅक्सेसरीज' },
+            'nav-reviews': { mr: 'अभिप्राय' },
+            'nav-track': { mr: 'स्टेटस पहा' },
+            'nav-rate': { mr: 'रेटिंग द्या ⭐' },
+            'hero-title': { mr: 'खात्रीशीर मोबाईल दुरुस्ती आणि सर्वोत्तम अॅक्सेसरीज' },
+            'hero-desc': { mr: 'उदगीरमध्ये घरपोच दुरुस्ती आणि उत्तम दर्जाच्या वस्तूंचा अनुभव घ्या.' },
+            'hero-book': { mr: 'आत्ताच दुरुस्ती बूक करा' },
+            
+            'years-exp': { mr: 'वर्षांचा अनुभव' },
+            'about-title': { mr: 'उदगीर मधील विश्वासार्ह मोबाईल तज्ञ' },
+            'about-desc': { mr: '१५ वर्षांहून अधिक अनुभवासह, भक्ती मोबाईलने हजारो ग्राहकांचे फोन यशस्वीरित्या दुरुस्त केले आहेत. आम्ही ओरिजिनल पार्ट्स आणि प्रगत तंत्रज्ञान वापरतो.' },
+            'vision-title': { mr: 'आमचा दृष्टिकोन' },
+            'vision-desc': { mr: 'महाराष्ट्रातील सर्वात विश्वासार्ह आणि पारदर्शक टेक रिपेअर हब बनणे.' },
+            'mission-title': { mr: 'आमचे ध्येय' },
+            'mission-desc': { mr: 'अतिशय जलद, उच्च दर्जाची आणि परवडणारी मोबाईल दुरुस्ती सेवा प्रदान करणे.' },
+            'goal-title': { mr: 'आमचे उद्दिष्ट' },
+            'goal-desc': { mr: 'प्रत्येक खराब झालेला डिव्हाइस पुन्हा पूर्वीसारखा नवीन करून ग्राहकांचे १००% समाधान करणे.' },
+
+            'services-title': { mr: 'आमच्या दुरुस्ती सेवा' },
+            'services-subtitle': { mr: 'सर्व ब्रँड्ससाठी व्यावसायिक दुरुस्ती (Apple, Samsung, Vivo, Oppo, Xiaomi)' },
+            's1-title': { mr: 'स्क्रीन बदलणे' }, 's1-desc': { mr: 'ओरिजिनल LCD आणि OLED डिस्प्ले.' },
+            's2-title': { mr: 'बॅटरी बदलणे' }, 's2-desc': { mr: '१००% हेल्थ आणि फास्ट चार्जिंग.' },
+            's3-title': { mr: 'वॉटर डॅमेज' }, 's3-desc': { mr: 'केमिकल वॉश आणि शॉर्ट-सर्किट दुरुस्ती.' },
+            's4-title': { mr: 'मदरबोर्ड IC दुरुस्ती' }, 's4-desc': { mr: 'मायक्रो-सोल्डरिंग आणि डेड बूट दुरुस्ती.' },
+            's5-title': { mr: 'सॉफ्टवेअर अनलॉकिंग' }, 's5-desc': { mr: 'FRP बायपास, फ्लॅशिंग आणि OS रिस्टोअर.' },
+            's6-title': { mr: 'स्पीकर आणि माईक' }, 's6-desc': { mr: 'स्पष्ट आवाजासाठी दुरुस्ती.' },
+            's7-title': { mr: 'कॅमेरा दुरुस्ती' }, 's7-desc': { mr: 'लेन्स बदलणे आणि फोकस दुरुस्ती.' },
+            's8-title': { mr: 'चार्जिंग पोर्ट दुरुस्ती' }, 's8-desc': { mr: 'सैल पोर्ट आणि कनेक्शन दुरुस्ती.' },
+            's9-title': { mr: 'बॉडी पॅनेल बदलणे' }, 's9-desc': { mr: 'ग्लास बॅक आणि हाऊसिंग बदलणे.' },
+
+            'acc-title': { mr: 'प्रिमियम अॅक्सेसरीज' },
+            'acc-subtitle': { mr: 'टॉप ब्रँड्स आता दुकानात उपलब्ध.' },
+            'badge-sale': { mr: 'सेल' }, 'badge-new': { mr: 'नवीन' },
+            'a1-title': { mr: 'टफ आर्मर कव्हर' }, 'a2-title': { mr: 'TWS इयरबड्स' },
+            'a3-title': { mr: '६५W फास्ट चार्जर' }, 'a4-title': { mr: '१००००mAh पॉवरबँक' },
+            'a5-title': { mr: 'टेम्पर्ड ग्लास' }, 'a6-title': { mr: 'डेटा केबल्स' },
+            'a7-title': { mr: 'कार होल्डर' }, 'a8-title': { mr: 'ब्लूटूथ स्पीकर' },
+
+            'rev-title': { mr: 'ग्राहकांचे अभिप्राय' },
+            'rev-subtitle': { mr: 'उदगीरकरांचे आमच्याबद्दलचे मत.' },
+            'rev-btn': { mr: 'अभिप्राय लिहा' },
+            
+            'modal-book-title': { mr: 'दुरुस्ती बूक करा' },
+            'modal-submit': { mr: 'माहिती पाठवा' },
+            'book-success': { mr: 'तुमची दुरुस्ती बूक झाली্বা आहे!' },
+            'book-save-id': { mr: 'हा ट्रॅकिंग ID सेव्ह करा:' },
+            'modal-track-title': { mr: 'दुरुस्तीचे स्टेटस पहा' },
+            'modal-search': { mr: 'शोधा' },
+            'track-status': { mr: 'सध्याची स्थिती:' },
+            'modal-rate-title': { mr: 'आम्हाला रेटिंग द्या' },
+            'modal-rate-sub': { mr: 'तुमचा अभिप्राय आम्हाला सुधारण्यास मदत करतो.' },
+            'modal-submit-rev': { mr: 'अभिप्राय सबमिट करा' },
+            'rate-thanks': { mr: 'धन्यवाद! तुमचा अभिप्राय सेव्ह झाला.' },
+            'wa-chat': { mr: 'आम्हाला मेसेज करा' }
+        };
+
+        const placeholderDict = {
+            'b-name': { mr: 'पूर्ण नाव' },
+            'b-phone': { mr: 'मोबाईल क्रमांक' },
+            'b-device': { mr: 'डिव्हाइस (उदा. iPhone 13)' },
+            'b-issue': { mr: 'अडचण काय आहे ते लिहा...' },
+            't-id': { mr: 'ट्रॅकिंग ID टाका (उदा. BMR-1234)' },
+            'r-name': { mr: 'तुमचे नाव' },
+            'r-text': { mr: 'तुमचा अभिप्राय लिहा...' }
+        };
+
         window.toggleLanguage = function() {
-            window.isMarathi = !window.isMarathi;
-            document.getElementById('langToggle').innerText = window.isMarathi ? "English (EN)" : "मराठी (MR)";
-            // Simplified translation logic for this preview
+            currentLang = currentLang === 'en' ? 'mr' : 'en';
+            
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (!el.dataset.orig) el.dataset.orig = el.innerHTML; 
+                
+                if (currentLang === 'mr' && dict[key] && dict[key].mr) {
+                    el.innerHTML = dict[key].mr;
+                } else {
+                    el.innerHTML = el.dataset.orig;
+                }
+            });
+
+            for(let id in placeholderDict) {
+                const input = document.getElementById(id);
+                if(input) {
+                    if (!input.dataset.origPlaceholder) input.dataset.origPlaceholder = input.placeholder;
+                    if (currentLang === 'mr' && placeholderDict[id].mr) {
+                        input.placeholder = placeholderDict[id].mr;
+                    } else {
+                        input.placeholder = input.dataset.origPlaceholder;
+                    }
+                }
+            }
         }
     </script>
 </body>
