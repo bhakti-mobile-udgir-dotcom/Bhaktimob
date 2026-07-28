@@ -28,7 +28,7 @@
             <span data-lang="location">📍 Udgir, Maharashtra</span>
         </div>
         <div class="flex gap-4 items-center">
-            <button onclick="toggleLanguage()" class="font-bold text-blue-400 hover:text-blue-300 transition" id="lang-toggle">[EN | मराठी]</button>
+            <button onclick="toggleLanguage()" class="font-bold text-blue-400 hover:text-blue-300 transition border border-blue-400 px-2 py-0.5 rounded" id="lang-toggle">मराठी / EN</button>
         </div>
     </div>
 
@@ -42,11 +42,12 @@
                 </div>
             </div>
             
-            <div class="hidden md:flex gap-6 items-center font-semibold text-sm">
+            <div class="hidden lg:flex gap-6 items-center font-semibold text-sm">
                 <a href="#home" class="hover:text-blue-600 transition" data-lang="nav-home">Home</a>
-                <a href="#about" class="hover:text-blue-600 transition" data-lang="nav-about">About Us</a>
                 <a href="#services" class="hover:text-blue-600 transition" data-lang="nav-repairs">Repairs</a>
+                <a href="#pricing" class="hover:text-blue-600 transition" data-lang="nav-pricing">Pricing</a>
                 <a href="#accessories" class="hover:text-blue-600 transition" data-lang="nav-accessories">Accessories</a>
+                <a href="#gallery" class="hover:text-blue-600 transition" data-lang="nav-gallery">Gallery</a>
                 <a href="#reviews" class="hover:text-blue-600 transition" data-lang="nav-reviews">Reviews</a>
             </div>
 
@@ -84,24 +85,6 @@
                     <p class="text-slate-600 mb-6 text-lg" data-lang="about-desc">With over 15 years of dedicated service, Bhakti Mobile has been repairing, upgrading, and reviving smartphones for thousands of happy customers. We use genuine parts and advanced micro-soldering techniques to ensure your device runs perfectly.</p>
                 </div>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition">
-                    <div class="text-3xl mb-3">👁️</div>
-                    <h3 class="font-bold text-xl mb-2" data-lang="vision-title">Our Vision</h3>
-                    <p class="text-slate-600 text-sm" data-lang="vision-desc">To be the most trusted and advanced tech repair hub in Maharashtra, known for unparalleled transparency.</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition">
-                    <div class="text-3xl mb-3">🚀</div>
-                    <h3 class="font-bold text-xl mb-2" data-lang="mission-title">Our Mission</h3>
-                    <p class="text-slate-600 text-sm" data-lang="mission-desc">To provide lightning-fast, high-quality, and affordable mobile repair solutions while educating our customers.</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition">
-                    <div class="text-3xl mb-3">🎯</div>
-                    <h3 class="font-bold text-xl mb-2" data-lang="goal-title">Our Goal</h3>
-                    <p class="text-slate-600 text-sm" data-lang="goal-desc">To ensure 100% customer satisfaction by returning every broken device to its original factory-fresh condition.</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -137,25 +120,75 @@
                     <p class="text-sm text-slate-500" data-lang="s5-desc">FRP Bypass, Flashing & OS Restore.</p>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Speaker">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s6-title">Speaker & Mic Fix</h3>
-                    <p class="text-sm text-slate-500" data-lang="s6-desc">Clear audio restoration.</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Camera">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s7-title">Camera Repair</h3>
-                    <p class="text-sm text-slate-500" data-lang="s7-desc">Lens replacement & focus fix.</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
                     <img src="https://images.unsplash.com/photo-1616423641443-470a273b4009?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Charging Port">
                     <h3 class="font-bold text-lg mb-1" data-lang="s8-title">Charging Port Fix</h3>
                     <p class="text-sm text-slate-500" data-lang="s8-desc">Loose port & connection repair.</p>
                 </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1589492477829-5e65395b66cc?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Back Panel">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s9-title">Body Panel Replacement</h3>
-                    <p class="text-sm text-slate-500" data-lang="s9-desc">Glass back & housing replacement.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-16 bg-white">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="price-title">Transparent Pricing</h2>
+            <p class="text-slate-500 mb-10" data-lang="price-sub">Estimated starting prices. These are managed live by the shop admin.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Pricing List 1 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm text-left">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600 border-b border-slate-200 pb-2" data-lang="p-cat-1">Android Repairs</h3>
+                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
+                        <span class="font-semibold text-slate-700" data-lang="p-item-1">Screen Replacement (LCD)</span>
+                        <span class="font-bold text-slate-900" id="val-p-and-screen">₹800+</span>
+                    </div>
+                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
+                        <span class="font-semibold text-slate-700" data-lang="p-item-2">Battery Replacement</span>
+                        <span class="font-bold text-slate-900" id="val-p-and-batt">₹600+</span>
+                    </div>
+                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
+                        <span class="font-semibold text-slate-700" data-lang="p-item-3">Charging Port Repair</span>
+                        <span class="font-bold text-slate-900" id="val-p-and-port">₹350+</span>
+                    </div>
+                    <div class="flex justify-between py-3">
+                        <span class="font-semibold text-slate-700" data-lang="p-item-4">Software / FRP Unlock</span>
+                        <span class="font-bold text-slate-900" id="val-p-and-soft">₹300+</span>
+                    </div>
                 </div>
+
+                <!-- Pricing List 2 -->
+                <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-sm text-left text-white">
+                    <h3 class="text-xl font-bold mb-4 text-amber-400 border-b border-slate-700 pb-2" data-lang="p-cat-2">iPhone Repairs</h3>
+                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
+                        <span class="font-semibold text-slate-300" data-lang="p-item-5">Screen Replacement</span>
+                        <span class="font-bold text-white" id="val-p-iph-screen">₹1500+</span>
+                    </div>
+                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
+                        <span class="font-semibold text-slate-300" data-lang="p-item-6">Battery Replacement</span>
+                        <span class="font-bold text-white" id="val-p-iph-batt">₹1200+</span>
+                    </div>
+                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
+                        <span class="font-semibold text-slate-300" data-lang="p-item-7">Back Glass Replacement</span>
+                        <span class="font-bold text-white" id="val-p-iph-glass">₹1000+</span>
+                    </div>
+                    <div class="flex justify-between py-3">
+                        <span class="font-semibold text-slate-300" data-lang="p-item-8">TrueTone Restoration</span>
+                        <span class="font-bold text-white" id="val-p-iph-true">₹500+</span>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-6 text-sm text-slate-400 italic" data-lang="price-note">* Prices vary by exact make, model, and part quality chosen by customer.</p>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="gallery-title">Our Work & Shop</h2>
+            <p class="text-slate-500 mb-10" data-lang="gallery-sub">A glimpse into our advanced repair setups.</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=400&auto=format&fit=crop" class="w-full h-48 object-cover rounded-xl shadow-sm hover-scale" alt="Micro Soldering">
+                <img src="https://images.unsplash.com/photo-1597740985671-2a8a3b80502e?q=80&w=400&auto=format&fit=crop" class="w-full h-48 object-cover rounded-xl shadow-sm hover-scale" alt="Open Phone">
+                <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=400&auto=format&fit=crop" class="w-full h-48 object-cover rounded-xl shadow-sm hover-scale" alt="Motherboard">
+                <img src="https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?q=80&w=400&auto=format&fit=crop" class="w-full h-48 object-cover rounded-xl shadow-sm hover-scale" alt="Testing Tools">
             </div>
         </div>
     </section>
@@ -164,7 +197,6 @@
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="acc-title">Premium Accessories</h2>
             <p class="text-slate-500 mb-10" data-lang="acc-subtitle">Top brands available in-store.</p>
-            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale relative">
                     <span class="absolute top-2 left-2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-sale">Sale</span>
@@ -188,26 +220,6 @@
                     <h3 class="font-bold text-sm mb-1" data-lang="a4-title">10000mAh Powerbank</h3>
                     <p class="text-blue-600 font-bold text-sm">₹ 899</p>
                 </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1622480669146-24e525164d26?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Glass">
-                    <h3 class="font-bold text-sm mb-1" data-lang="a5-title">11D Tempered Glass</h3>
-                    <p class="text-blue-600 font-bold text-sm">₹ 149</p>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1588665099307-28fb7b243fc4?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Cable">
-                    <h3 class="font-bold text-sm mb-1" data-lang="a6-title">Braided Data Cables</h3>
-                    <p class="text-blue-600 font-bold text-sm">₹ 199</p>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1587635607316-3e7ad66d4f95?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Car Holder">
-                    <h3 class="font-bold text-sm mb-1" data-lang="a7-title">Magnetic Car Holders</h3>
-                    <p class="text-blue-600 font-bold text-sm">₹ 349</p>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Speaker">
-                    <h3 class="font-bold text-sm mb-1" data-lang="a8-title">Bluetooth Speakers</h3>
-                    <p class="text-blue-600 font-bold text-sm">₹ 799</p>
-                </div>
             </div>
         </div>
     </section>
@@ -221,7 +233,6 @@
                 </div>
                 <button onclick="openModal('rateModal')" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm shadow-sm hover:bg-blue-700" data-lang="rev-btn">Write a Review</button>
             </div>
-            
             <div class="flex overflow-x-auto gap-4 hide-scrollbar snap-x pb-4" id="review-container">
                 <!-- Reviews injected via JS -->
             </div>
@@ -232,26 +243,25 @@
         <h2 class="text-2xl font-bold text-white mb-2">Bhakti Mobile & Repairing Center</h2>
         <p class="mb-4">Udgir, Maharashtra - 413517</p>
         <p class="mb-4">📞 +91 9049555270 | 📞 +91 8788131515</p>
-        <div class="flex justify-center gap-4 mb-6">
-            <a href="https://wa.me/919049555270" class="text-green-500 hover:text-green-400 font-bold">WhatsApp Chat</a>
-        </div>
-        <p class="text-sm">&copy; 2026 Bhakti Mobile. All rights reserved.</p>
+        <p class="text-sm flex items-center justify-center gap-2">
+            &copy; 2026 Bhakti Mobile. All rights reserved. 
+            <!-- Secret Admin Login Button -->
+            <button onclick="openModal('adminLoginModal')" class="hover:text-white transition ml-2">🔒 Admin</button>
+        </p>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919049555270" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 hover:scale-110 transition z-50 group flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.005-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-        </svg>
-        <span class="hidden group-hover:block font-bold text-sm mr-1" data-lang="wa-chat">Chat with us</span>
+    <!-- Fixed Buttons & Indicators -->
+    <a href="https://wa.me/919049555270" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 hover:scale-110 transition z-40 group flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.005-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+        <span class="hidden group-hover:block font-bold text-sm mr-1" data-lang="wa-chat">WhatsApp</span>
     </a>
 
-    <!-- Database Status Indicator -->
-    <div id="db-status" class="fixed bottom-6 left-6 bg-slate-900 text-white text-xs font-mono px-3 py-1.5 rounded-full shadow-lg z-50 flex items-center gap-2 opacity-80">
+    <div id="db-status" class="fixed bottom-6 left-6 bg-slate-900 text-white text-xs font-mono px-3 py-1.5 rounded-full shadow-lg z-50 flex items-center gap-2 opacity-90 pointer-events-none">
         <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse" id="db-dot"></span>
         <span id="db-text">Connecting to Firebase...</span>
     </div>
 
+    <!-- Booking Modal -->
     <div id="bookModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
             <button onclick="closeModal('bookModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
@@ -272,12 +282,13 @@
         </div>
     </div>
 
+    <!-- Tracking Modal -->
     <div id="trackModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
             <button onclick="closeModal('trackModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
             <h2 class="text-2xl font-bold mb-4" data-lang="modal-track-title">Track Repair Status</h2>
             <form id="trackForm" class="flex flex-col gap-4">
-                <input type="text" id="t-id" placeholder="Enter Tracking ID (e.g. BMR-1234)" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500 font-mono uppercase" required>
+                <input type="text" id="t-id" placeholder="Enter Tracking ID (e.g. BMR-1234)" oninput="this.value = this.value.toUpperCase()" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500 font-mono uppercase" required>
                 <div id="trackError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
                 <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-lg transition" id="trackSubmitBtn" data-lang="modal-search">Search</button>
             </form>
@@ -289,6 +300,7 @@
         </div>
     </div>
 
+    <!-- Rating Modal -->
     <div id="rateModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
             <button onclick="closeModal('rateModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
@@ -312,12 +324,96 @@
         </div>
     </div>
 
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[60] justify-center items-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl relative">
+            <button onclick="closeModal('adminLoginModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 text-center">Admin Access</h2>
+            <input type="password" id="adminPinInput" placeholder="Enter 4-Digit PIN" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 text-center text-2xl tracking-widest focus:outline-blue-500 mb-4">
+            <p id="adminLoginError" class="hidden text-red-500 text-center text-sm font-bold mb-4">Incorrect PIN</p>
+            <button onclick="checkAdminPin()" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-lg transition">Login</button>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div id="adminDashboardModal" class="hidden fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[70] justify-center items-center p-2 sm:p-4">
+        <div class="bg-white rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col shadow-2xl relative overflow-hidden">
+            <div class="p-4 sm:p-6 bg-slate-900 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold">Admin Dashboard</h2>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="switchAdminTab('bookings')" id="tab-btn-bookings" class="px-4 py-1.5 bg-blue-600 rounded-md text-sm font-bold transition">Bookings</button>
+                        <button onclick="switchAdminTab('pricing')" id="tab-btn-pricing" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Edit Pricing</button>
+                    </div>
+                </div>
+                <div class="flex gap-4 self-end sm:self-auto">
+                    <button onclick="loadAdminBookings()" id="adminRefreshBtn" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition">🔄 Refresh</button>
+                    <button onclick="closeModal('adminDashboardModal')" class="text-slate-300 hover:text-white text-3xl font-bold leading-none">&times;</button>
+                </div>
+            </div>
+            
+            <div class="p-4 sm:p-6 flex-1 overflow-y-auto bg-slate-50">
+                
+                <!-- Bookings Tab -->
+                <div id="adminBookingsView" class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 uppercase text-xs">
+                                <th class="p-4 border-b font-bold">Track ID</th>
+                                <th class="p-4 border-b font-bold">Date & Time</th>
+                                <th class="p-4 border-b font-bold">Customer Info</th>
+                                <th class="p-4 border-b font-bold">Device & Issue</th>
+                                <th class="p-4 border-b font-bold">Status Update</th>
+                                <th class="p-4 border-b font-bold">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminBookingsTable" class="text-sm text-slate-700">
+                            <tr><td colspan="6" class="text-center p-10 font-bold text-slate-400">Loading bookings from cloud...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pricing Editor Tab -->
+                <div id="adminPricingView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Manage Public Pricing</h3>
+                    <p class="text-sm text-slate-500 mb-6">Enter prices as text (e.g. "₹800+", "Call for Price"). Changes are live instantly.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-blue-600 mb-3 bg-blue-50 p-2 rounded">Android Repairs</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center"><label class="text-sm font-semibold w-1/2">Screen (LCD)</label><input type="text" id="edit-p-and-screen" class="border p-2 rounded w-1/2 focus:outline-blue-500"></div>
+                                <div class="flex justify-between items-center"><label class="text-sm font-semibold w-1/2">Battery</label><input type="text" id="edit-p-and-batt" class="border p-2 rounded w-1/2 focus:outline-blue-500"></div>
+                                <div class="flex justify-between items-center"><label class="text-sm font-semibold w-1/2">Charging Port</label><input type="text" id="edit-p-and-port" class="border p-2 rounded w-1/2 focus:outline-blue-500"></div>
+                                <div class="flex justify-between items-center"><label class="text-sm font-semibold w-1/2">Software</label><input type="text" id="edit-p-and-soft" class="border p-2 rounded w-1/2 focus:outline-blue-500"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-amber-500 mb-3 bg-amber-50 p-2 rounded">iPhone Repairs</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center"><label class="text-sm font-semibold w-1/2">Screen</label><input type="text" id="edit-p-iph-screen" class="border p-2 rounded w-1/2 focus:outline-amber-500"></div>
+                                <div class="flex justify-between items-center"><label class="text-sm font-semibold w-1/2">Battery</label><input type="text" id="edit-p-iph-batt" class="border p-2 rounded w-1/2 focus:outline-amber-500"></div>
+                                <div class="flex justify-between items-center"><label class="text-sm font-semibold w-1/2">Back Glass</label><input type="text" id="edit-p-iph-glass" class="border p-2 rounded w-1/2 focus:outline-amber-500"></div>
+                                <div class="flex justify-between items-center"><label class="text-sm font-semibold w-1/2">TrueTone</label><input type="text" id="edit-p-iph-true" class="border p-2 rounded w-1/2 focus:outline-amber-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-4 border-t flex justify-end items-center gap-4">
+                        <span id="priceSaveMsg" class="hidden text-green-600 font-bold">✔ Prices updated successfully!</span>
+                        <button onclick="saveAdminPricing()" id="savePricingBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-lg shadow-lg transition">Save to Cloud</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Hardcoded custom config for hosting
         const firebaseConfig = {
           apiKey: "AIzaSyBu1kxGU6-JtHlyfT2qDaaznTOD8gMZQDI",
           authDomain: "bhakti-mobile-eaeff.firebaseapp.com",
@@ -341,7 +437,7 @@
             
             signInAnonymously(auth).catch(err => {
                 showDbError(`Auth Error: ${err.message}`);
-                console.error(err);
+                console.error("Firebase Auth Error:", err);
             });
 
             onAuthStateChanged(auth, (user) => {
@@ -349,11 +445,16 @@
                     statusText.innerText = "Firebase Connected";
                     statusDot.classList.remove('bg-red-500', 'animate-pulse');
                     statusDot.classList.add('bg-green-500');
+                    // Load dynamic data on connect
                     loadLiveReviews();
+                    loadLivePricing();
+                } else {
+                    showDbError("Disconnected from Cloud");
                 }
             });
         } catch (error) {
             showDbError("Init Error: Check Config");
+            console.error("Firebase Init Error:", error);
         }
 
         function showDbError(msg) {
@@ -362,6 +463,7 @@
             statusDot.classList.remove('animate-pulse');
         }
 
+        // Global Modal Controls
         window.openModal = function(id) {
             document.getElementById(id).classList.add('modal-active');
             document.getElementById(id).classList.remove('hidden');
@@ -369,24 +471,31 @@
         window.closeModal = function(id) {
             document.getElementById(id).classList.remove('modal-active');
             document.getElementById(id).classList.add('hidden');
+            if(id === 'adminLoginModal') document.getElementById('adminLoginError').classList.add('hidden');
         }
-
         function showFormError(boxId, errorMsg) {
             const box = document.getElementById(boxId);
             box.classList.remove('hidden');
-            box.innerText = `Firebase Error: ${errorMsg}`;
+            box.innerText = `Database Error: ${errorMsg}`;
         }
-        function hideFormError(boxId) {
-            document.getElementById(boxId).classList.add('hidden');
-        }
+        function hideFormError(boxId) { document.getElementById(boxId).classList.add('hidden'); }
+
+        const dbTimeout = (promise, ms = 8000) => {
+            return Promise.race([
+                promise,
+                new Promise((_, reject) => setTimeout(() => reject(new Error("Database Timeout: Ensure 'Create Database' is clicked in Firebase Console.")), ms))
+            ]);
+        };
 
         document.getElementById('bookForm').addEventListener('submit', async (e) => {
             e.preventDefault(); 
             hideFormError('bookError');
-            if(!auth.currentUser) return showFormError('bookError', "Not connected to Firebase Auth yet. Please wait or check settings.");
+            if(!auth.currentUser) return showFormError('bookError', "Connection failed. Please ensure Firebase Auth is enabled.");
             
             const btn = document.getElementById('bookSubmitBtn');
+            const originalText = btn.innerText;
             btn.innerText = "Saving to Cloud...";
+            btn.disabled = true;
             
             const tid = "BMR-" + Math.floor(1000 + Math.random() * 9000);
             const data = {
@@ -400,29 +509,32 @@
 
             try {
                 const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid);
-                await setDoc(docRef, data);
+                await dbTimeout(setDoc(docRef, data));
                 
                 document.getElementById('bookForm').classList.add('hidden');
                 document.getElementById('bookResult').classList.remove('hidden');
                 document.getElementById('generatedId').innerText = tid;
             } catch (err) {
                 showFormError('bookError', err.message);
-                btn.innerText = "Submit Booking";
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
         });
 
         document.getElementById('trackForm').addEventListener('submit', async (e) => {
             e.preventDefault(); 
             hideFormError('trackError');
-            if(!auth.currentUser) return showFormError('trackError', "Not connected to Firebase Auth yet.");
+            if(!auth.currentUser) return showFormError('trackError', "Connection failed.");
 
             const btn = document.getElementById('trackSubmitBtn');
+            const originalText = btn.innerText;
             btn.innerText = "Searching Cloud...";
+            btn.disabled = true;
             const tid = document.getElementById('t-id').value.toUpperCase();
 
             try {
                 const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid);
-                const docSnap = await getDoc(docRef);
+                const docSnap = await dbTimeout(getDoc(docRef));
 
                 if (docSnap.exists()) {
                     const data = docSnap.data();
@@ -436,8 +548,190 @@
             } catch (err) {
                 showFormError('trackError', err.message);
             }
-            btn.innerText = "Search";
+            btn.innerText = originalText;
+            btn.disabled = false;
         });
+
+        // Default prices incase DB is empty
+        const defaultPrices = {
+            'val-p-and-screen': '₹800+', 'val-p-and-batt': '₹600+', 'val-p-and-port': '₹350+', 'val-p-and-soft': '₹300+',
+            'val-p-iph-screen': '₹1500+', 'val-p-iph-batt': '₹1200+', 'val-p-iph-glass': '₹1000+', 'val-p-iph-true': '₹500+'
+        };
+
+        window.loadLivePricing = async function() {
+            try {
+                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing');
+                const snap = await dbTimeout(getDoc(docRef));
+                
+                let pricesToLoad = defaultPrices;
+                if (snap.exists()) {
+                    pricesToLoad = { ...defaultPrices, ...snap.data() };
+                }
+                
+                // Update public UI
+                for (const key in pricesToLoad) {
+                    const el = document.getElementById(key);
+                    if (el) el.innerText = pricesToLoad[key];
+                    // Also prepopulate admin inputs if they exist
+                    const inputEl = document.getElementById(key.replace('val-', 'edit-'));
+                    if (inputEl) inputEl.value = pricesToLoad[key];
+                }
+            } catch (err) {
+                console.log("Could not load custom pricing. Using defaults.", err.message);
+            }
+        }
+
+        window.saveAdminPricing = async function() {
+            const btn = document.getElementById('savePricingBtn');
+            const msg = document.getElementById('priceSaveMsg');
+            btn.innerText = "Saving...";
+            
+            const newPrices = {
+                'val-p-and-screen': document.getElementById('edit-p-and-screen').value,
+                'val-p-and-batt': document.getElementById('edit-p-and-batt').value,
+                'val-p-and-port': document.getElementById('edit-p-and-port').value,
+                'val-p-and-soft': document.getElementById('edit-p-and-soft').value,
+                'val-p-iph-screen': document.getElementById('edit-p-iph-screen').value,
+                'val-p-iph-batt': document.getElementById('edit-p-iph-batt').value,
+                'val-p-iph-glass': document.getElementById('edit-p-iph-glass').value,
+                'val-p-iph-true': document.getElementById('edit-p-iph-true').value
+            };
+
+            try {
+                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing');
+                await setDoc(docRef, newPrices);
+                
+                // Update public view immediately
+                for (const key in newPrices) {
+                    const el = document.getElementById(key);
+                    if (el) el.innerText = newPrices[key];
+                }
+                
+                btn.innerText = "Save to Cloud";
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 3000);
+            } catch (err) {
+                alert("Error saving pricing: " + err.message);
+                btn.innerText = "Save to Cloud";
+            }
+        }
+
+        window.checkAdminPin = function() {
+            const pin = document.getElementById('adminPinInput').value;
+            if (pin === '1515') {
+                closeModal('adminLoginModal');
+                openModal('adminDashboardModal');
+                document.getElementById('adminPinInput').value = ''; 
+                switchAdminTab('bookings'); // Default open bookings
+            } else {
+                document.getElementById('adminLoginError').classList.remove('hidden');
+            }
+        }
+
+        window.switchAdminTab = function(tab) {
+            const btnBookings = document.getElementById('tab-btn-bookings');
+            const btnPricing = document.getElementById('tab-btn-pricing');
+            const viewBookings = document.getElementById('adminBookingsView');
+            const viewPricing = document.getElementById('adminPricingView');
+            const refreshBtn = document.getElementById('adminRefreshBtn');
+
+            if (tab === 'bookings') {
+                btnBookings.classList.replace('bg-slate-700', 'bg-blue-600');
+                btnBookings.classList.remove('hover:bg-slate-600');
+                btnPricing.classList.replace('bg-blue-600', 'bg-slate-700');
+                btnPricing.classList.add('hover:bg-slate-600');
+                
+                viewBookings.classList.remove('hidden');
+                viewPricing.classList.add('hidden');
+                refreshBtn.classList.remove('hidden');
+                loadAdminBookings();
+            } else {
+                btnPricing.classList.replace('bg-slate-700', 'bg-blue-600');
+                btnPricing.classList.remove('hover:bg-slate-600');
+                btnBookings.classList.replace('bg-blue-600', 'bg-slate-700');
+                btnBookings.classList.add('hover:bg-slate-600');
+
+                viewPricing.classList.remove('hidden');
+                viewBookings.classList.add('hidden');
+                refreshBtn.classList.add('hidden');
+            }
+        }
+
+        window.loadAdminBookings = async function() {
+            const table = document.getElementById('adminBookingsTable');
+            table.innerHTML = `<tr><td colspan="6" class="text-center p-10 font-bold text-slate-500">Fetching live bookings...</td></tr>`;
+            
+            try {
+                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'bookings');
+                const querySnapshot = await getDocs(q);
+                
+                let bookings = [];
+                querySnapshot.forEach((doc) => { bookings.push({ id: doc.id, ...doc.data() }); });
+                
+                bookings.sort((a,b) => new Date(b.date) - new Date(a.date));
+                
+                if(bookings.length === 0) {
+                    table.innerHTML = `<tr><td colspan="6" class="text-center p-10 text-slate-500">No bookings found in database.</td></tr>`;
+                    return;
+                }
+
+                let html = '';
+                bookings.forEach(b => {
+                    const formattedDate = new Date(b.date).toLocaleString('en-IN');
+                    html += `
+                        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+                            <td class="p-4 font-mono font-bold text-blue-600">${b.id}</td>
+                            <td class="p-4 text-xs text-slate-500">${formattedDate}</td>
+                            <td class="p-4">
+                                <div class="font-bold">${b.name}</div>
+                                <div class="text-xs text-slate-500">📞 ${b.phone}</div>
+                            </td>
+                            <td class="p-4">
+                                <div class="font-bold">${b.device}</div>
+                                <div class="text-xs text-red-500 truncate w-32" title="${b.issue}">${b.issue}</div>
+                            </td>
+                            <td class="p-4">
+                                <select id="status-${b.id}" class="p-2 border border-slate-300 rounded-lg text-sm bg-white outline-none">
+                                    <option value="Received" ${b.status === 'Received' ? 'selected' : ''}>Received</option>
+                                    <option value="In Progress" ${b.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                                    <option value="Waiting for Parts" ${b.status === 'Waiting for Parts' ? 'selected' : ''}>Waiting for Parts</option>
+                                    <option value="Ready for Pickup" ${b.status === 'Ready for Pickup' ? 'selected' : ''}>Ready for Pickup</option>
+                                    <option value="Delivered" ${b.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                                </select>
+                            </td>
+                            <td class="p-4">
+                                <button onclick="saveAdminStatus('${b.id}')" id="btn-${b.id}" class="bg-green-100 hover:bg-green-200 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold transition">Update</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                table.innerHTML = html;
+            } catch (err) {
+                table.innerHTML = `<tr><td colspan="6" class="text-center p-10 font-bold text-red-500">Error: ${err.message}</td></tr>`;
+            }
+        }
+
+        window.saveAdminStatus = async function(docId) {
+            const newStatus = document.getElementById(`status-${docId}`).value;
+            const btn = document.getElementById(`btn-${docId}`);
+            btn.innerText = 'Saving...';
+            
+            try {
+                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', docId);
+                await updateDoc(docRef, { status: newStatus });
+                btn.innerText = 'Saved!';
+                btn.classList.replace('bg-green-100', 'bg-blue-100');
+                btn.classList.replace('text-green-700', 'text-blue-700');
+                setTimeout(() => {
+                    btn.innerText = 'Update';
+                    btn.classList.replace('bg-blue-100', 'bg-green-100');
+                    btn.classList.replace('text-blue-700', 'text-green-700');
+                }, 2000);
+            } catch (err) {
+                alert("Error saving: " + err.message);
+                btn.innerText = 'Failed';
+            }
+        }
 
         let selectedStars = 0;
         document.querySelectorAll('.star').forEach(star => {
@@ -457,10 +751,12 @@
             e.preventDefault();
             hideFormError('rateError');
             if(selectedStars == 0) { alert("Please select a star rating!"); return; }
-            if(!auth.currentUser) return showFormError('rateError', "Not connected to Firebase Auth yet.");
+            if(!auth.currentUser) return showFormError('rateError', "Connection failed.");
 
             const btn = document.getElementById('rateSubmitBtn');
+            const originalText = btn.innerText;
             btn.innerText = "Publishing to Cloud...";
+            btn.disabled = true;
 
             const rid = "REV-" + Date.now();
             const reviewData = {
@@ -472,7 +768,7 @@
 
             try {
                 const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'reviews', rid);
-                await setDoc(docRef, reviewData);
+                await dbTimeout(setDoc(docRef, reviewData));
                 
                 document.getElementById('rateForm').classList.add('hidden');
                 document.getElementById('rateSuccess').classList.remove('hidden');
@@ -480,7 +776,8 @@
                 injectReviewCard(reviewData, true);
             } catch (err) {
                 showFormError('rateError', err.message);
-                btn.innerText = "Submit Review";
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
         });
 
@@ -493,20 +790,14 @@
             {n:"Ramesh B.", t:"Excellent micro-soldering work on my dead motherboard.", s:5},
             {n:"Kavita J.", t:"Trustworthy shop. They explain the issue clearly.", s:5},
             {n:"Vishal T.", t:"Purchased a power bank. Good quality and warranty provided.", s:4},
-            {n:"Neha R.", t:"Highly recommended for any software or unlocking issues.", s:5},
+            {n:"नेहा रा.", t:"Highly recommended for any software or unlocking issues.", s:5},
             {n:"Ganesh K.", t:"Fast service and polite staff.", s:5},
-            {n:"Pooja V.", t:"My phone speaker was cracking, now it sounds brand new.", s:5},
-            {n:"Vikram S.", t:"Best repair center in Latur district. Genuine work.", s:5},
             {n:"संतोष प.", t:"माझा मोबाईल पाण्यात पडला होता, इथे लगेच दुरुस्त करून मिळाला. खूप छान सर्व्हिस.", s:5},
             {n:"प्रशांत कु.", t:"उदगीर मधील सर्वात भारी मोबाईल दुकान. दर पण योग्य आहेत.", s:5},
-            {n:"दीपाली म.", t:"स्क्रीन बदलून घेतली, ओरिजिनल लावली आहे. खूप धन्यवाद.", s:5},
-            {n:"अमोल रा.", t:"माझ्या फोनचा चार्जिंग प्रॉब्लेम 15 मिनिटात सॉल्व्ह केला. सुपर फास्ट!", s:4},
-            {n:"सुवर्णा जा.", t:"कव्हर आणि इयरफोन घेतले, क्वालिटी एकदम मस्त आहे.", s:5}
+            {n:"दीपाली म.", t:"स्क्रीन बदलून घेतली, ओरिजिनल लावली आहे. खूप धन्यवाद.", s:5}
         ];
 
-        function getStars(count) {
-            return "⭐".repeat(count);
-        }
+        function getStars(count) { return "⭐".repeat(count); }
 
         function injectReviewCard(rev, isNew = false) {
             const container = document.getElementById('review-container');
@@ -514,7 +805,6 @@
             card.className = "min-w-[300px] max-w-[300px] bg-white p-5 rounded-2xl shadow-sm border border-slate-100 snap-center relative";
             let badge = isNew ? `<span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>` : '';
             
-            // Critical fix for missing names
             const rName = rev.name || rev.n || 'User';
             const rText = rev.text || rev.t || '';
             const rStars = rev.stars || rev.s || 5;
@@ -531,11 +821,7 @@
                 </div>
                 <p class="text-slate-600 text-sm italic">"${rText}"</p>
             `;
-            if (isNew) {
-                container.prepend(card);
-            } else {
-                container.appendChild(card);
-            }
+            if (isNew) { container.prepend(card); } else { container.appendChild(card); }
         }
 
         async function loadLiveReviews() {
@@ -544,19 +830,16 @@
             
             try {
                 const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'reviews');
-                const querySnapshot = await getDocs(q);
+                const querySnapshot = await dbTimeout(getDocs(q));
                 
                 let cloudReviews = [];
                 querySnapshot.forEach((doc) => { cloudReviews.push(doc.data()); });
                 
-                // Sort in memory to avoid needing complex Firestore indexes
                 cloudReviews.sort((a,b) => b.date - a.date);
-                
                 cloudReviews.forEach(rev => injectReviewCard(rev, true));
             } catch (err) {
                 console.log("Could not load cloud reviews:", err.message);
             }
-
             staticReviews.forEach(rev => injectReviewCard(rev));
         }
         
@@ -568,71 +851,76 @@
             'location': { mr: '📍 उदगीर, महाराष्ट्र' },
             'subtitle': { mr: 'रिपेअरिंग सेंटर' },
             'nav-home': { mr: 'मुख्यपृष्ठ' },
-            'nav-about': { mr: 'आमच्याबद्दल' },
             'nav-repairs': { mr: 'दुरुस्ती' },
+            'nav-pricing': { mr: 'दरपत्रक' },
             'nav-accessories': { mr: 'अॅक्सेसरीज' },
+            'nav-gallery': { mr: 'गॅलरी' },
             'nav-reviews': { mr: 'अभिप्राय' },
             'nav-track': { mr: 'स्टेटस पहा' },
             'nav-rate': { mr: 'रेटिंग द्या ⭐' },
             'hero-title': { mr: 'खात्रीशीर मोबाईल दुरुस्ती आणि सर्वोत्तम अॅक्सेसरीज' },
             'hero-desc': { mr: 'उदगीरमध्ये घरपोच दुरुस्ती आणि उत्तम दर्जाच्या वस्तूंचा अनुभव घ्या.' },
             'hero-book': { mr: 'आत्ताच दुरुस्ती बूक करा' },
-            
-            'years-exp': { mr: 'वर्षांचा अनुभव' },
             'about-title': { mr: 'उदगीर मधील विश्वासार्ह मोबाईल तज्ञ' },
             'about-desc': { mr: '१५ वर्षांहून अधिक अनुभवासह, भक्ती मोबाईलने हजारो ग्राहकांचे फोन यशस्वीरित्या दुरुस्त केले आहेत. आम्ही ओरिजिनल पार्ट्स आणि प्रगत तंत्रज्ञान वापरतो.' },
-            'vision-title': { mr: 'आमचा दृष्टिकोन' },
-            'vision-desc': { mr: 'महाराष्ट्रातील सर्वात विश्वासार्ह आणि पारदर्शक टेक रिपेअर हब बनणे.' },
-            'mission-title': { mr: 'आमचे ध्येय' },
-            'mission-desc': { mr: 'अतिशय जलद, उच्च दर्जाची आणि परवडणारी मोबाईल दुरुस्ती सेवा प्रदान करणे.' },
-            'goal-title': { mr: 'आमचे उद्दिष्ट' },
-            'goal-desc': { mr: 'प्रत्येक खराब झालेला डिव्हाइस पुन्हा पूर्वीसारखा नवीन करून ग्राहकांचे १००% समाधान करणे.' },
-
-            'services-title': { mr: 'आमच्या दुरुस्ती सेवा' },
-            'services-subtitle': { mr: 'सर्व ब्रँड्ससाठी व्यावसायिक दुरुस्ती (Apple, Samsung, Vivo, Oppo, Xiaomi)' },
-            's1-title': { mr: 'स्क्रीन बदलणे' }, 's1-desc': { mr: 'ओरिजिनल LCD आणि OLED डिस्प्ले.' },
-            's2-title': { mr: 'बॅटरी बदलणे' }, 's2-desc': { mr: '१००% हेल्थ आणि फास्ट चार्जिंग.' },
-            's3-title': { mr: 'वॉटर डॅमेज' }, 's3-desc': { mr: 'केमिकल वॉश आणि शॉर्ट-सर्किट दुरुस्ती.' },
-            's4-title': { mr: 'मदरबोर्ड IC दुरुस्ती' }, 's4-desc': { mr: 'मायक्रो-सोल्डरिंग आणि डेड बूट दुरुस्ती.' },
-            's5-title': { mr: 'सॉफ्टवेअर अनलॉकिंग' }, 's5-desc': { mr: 'FRP बायपास, फ्लॅशिंग आणि OS रिस्टोअर.' },
-            's6-title': { mr: 'स्पीकर आणि माईक' }, 's6-desc': { mr: 'स्पष्ट आवाजासाठी दुरुस्ती.' },
-            's7-title': { mr: 'कॅमेरा दुरुस्ती' }, 's7-desc': { mr: 'लेन्स बदलणे आणि फोकस दुरुस्ती.' },
-            's8-title': { mr: 'चार्जिंग पोर्ट दुरुस्ती' }, 's8-desc': { mr: 'सैल पोर्ट आणि कनेक्शन दुरुस्ती.' },
-            's9-title': { mr: 'बॉडी पॅनेल बदलणे' }, 's9-desc': { mr: 'ग्लास बॅक आणि हाऊसिंग बदलणे.' },
-
-            'acc-title': { mr: 'प्रिमियम अॅक्सेसरीज' },
-            'acc-subtitle': { mr: 'टॉप ब्रँड्स आता दुकानात उपलब्ध.' },
-            'badge-sale': { mr: 'सेल' }, 'badge-new': { mr: 'नवीन' },
-            'a1-title': { mr: 'टफ आर्मर कव्हर' }, 'a2-title': { mr: 'TWS इयरबड्स' },
-            'a3-title': { mr: '६५W फास्ट चार्जर' }, 'a4-title': { mr: '१००००mAh पॉवरबँक' },
-            'a5-title': { mr: 'टेम्पर्ड ग्लास' }, 'a6-title': { mr: 'डेटा केबल्स' },
-            'a7-title': { mr: 'कार होल्डर' }, 'a8-title': { mr: 'ब्लूटूथ स्पीकर' },
-
-            'rev-title': { mr: 'ग्राहकांचे अभिप्राय' },
-            'rev-subtitle': { mr: 'उदगीरकरांचे आमच्याबद्दलचे मत.' },
+            'services-title': { mr: 'आमच्या सेवा' },
+            'services-subtitle': { mr: 'सर्व ब्रँड्ससाठी व्यावसायिक दुरुस्ती (Apple, Samsung, OnePlus, Vivo, Oppo, Xiaomi)' },
+            's1-title': { mr: 'स्क्रीन बदलणे' },
+            's1-desc': { mr: 'ओरिजिनल LCD आणि OLED डिस्प्ले.' },
+            's2-title': { mr: 'बॅटरी बदलणे' },
+            's2-desc': { mr: '100% हेल्थ आणि फास्ट चार्जिंग.' },
+            's3-title': { mr: 'पाण्यात पडलेले फोन' },
+            's3-desc': { mr: 'केमिकल वॉश आणि शॉर्ट सर्किट दुरुस्ती.' },
+            's4-title': { mr: 'मदरबोर्ड IC दुरुस्ती' },
+            's4-desc': { mr: 'मायक्रो सोल्डरिंग आणि डेड बूट फिक्स.' },
+            's5-title': { mr: 'सॉफ्टवेअर अनलॉकिंग' },
+            's5-desc': { mr: 'FRP बायपास, फ्लॅशिंग आणि OS रिस्टोअर.' },
+            's8-title': { mr: 'चार्जिंग पोर्ट दुरुस्ती' },
+            's8-desc': { mr: 'लूज पोर्ट आणि कनेक्शन दुरुस्ती.' },
+            'price-title': { mr: 'पारदर्शक दरपत्रक' },
+            'price-sub': { mr: 'दुरुस्तीचे अंदाजे दर. दुकानाच्या प्रशासकाद्वारे हे दर थेट व्यवस्थापित केले जातात.' },
+            'p-cat-1': { mr: 'अँड्रॉइड दुरुस्ती' },
+            'p-item-1': { mr: 'स्क्रीन बदलणे (LCD)' },
+            'p-item-2': { mr: 'बॅटरी बदलणे' },
+            'p-item-3': { mr: 'चार्जिंग पोर्ट दुरुस्ती' },
+            'p-item-4': { mr: 'सॉफ्टवेअर / FRP अनलॉक' },
+            'p-cat-2': { mr: 'आयफोन दुरुस्ती' },
+            'p-item-5': { mr: 'स्क्रीन बदलणे' },
+            'p-item-6': { mr: 'बॅटरी बदलणे' },
+            'p-item-7': { mr: 'बॅक ग्लास बदलणे' },
+            'p-item-8': { mr: 'ट्रू-टोन रिस्टोरेशन' },
+            'price-note': { mr: '* किमती ग्राहकांनी निवडलेल्या पार्ट्सच्या गुणवत्तेनुसार बदलू शकतात.' },
+            'gallery-title': { mr: 'आमचे काम आणि दुकान' },
+            'gallery-sub': { mr: 'आमच्या प्रगत दुरुस्ती सेटअपची एक झलक.' },
+            'acc-title': { mr: 'प्रीमियम अॅक्सेसरीज' },
+            'acc-subtitle': { mr: 'टॉप ब्रँड्स दुकानात उपलब्ध आहेत.' },
+            'badge-sale': { mr: 'सूट' },
+            'badge-new': { mr: 'नवीन' },
+            'a1-title': { mr: 'टफ आर्मर कव्हर' },
+            'a2-title': { mr: 'TWS इयरबड्स' },
+            'a3-title': { mr: '65W फास्ट चार्जर' },
+            'a4-title': { mr: '10000mAh पॉवरबँक' },
+            'rev-title': { mr: 'ग्राहकांचा अभिप्राय' },
+            'rev-subtitle': { mr: 'उदगीर मधील लोकांचे आमच्याबद्दल मत.' },
             'rev-btn': { mr: 'अभिप्राय लिहा' },
-            
             'modal-book-title': { mr: 'दुरुस्ती बूक करा' },
             'modal-submit': { mr: 'माहिती पाठवा' },
-            'book-success': { mr: 'तुमची दुरुस्ती बूक झाली্বা आहे!' },
+            'book-success': { mr: 'तुमची दुरुस्ती बूक झाली आहे!' },
             'book-save-id': { mr: 'हा ट्रॅकिंग ID सेव्ह करा:' },
             'modal-track-title': { mr: 'दुरुस्तीचे स्टेटस पहा' },
             'modal-search': { mr: 'शोधा' },
             'track-status': { mr: 'सध्याची स्थिती:' },
-            'modal-rate-title': { mr: 'आम्हाला रेटिंग द्या' },
+            'modal-rate-title': { mr: 'आम्हाला रेट करा' },
             'modal-rate-sub': { mr: 'तुमचा अभिप्राय आम्हाला सुधारण्यास मदत करतो.' },
-            'modal-submit-rev': { mr: 'अभिप्राय सबमिट करा' },
-            'rate-thanks': { mr: 'धन्यवाद! तुमचा अभिप्राय सेव्ह झाला.' },
+            'modal-submit-rev': { mr: 'अभिप्राय पाठवा' },
+            'rate-thanks': { mr: 'धन्यवाद! तुमचा अभिप्राय लाईव्ह झाला आहे.' },
             'wa-chat': { mr: 'आम्हाला मेसेज करा' }
         };
 
         const placeholderDict = {
-            'b-name': { mr: 'पूर्ण नाव' },
-            'b-phone': { mr: 'मोबाईल क्रमांक' },
-            'b-device': { mr: 'डिव्हाइस (उदा. iPhone 13)' },
-            'b-issue': { mr: 'अडचण काय आहे ते लिहा...' },
-            't-id': { mr: 'ट्रॅकिंग ID टाका (उदा. BMR-1234)' },
-            'r-name': { mr: 'तुमचे नाव' },
+            'b-name': { mr: 'पूर्ण नाव' }, 'b-phone': { mr: 'मोबाईल क्रमांक' },
+            'b-device': { mr: 'डिव्हाइस (उदा. iPhone 13)' }, 'b-issue': { mr: 'अडचण काय आहे ते लिहा...' },
+            't-id': { mr: 'ट्रॅकिंग ID टाका (उदा. BMR-1234)' }, 'r-name': { mr: 'तुमचे नाव' },
             'r-text': { mr: 'तुमचा अभिप्राय लिहा...' }
         };
 
@@ -642,7 +930,6 @@
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const key = el.getAttribute('data-lang');
                 if (!el.dataset.orig) el.dataset.orig = el.innerHTML; 
-                
                 if (currentLang === 'mr' && dict[key] && dict[key].mr) {
                     el.innerHTML = dict[key].mr;
                 } else {
