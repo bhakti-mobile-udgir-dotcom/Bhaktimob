@@ -538,7 +538,18 @@
                 
                 const performAnonymousLogin = () => {
                     signInAnonymously(auth).catch((err) => {
-                        window.showFirebaseError(`Authentication failed. Did you enable 'Anonymous' sign-in in Firebase Console? (${err.message})`);
+                        let errorMsg = `Authentication failed: ${err.message}`;
+                        
+                        if (err.code === 'auth/unauthorized-domain') {
+                            const currentDomain = window.location.hostname || "this domain";
+                            errorMsg = `<b>Domain Blocked!</b><br>Firebase is protecting your app.<br>Go to Firebase -> Authentication -> Settings -> Authorized Domains.<br>Click 'Add domain' and paste this exact text: <br><b class="text-yellow-300 select-all">${currentDomain}</b>`;
+                        } else if (err.code === 'auth/operation-not-allowed') {
+                            errorMsg = `<b>Auth Disabled!</b><br>Go to Firebase -> Authentication -> Sign-in method -> Enable 'Anonymous'.`;
+                        } else if (err.code === 'auth/api-key-not-valid') {
+                            errorMsg = `<b>API Key Error!</b><br>Your API key is restricted or invalid. Check Google Cloud Console API restrictions.`;
+                        }
+                        
+                        window.showFirebaseError(errorMsg);
                     });
                 };
 
