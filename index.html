@@ -568,11 +568,17 @@
         // Submit Booking to Firebase
         window.submitBooking = async function(e) {
             e.preventDefault();
-            if(!auth.currentUser) return;
             const btn = document.getElementById('b_submit_btn');
             const err = document.getElementById('bookingDbError');
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
             err.classList.add('hidden');
+
+            if(!auth.currentUser) {
+                err.innerHTML = "<b>Auth Error:</b> Firebase not connected. Ensure 'Anonymous' sign-in is enabled in Firebase Console.";
+                err.classList.remove('hidden');
+                btn.innerHTML = 'Submit Request';
+                return;
+            }
 
             const id = 'BMR-' + Math.floor(1000 + Math.random() * 9000);
             const data = {
@@ -592,18 +598,15 @@
                 document.getElementById('bookingSuccess').classList.remove('hidden');
             } catch (error) {
                 console.error(error);
-                if(error.code === 'permission-denied') {
-                    showDebugError("<b>Database Blocked!</b><br>Go to Firestore -> Rules.<br>Paste the exact rules provided earlier and click Publish.");
-                }
-                err.innerText = "Error connecting to cloud. Check debugger.";
+                err.innerHTML = `<b>Database Error:</b> ${error.message} (Code: ${error.code})`;
                 err.classList.remove('hidden');
+                showDebugError(`Booking failed: ${error.message}`);
             }
             btn.innerHTML = 'Submit Request';
         }
 
         // Search Repair in Firebase
         window.searchRepair = async function() {
-            if(!auth.currentUser) return;
             const id = document.getElementById('trackingIdInput').value.trim().toUpperCase();
             if(!id) return;
             
@@ -611,6 +614,12 @@
             const res = document.getElementById('trackingResult');
             err.classList.add('hidden');
             res.classList.add('hidden');
+
+            if(!auth.currentUser) {
+                err.innerHTML = "<b>Auth Error:</b> Database disconnected. Check Firebase Auth.";
+                err.classList.remove('hidden');
+                return;
+            }
 
             try {
                 const docSnap = await getDoc(doc(db, 'artifacts', window.appId, 'public', 'data', 'repairs', id));
@@ -632,29 +641,37 @@
                     }
                     res.classList.remove('hidden');
                 } else {
+                    err.innerHTML = "Tracking ID not found. Please check and try again.";
                     err.classList.remove('hidden');
                 }
             } catch (error) {
                 console.error(error);
-                err.innerText = "Connection error. Ensure rules are published.";
+                err.innerHTML = `<b>Database Error:</b> ${error.message}`;
                 err.classList.remove('hidden');
+                showDebugError(`Search failed: ${error.message}`);
             }
         }
 
         // Submit Review to Firebase
         window.submitReview = async function(e) {
             e.preventDefault();
-            if(!auth.currentUser) return;
+            const btn = document.getElementById('r_submit_btn');
+            const err = document.getElementById('rateDbError');
             
             if (selectedRating === 0) {
                 document.getElementById('rateError').classList.remove('hidden');
                 return;
             }
 
-            const btn = document.getElementById('r_submit_btn');
-            const err = document.getElementById('rateDbError');
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
             err.classList.add('hidden');
+
+            if(!auth.currentUser) {
+                err.innerHTML = "<b>Auth Error:</b> Firebase not connected. Ensure 'Anonymous' sign-in is enabled.";
+                err.classList.remove('hidden');
+                btn.innerHTML = 'Submit Review';
+                return;
+            }
 
             const reviewId = 'rev_' + Date.now();
             const data = {
@@ -670,8 +687,9 @@
                 document.getElementById('rateSuccess').classList.remove('hidden');
             } catch (error) {
                 console.error(error);
-                err.innerText = "Error saving review to cloud. Check debugger.";
+                err.innerHTML = `<b>Database Error:</b> ${error.message} (Code: ${error.code})`;
                 err.classList.remove('hidden');
+                showDebugError(`Review failed: ${error.message}`);
             }
             btn.innerHTML = 'Submit Review';
         }
