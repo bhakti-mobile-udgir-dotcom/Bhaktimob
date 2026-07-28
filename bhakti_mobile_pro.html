@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhakti Mobile & Repairing Center, Udgir</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .hero-bg { background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.9)), url('https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=1920&q=80') center/cover; }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50">
+
+    <!-- Top Contact & Utility Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 hidden md:block">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-brand-500"></i> +91 9049555270, +91 8788131515</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand-500"></i> Main Market, Udgir</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="openModal('trackingModal')" class="hover:text-white transition-colors flex items-center gap-1" data-translate="top_track"><i class="fa-solid fa-truck-fast"></i> Track Repair</button>
+                <div class="h-4 w-px bg-slate-700"></div>
+                <button onclick="toggleLanguage()" id="langToggle" class="font-bold text-white hover:text-brand-500 transition-colors">मराठी (MR)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-mobile-screen-button text-xl"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black text-slate-900 tracking-tight leading-none">BHAKTI <span class="text-brand-600">MOBILE</span></span>
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Repairing Center, Udgir</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-8">
+                    <a href="#about" class="text-sm font-bold text-slate-600 hover:text-brand-600 transition-colors" data-translate="nav_about">About Us</a>
+                    <a href="#services" class="text-sm font-bold text-slate-600 hover:text-brand-600 transition-colors" data-translate="nav_services">Repairs</a>
+                    <a href="#accessories" class="text-sm font-bold text-slate-600 hover:text-brand-600 transition-colors" data-translate="nav_accessories">Accessories</a>
+                    <a href="#reviews" class="text-sm font-bold text-slate-600 hover:text-brand-600 transition-colors" data-translate="nav_reviews">Reviews</a>
+                    <button onclick="openModal('rateModal')" class="text-sm font-bold text-slate-600 hover:text-brand-600 transition-colors" data-translate="nav_rate">Rate Us</button>
+                </nav>
+
+                <!-- Icons -->
+                <div class="flex items-center gap-4 lg:gap-6">
+                    <button class="text-slate-600 hover:text-brand-600 transition-colors"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                    <button class="text-slate-600 hover:text-brand-600 transition-colors"><i class="fa-regular fa-user text-lg"></i></button>
+                    <button class="text-slate-600 hover:text-brand-600 transition-colors relative">
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">2</span>
+                    </button>
+                    <button class="lg:hidden text-slate-600 text-2xl"><i class="fa-solid fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white h-[75vh] flex items-center justify-center text-center px-4">
+        <div class="max-w-3xl">
+            <span class="bg-brand-600/20 border border-brand-500/50 text-brand-300 font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-widest mb-6 inline-block backdrop-blur-md" data-translate="hero_badge">#1 Mobile Experts in Udgir</span>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight" data-translate="hero_title">Revive Your Device.<br>Upgrade Your Life.</h1>
+            <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto font-light" data-translate="hero_desc">Professional mobile repairing, certified micro-soldering, and premium accessories with guaranteed reliability.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openModal('bookingModal')" class="bg-brand-600 hover:bg-brand-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-brand-500/30 flex items-center justify-center gap-2" data-translate="hero_btn_book">
+                    <i class="fa-solid fa-screwdriver-wrench"></i> Book Repair
+                </button>
+                <a href="#accessories" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2" data-translate="hero_btn_shop">
+                    <i class="fa-solid fa-bag-shopping"></i> Shop Accessories
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us / 15+ Years Experience -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80" alt="Repair Tech" class="rounded-2xl shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 bg-brand-600 text-white p-6 rounded-2xl shadow-xl hidden md:block">
+                        <div class="text-4xl font-black mb-1">15+</div>
+                        <div class="text-sm font-bold uppercase tracking-wider" data-translate="about_years">Years Exp.</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-brand-600 font-bold tracking-widest uppercase text-xs mb-3" data-translate="about_label">About Us</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6" data-translate="about_title">Trusted by Thousands in Udgir</h3>
+                    <p class="text-slate-600 text-lg mb-6 leading-relaxed" data-translate="about_desc1">At Bhakti Mobile & Repairing Center, we don't just fix phones; we bring them back to life. With over 15 years of deep industry experience, our certified technicians have seen and solved it all—from shattered screens to complex motherboard failures.</p>
+                    <p class="text-slate-600 text-lg leading-relaxed" data-translate="about_desc2">We believe in transparent pricing, genuine spare parts, and incredibly fast turnaround times so you are never disconnected for long.</p>
+                </div>
+            </div>
+
+            <!-- Vision, Mission, Goal -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-xl mb-6"><i class="fa-regular fa-eye"></i></div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3" data-translate="vmg_vision_title">Our Vision</h4>
+                    <p class="text-slate-600" data-translate="vmg_vision_desc">To be the most trusted and technologically advanced mobile care destination in Maharashtra.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-bullseye"></i></div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3" data-translate="vmg_mission_title">Our Mission</h4>
+                    <p class="text-slate-600" data-translate="vmg_mission_desc">Providing instant, high-quality, and affordable repair solutions without compromising on data security or part integrity.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-trophy"></i></div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3" data-translate="vmg_goal_title">Our Goal</h4>
+                    <p class="text-slate-600" data-translate="vmg_goal_desc">To achieve 100% customer satisfaction by ensuring every device leaves our store performing like new.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repair Services (9 Items) -->
+    <section id="services" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-brand-600 font-bold tracking-widest uppercase text-xs mb-3" data-translate="service_label">Expert Solutions</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight" data-translate="service_title">Comprehensive Repair Services</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- S1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1597740985671-2a8a3b80502e?auto=format&fit=crop&w=600&q=80" alt="Screen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv1_title">Display Replacement</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv1_desc">Original OEM screens for all brands with touch calibration.</p>
+                    </div>
+                </div>
+                <!-- S2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1620286884048-fc54b17ce289?auto=format&fit=crop&w=600&q=80" alt="Battery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv2_title">Battery Replacement</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv2_desc">High-capacity, certified batteries with 6-month warranty.</p>
+                    </div>
+                </div>
+                <!-- S3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1592899677958-2f1680d603fb?auto=format&fit=crop&w=600&q=80" alt="Motherboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv3_title">Chip-Level Repair</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv3_desc">Advanced micro-soldering for dead motherboards.</p>
+                    </div>
+                </div>
+                <!-- S4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 bg-slate-200 flex items-center justify-center text-4xl text-brand-500"><i class="fa-solid fa-water"></i></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv4_title">Water Damage Recovery</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv4_desc">Ultrasonic cleaning to save liquid-damaged phones.</p>
+                    </div>
+                </div>
+                <!-- S5 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 bg-slate-200 flex items-center justify-center text-4xl text-brand-500"><i class="fa-solid fa-plug"></i></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv5_title">Charging Port Fix</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv5_desc">CC board replacement for fast-charging issues.</p>
+                    </div>
+                </div>
+                <!-- S6 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 bg-slate-200 flex items-center justify-center text-4xl text-brand-500"><i class="fa-solid fa-camera"></i></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv6_title">Camera Lens Repair</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv6_desc">Restore blur-free photos with new camera modules.</p>
+                    </div>
+                </div>
+                <!-- S7 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 bg-slate-200 flex items-center justify-center text-4xl text-brand-500"><i class="fa-solid fa-volume-high"></i></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv7_title">Speaker & Mic Fix</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv7_desc">Clear audio restoration for calls and media.</p>
+                    </div>
+                </div>
+                <!-- S8 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 bg-slate-200 flex items-center justify-center text-4xl text-brand-500"><i class="fa-brands fa-android"></i></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv8_title">Software Flashing</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv8_desc">Bootloop fixes, FRP bypass, and OS upgrades.</p>
+                    </div>
+                </div>
+                <!-- S9 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="h-48 bg-slate-200 flex items-center justify-center text-4xl text-brand-500"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-translate="srv9_title">Back Glass Replacement</h3>
+                        <p class="text-slate-500 text-sm mb-4" data-translate="srv9_desc">Laser machine removal for seamless finish.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessories Store (8 Items) -->
+    <section id="accessories" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-brand-600 font-bold tracking-widest uppercase text-xs mb-3" data-translate="acc_label">Premium Gear</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight" data-translate="acc_title">Top Accessories</h3>
+                </div>
+                <button class="hidden md:block text-brand-600 font-bold hover:underline" data-translate="btn_view_all">View All <i class="fa-solid fa-arrow-right ml-1"></i></button>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <!-- A1 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-brand-500 transition-colors group relative">
+                    <span class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg uppercase">Sale</span>
+                    <div class="h-40 flex items-center justify-center mb-4"><img src="https://images.unsplash.com/photo-1606220838315-056192d5e927?auto=format&fit=crop&w=300&q=80" alt="Earbuds" class="h-full object-contain group-hover:scale-110 transition-transform"></div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 truncate" data-translate="acc1_title">Pro Wireless Earbuds</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-black text-brand-600">₹1,299</span>
+                        <button class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition-colors"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- A2 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-brand-500 transition-colors group">
+                    <div class="h-40 flex items-center justify-center mb-4"><img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=300&q=80" alt="Smartwatch" class="h-full object-contain group-hover:scale-110 transition-transform"></div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 truncate" data-translate="acc2_title">Sport Smartwatch</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-black text-brand-600">₹1,999</span>
+                        <button class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition-colors"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- A3 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-brand-500 transition-colors group">
+                    <div class="h-40 flex items-center justify-center mb-4 text-6xl text-slate-400"><i class="fa-solid fa-battery-full"></i></div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 truncate" data-translate="acc3_title">20000mAh Power Bank</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-black text-brand-600">₹999</span>
+                        <button class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition-colors"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- A4 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-brand-500 transition-colors group">
+                    <div class="h-40 flex items-center justify-center mb-4 text-6xl text-slate-400"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 truncate" data-translate="acc4_title">Tough Armor Case</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-black text-brand-600">₹299</span>
+                        <button class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition-colors"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- A5 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-brand-500 transition-colors group">
+                    <div class="h-40 flex items-center justify-center mb-4 text-6xl text-slate-400"><i class="fa-solid fa-plug"></i></div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 truncate" data-translate="acc5_title">65W GaN Fast Charger</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-black text-brand-600">₹799</span>
+                        <button class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition-colors"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- A6 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-brand-500 transition-colors group">
+                    <div class="h-40 flex items-center justify-center mb-4 text-6xl text-slate-400"><i class="fa-solid fa-headphones"></i></div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 truncate" data-translate="acc6_title">Bass Neckband Bluetooth</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-black text-brand-600">₹699</span>
+                        <button class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition-colors"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- A7 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-brand-500 transition-colors group">
+                    <div class="h-40 flex items-center justify-center mb-4 text-6xl text-slate-400"><i class="fa-solid fa-car"></i></div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 truncate" data-translate="acc7_title">Magnetic Car Mount</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-black text-brand-600">₹349</span>
+                        <button class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition-colors"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- A8 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:border-brand-500 transition-colors group">
+                    <div class="h-40 flex items-center justify-center mb-4 text-6xl text-slate-400"><i class="fa-brands fa-usb"></i></div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-1 truncate" data-translate="acc8_title">Braided Type-C Cable</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-black text-brand-600">₹199</span>
+                        <button class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 hover:bg-brand-600 hover:text-white transition-colors"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section (17 Reviews - 12 EN, 5 MR) -->
+    <section id="reviews" class="py-20 bg-brand-50/50 border-t border-brand-100 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 flex justify-between items-center">
+            <div>
+                <h2 class="text-brand-600 font-bold tracking-widest uppercase text-xs mb-2" data-translate="rev_label">Testimonials</h2>
+                <h3 class="text-3xl font-extrabold text-slate-900" data-translate="rev_title">Customer Feedback</h3>
+            </div>
+            <button onclick="openModal('rateModal')" class="bg-white border-2 border-brand-600 text-brand-600 px-4 py-2 rounded-lg font-bold hover:bg-brand-50 transition-colors text-sm"><i class="fa-solid fa-star text-yellow-400 mr-1"></i> Rate Us</button>
+        </div>
+        
+        <!-- Scrollable Container -->
+        <div class="flex overflow-x-auto gap-6 px-4 sm:px-6 lg:px-8 pb-8 snap-x snap-mandatory scrollbar-hide" style="-ms-overflow-style: none; scrollbar-width: none;">
+            
+            <!-- Live Cloud Reviews will appear here -->
+            <div id="liveReviewsContainer" class="flex gap-6 h-full items-stretch"></div>
+
+            <!-- Generate 17 Reviews Programmatically to save space but provide content -->
+            <script>
+                const reviews = [
+                    {n: "Rahul Deshmukh", text: "Excellent service! Fixed my broken screen in 2 hours.", lang: "en"},
+                    {n: "Sagar Patil", text: "माझा मोबाईल पाण्यात पडला होता, पण इथल्या टीमने तो पूर्णपणे दुरुस्त केला. खूप छान सर्व्हिस!", lang: "mr"},
+                    {n: "Amit Kulkarni", text: "Best mobile repair shop in Udgir. Genuine spare parts.", lang: "en"},
+                    {n: "Priya Sharma", text: "Got a new battery installed. Phone works like new now.", lang: "en"},
+                    {n: "Vishal Jadhav", text: "दुरुस्तीसाठी सर्वोत्तम ठिकाण. पैसे योग्य आकारतात.", lang: "mr"},
+                    {n: "Neha Singh", text: "Very polite staff and quick resolution for charging port.", lang: "en"},
+                    {n: "Suresh Chavan", text: "Highly recommend for micro-soldering issues.", lang: "en"},
+                    {n: "Ganesh Mane", text: "विश्वासार्ह दुकान. माझ्या सॅमसंग फोनचा डिस्प्ले खूप चांगला लावून दिला.", lang: "mr"},
+                    {n: "Ravi Teja", text: "Bought a tough case and earbuds. Premium quality.", lang: "en"},
+                    {n: "Anil Shinde", text: "Fastest repair service in town. Completely satisfied.", lang: "en"},
+                    {n: "Pooja Joshi", text: "आवाजाचा प्रॉब्लेम होता, 30 मिनिटात ठीक करून दिला. धन्यवाद!", lang: "mr"},
+                    {n: "Vikram Rajput", text: "Saved my dead motherboard when others said no.", lang: "en"},
+                    {n: "Manoj Tiwari", text: "Affordable rates compared to official service centers.", lang: "en"},
+                    {n: "Deepa Nair", text: "Great collection of accessories. Loved the smartwatch.", lang: "en"},
+                    {n: "Kiran Pawar", text: "माझ्या आईचा जुना फोन व्यवस्थित करून दिला. चांगली वागणूक.", lang: "mr"},
+                    {n: "Rohan Das", text: "Data was secure during software flash. Reliable guys.", lang: "en"},
+                    {n: "Kavita Rao", text: "10/10 experience. Clean shop and professional tools.", lang: "en"}
+                ];
+
+                reviews.forEach(r => {
+                    const initials = r.n.split(' ').map(n => n[0]).join('');
+                    document.write(`
+                        <div class="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] snap-center shrink-0 border border-slate-200">
+                            <div class="flex text-yellow-400 text-xs mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-slate-600 mb-4 text-sm h-16 overflow-hidden">"${r.text}"</p>
+                            <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                                <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-xs">${initials}</div>
+                                <div><h4 class="font-bold text-slate-900 text-sm">${r.n}</h4></div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t-4 border-brand-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center text-white"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <span class="text-lg font-black text-white tracking-tight">BHAKTI <span class="text-brand-500">MOBILE</span></span>
+                </div>
+                <p class="text-sm text-slate-400 mb-4">Your trusted destination for expert mobile repairs and premium accessories in Udgir.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-sm">Contact Us</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex gap-3"><i class="fa-solid fa-location-dot mt-1 text-brand-500"></i><span>Main Market, Udgir,<br>Maharashtra 413517</span></li>
+                    <li class="flex gap-3 items-center"><i class="fa-solid fa-phone text-brand-500"></i><span>+91 9049555270<br>+91 8788131515</span></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-sm">Business Hours</h4>
+                <ul class="space-y-2 text-sm">
+                    <li class="flex justify-between border-b border-slate-800 pb-2"><span>Mon - Sat</span><span class="text-white">9:00 AM - 9:00 PM</span></li>
+                    <li class="flex justify-between pt-2"><span>Sunday</span><span class="text-brand-500 font-bold">Closed</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 mt-10 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+            <p>&copy; 2026 Bhakti Mobile & Repairing Center, Udgir. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919049555270" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all z-40 group">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="absolute right-16 bg-white text-slate-800 text-sm font-bold py-2 px-4 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none" data-translate="btn_whatsapp">Chat with us</span>
+    </a>
+
+    <!-- TRACKING MODAL -->
+    <div id="trackingModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-lg text-slate-900" data-translate="modal_track_title">Track Repair Status</h3>
+                <button onclick="closeModal('trackingModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="trackingIdInput" placeholder="Enter ID (e.g., BMR-1001)" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500 uppercase font-mono">
+                <button onclick="searchRepair()" class="bg-brand-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-brand-700"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <p id="trackingError" class="text-red-500 text-sm hidden">ID not found. Please check and try again.</p>
+            <p id="trackingLoading" class="text-brand-600 text-sm font-bold hidden flex items-center gap-2 mt-4"><i class="fa-solid fa-circle-notch fa-spin"></i> Connecting to Cloud Database...</p>
+            <div id="trackingResult" class="hidden mt-6 bg-slate-50 p-4 rounded-xl border border-slate-100 shadow-inner">
+                <h4 class="font-bold text-slate-900 text-sm mb-4">Status for: <span id="resId" class="text-brand-600 font-mono"></span></h4>
+                <div class="space-y-4" id="trackingStatusList">
+                    <div class="flex items-center gap-3 text-green-500"><i class="fa-solid fa-circle-check"></i><span class="text-sm font-medium">Device Received</span></div>
+                    <div class="flex items-center gap-3 text-brand-500"><i class="fa-solid fa-circle-notch fa-spin"></i><span class="text-sm font-medium">Repair in Progress</span></div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fa-regular fa-circle"></i><span class="text-sm font-medium">Ready for Pickup</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING MODAL -->
+    <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-lg text-slate-900" data-translate="modal_book_title">Book Repair</h3>
+                <button onclick="closeModal('bookingModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="bookingForm" onsubmit="submitBooking(event)" class="space-y-4">
+                <input type="text" id="b_name" required placeholder="Full Name" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500">
+                <input type="tel" id="b_phone" required placeholder="Phone Number" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500">
+                <select id="b_brand" required class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500 text-slate-600">
+                    <option value="">Select Device Brand</option>
+                    <option>Apple</option><option>Samsung</option><option>OnePlus</option><option>Xiaomi/Redmi</option><option>Vivo/Oppo</option><option>Other</option>
+                </select>
+                <textarea id="b_issue" required rows="2" placeholder="Describe the issue (e.g., Screen broken, battery draining)" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500"></textarea>
+                <button type="submit" id="b_submit_btn" class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold hover:bg-brand-700 shadow-lg shadow-brand-500/30 transition-all">Submit Request</button>
+            </form>
+            <div id="bookingSuccess" class="hidden text-center py-6">
+                <div class="text-4xl text-green-500 mb-2"><i class="fa-solid fa-circle-check"></i></div>
+                <h4 class="text-xl font-bold mb-2">Request Submitted!</h4>
+                <p class="text-sm text-slate-600 mb-4">Please bring your device to our store. Your tracking ID is:</p>
+                <div class="bg-slate-100 p-2 rounded-lg font-mono font-bold text-lg text-brand-600 mb-4" id="newTrackingId"></div>
+                <button onclick="closeModal('bookingModal')" class="w-full border-2 border-slate-200 py-2 rounded-lg font-bold text-slate-600 hover:bg-slate-50">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RATE US MODAL -->
+    <div id="rateModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-lg text-slate-900" data-translate="modal_rate_title">Rate Your Experience</h3>
+                <button onclick="closeModal('rateModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="rateForm" onsubmit="submitReview(event)" class="space-y-4">
+                <div class="text-center mb-4">
+                    <p class="text-sm text-slate-600 mb-2" data-translate="lbl_rating">Your Rating</p>
+                    <div class="flex justify-center gap-2 text-3xl text-slate-300" id="starRating">
+                        <i class="fa-solid fa-star cursor-pointer hover:text-yellow-400" onclick="setRating(1)" onmouseover="hoverRating(1)" onmouseout="resetHover()"></i>
+                        <i class="fa-solid fa-star cursor-pointer hover:text-yellow-400" onclick="setRating(2)" onmouseover="hoverRating(2)" onmouseout="resetHover()"></i>
+                        <i class="fa-solid fa-star cursor-pointer hover:text-yellow-400" onclick="setRating(3)" onmouseover="hoverRating(3)" onmouseout="resetHover()"></i>
+                        <i class="fa-solid fa-star cursor-pointer hover:text-yellow-400" onclick="setRating(4)" onmouseover="hoverRating(4)" onmouseout="resetHover()"></i>
+                        <i class="fa-solid fa-star cursor-pointer hover:text-yellow-400" onclick="setRating(5)" onmouseover="hoverRating(5)" onmouseout="resetHover()"></i>
+                    </div>
+                    <p id="rateError" class="text-red-500 text-xs hidden mt-2 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Please select a star rating.</p>
+                </div>
+                <input type="text" id="r_name" required placeholder="Your Name" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500">
+                <textarea id="r_text" required rows="3" placeholder="Your Feedback" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500"></textarea>
+                <button type="submit" id="r_submit_btn" class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold hover:bg-brand-700 shadow-lg shadow-brand-500/30 transition-all" data-translate="btn_submit_review">Submit Review</button>
+            </form>
+            <div id="rateSuccess" class="hidden text-center py-6">
+                <div class="text-4xl text-red-500 mb-2"><i class="fa-solid fa-heart"></i></div>
+                <h4 class="text-xl font-bold mb-2">Thank you!</h4>
+                <p class="text-sm text-slate-600 mb-4">We appreciate your feedback.</p>
+                <button onclick="closeModal('rateModal')" class="w-full border-2 border-slate-200 py-2 rounded-lg font-bold text-slate-600 hover:bg-slate-50">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'bhakti-mobile-app';
+        
+        // Using your live Firebase project configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBu1kxGU6-JtHlyfT2qDaaznTOD8gMZQDI",
+            authDomain: "bhakti-mobile-eaeff.firebaseapp.com",
+            projectId: "bhakti-mobile-eaeff",
+            storageBucket: "bhakti-mobile-eaeff.firebasestorage.app",
+            messagingSenderId: "626681125968",
+            appId: "1:626681125968:web:c9843e8e59d946a0b78555",
+            measurementId: "G-0DX7Y85TPX"
+        };
+        
+        let app, db, auth, currentUser;
+        let bookingsRef, reviewsRef;
+
+        if (firebaseConfig && Object.keys(firebaseConfig).length > 0) {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            bookingsRef = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+            reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
+
+            const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+            if (token) {
+                // If the test token fails (because we are using your custom Firebase), fallback to Anonymous Auth
+                signInWithCustomToken(auth, token).catch((err) => {
+                    console.log("Using personal Firebase instance, falling back to Anonymous Auth.");
+                    signInAnonymously(auth).catch(console.error);
+                });
+            } else {
+                signInAnonymously(auth).catch(console.error);
+            }
+            
+            // Wait for authentication to complete before reading from the database
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    currentUser = user;
+                    
+                    if (reviewsRef) {
+                        onSnapshot(reviewsRef, (snapshot) => {
+                            let liveReviews = [];
+                            snapshot.forEach(doc => liveReviews.push(doc.data()));
+                            liveReviews.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+                            
+                            if(liveReviews.length > 0) {
+                                const container = document.getElementById('liveReviewsContainer');
+                                if (container) {
+                                    let html = '';
+                                    liveReviews.forEach(r => {
+                                        const name = r.name || 'Guest';
+                                        const initials = name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
+                                        let stars = '';
+                                        for(let i=1; i<=5; i++) stars += `<i class="fa-solid fa-star ${i <= r.rating ? 'text-yellow-400' : 'text-slate-300'}"></i>`;
+                                        
+                                        html += `
+                                            <div class="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] snap-center shrink-0 border border-brand-200 relative overflow-hidden">
+                                                <div class="absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black uppercase px-2 py-1 rounded-bl-lg">New</div>
+                                                <div class="flex text-xs mb-3">${stars}</div>
+                                                <p class="text-slate-600 mb-4 text-sm h-16 overflow-hidden">"${r.text}"</p>
+                                                <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                                                    <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-xs">${initials}</div>
+                                                    <div><h4 class="font-bold text-slate-900 text-sm">${name}</h4></div>
+                                                </div>
+                                            </div>
+                                        `;
+                                    });
+                                    container.innerHTML = html;
+                                }
+                            }
+                        }, (error) => console.error(error));
+                    }
+                }
+            });
+        }
+
+        window.openModal = function(id) { document.getElementById(id).classList.remove('hidden'); }
+        window.closeModal = function(id) { 
+            document.getElementById(id).classList.add('hidden'); 
+            if(id === 'trackingModal') { document.getElementById('trackingResult').classList.add('hidden'); document.getElementById('trackingError').classList.add('hidden'); document.getElementById('trackingLoading').classList.add('hidden'); }
+            if(id === 'bookingModal') { document.getElementById('bookingForm').classList.remove('hidden'); document.getElementById('bookingSuccess').classList.add('hidden'); document.getElementById('bookingForm').reset(); }
+            if(id === 'rateModal') { document.getElementById('rateForm').classList.remove('hidden'); document.getElementById('rateSuccess').classList.add('hidden'); document.getElementById('rateForm').reset(); window.setRating(0); }
+        }
+
+        window.searchRepair = async function() {
+            const val = document.getElementById('trackingIdInput').value.trim().toUpperCase();
+            document.getElementById('trackingError').classList.add('hidden');
+            document.getElementById('trackingResult').classList.add('hidden');
+            
+            if(val === '' || val.length < 5) {
+                document.getElementById('trackingError').innerText = "Please enter a valid Tracking ID.";
+                document.getElementById('trackingError').classList.remove('hidden');
+                return;
+            }
+
+            if (!currentUser || !db) {
+                // Fallback to visual demo if no cloud setup
+                document.getElementById('trackingResult').classList.remove('hidden');
+                document.getElementById('resId').innerText = val;
+                window.renderStatus('received');
+                return;
+            }
+
+            document.getElementById('trackingLoading').classList.remove('hidden');
+
+            try {
+                const snapshot = await getDocs(bookingsRef);
+                let found = null;
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    if (data.trackingId === val) found = data;
+                });
+
+                document.getElementById('trackingLoading').classList.add('hidden');
+
+                if (found) {
+                    document.getElementById('trackingResult').classList.remove('hidden');
+                    document.getElementById('resId').innerText = val;
+                    window.renderStatus(found.status);
+                } else {
+                    document.getElementById('trackingError').innerText = "ID not found in Cloud Database. Please check and try again.";
+                    document.getElementById('trackingError').classList.remove('hidden');
+                }
+            } catch (err) {
+                document.getElementById('trackingLoading').classList.add('hidden');
+                console.error(err);
+            }
+        }
+
+        window.renderStatus = function(status) {
+            const list = document.getElementById('trackingStatusList');
+            const isReceived = status === 'received' || status === 'in-progress' || status === 'ready';
+            const isProgress = status === 'in-progress' || status === 'ready';
+            const isReady = status === 'ready';
+
+            let html = `<div class="flex items-center gap-3 ${isReceived ? 'text-green-500' : 'text-slate-300'}"><i class="fa-solid fa-circle-check"></i><span class="text-sm font-medium">Device Received</span></div>`;
+            
+            if (isProgress && !isReady) {
+                 html += `<div class="flex items-center gap-3 text-brand-500"><i class="fa-solid fa-circle-notch fa-spin"></i><span class="text-sm font-medium">Repair in Progress</span></div>`;
+            } else {
+                 html += `<div class="flex items-center gap-3 ${isProgress ? 'text-green-500' : 'text-slate-300'}"><i class="fa-solid fa-circle-check"></i><span class="text-sm font-medium">Repair in Progress</span></div>`;
+            }
+
+            html += `<div class="flex items-center gap-3 ${isReady ? 'text-green-500' : 'text-slate-300'}"><i class="fa-solid fa-circle-check"></i><span class="text-sm font-medium">Ready for Pickup</span></div>`;
+            list.innerHTML = html;
+        }
+
+        window.submitBooking = async function(e) {
+            e.preventDefault();
+            const id = 'BMR-' + Math.floor(1000 + Math.random() * 9000);
+            const btn = document.getElementById('b_submit_btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Saving to Cloud...`;
+            btn.disabled = true;
+
+            const bookingData = {
+                trackingId: id,
+                name: document.getElementById('b_name')?.value || 'Guest',
+                phone: document.getElementById('b_phone')?.value || '',
+                brand: document.getElementById('b_brand')?.value || '',
+                issue: document.getElementById('b_issue')?.value || '',
+                status: 'received',
+                createdAt: new Date().toISOString()
+            };
+
+            if (currentUser && db) {
+                try {
+                    await addDoc(bookingsRef, bookingData);
+                } catch (err) {
+                    console.error("Error saving booking:", err);
+                }
+            }
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            document.getElementById('bookingForm').classList.add('hidden');
+            document.getElementById('bookingSuccess').classList.remove('hidden');
+            document.getElementById('newTrackingId').innerText = id;
+        }
+
+        window.currentRating = 0;
+        window.hoverRating = function(rating) {
+            const stars = document.querySelectorAll('#starRating i');
+            stars.forEach((star, i) => { star.className = i < rating ? "fa-solid fa-star cursor-pointer text-yellow-400" : "fa-solid fa-star cursor-pointer text-slate-300"; });
+        }
+        window.resetHover = function() { window.hoverRating(window.currentRating); }
+        window.setRating = function(rating) { 
+            window.currentRating = rating; 
+            window.hoverRating(rating); 
+            document.getElementById('rateError').classList.add('hidden'); 
+        }
+        
+        window.submitReview = async function(e) {
+            e.preventDefault();
+            if(window.currentRating === 0) {
+                document.getElementById('rateError').classList.remove('hidden');
+                return;
+            }
+            
+            const btn = document.getElementById('r_submit_btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Saving...`;
+            btn.disabled = true;
+
+            const reviewData = {
+                name: document.getElementById('r_name')?.value || 'Guest',
+                text: document.getElementById('r_text')?.value || '',
+                rating: window.currentRating,
+                createdAt: new Date().toISOString()
+            };
+
+            if (currentUser && db) {
+                try {
+                    await addDoc(reviewsRef, reviewData);
+                } catch (err) {
+                    console.error("Error saving review:", err);
+                }
+            }
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            document.getElementById('rateForm').classList.add('hidden');
+            document.getElementById('rateSuccess').classList.remove('hidden');
+        }
+
+        window.isMarathi = false;
+        const dict = {
+            'mr': {
+                "top_track": "<i class='fa-solid fa-truck-fast'></i> रिपेअर ट्रॅक करा",
+                "nav_about": "आमच्याबद्दल", "nav_services": "रिपेअरिंग", "nav_accessories": "अॅक्सेसरीज", "nav_reviews": "प्रतिक्रिया", "nav_rate": "रेटिंग द्या",
+                "hero_badge": "उदगीर मधील #१ मोबाईल एक्सपर्ट्स",
+                "hero_title": "तुमचा मोबाईल दुरुस्त करा.<br>तुमचे जीवन अपग्रेड करा.",
+                "hero_desc": "प्रोफेशनल मोबाईल रिपेअरिंग, सर्टिफाइड मायक्रो-सोल्डरिंग आणि खात्रीशीर प्रीमियम अॅक्सेसरीज.",
+                "hero_btn_book": "<i class='fa-solid fa-screwdriver-wrench'></i> रिपेअर बुक करा",
+                "hero_btn_shop": "<i class='fa-solid fa-bag-shopping'></i> अॅक्सेसरीज पहा",
+                "about_years": "वर्षांचा अनुभव", "about_label": "आमच्याबद्दल", "about_title": "उदगीर मध्ये हजारो लोकांचा विश्वास",
+                "about_desc1": "भक्ती मोबाईल अँड रिपेअरिंग सेंटरमध्ये, आम्ही फक्त फोन दुरुस्त करत नाही; आम्ही त्यांना नवीन जीवन देतो. १५ वर्षांपेक्षा जास्त अनुभवासह, आमच्या तंत्रज्ञांनी सर्व समस्या सोडवल्या आहेत.",
+                "about_desc2": "आम्ही पारदर्शक किंमती, मूळ स्पेअर पार्ट्स आणि अतिशय जलद सेवा देण्यावर विश्वास ठेवतो.",
+                "vmg_vision_title": "आमची दृष्टी", "vmg_vision_desc": "महाराष्ट्रातील सर्वात विश्वसनीय मोबाईल केअर डेस्टिनेशन बनणे.",
+                "vmg_mission_title": "आमचे ध्येय", "vmg_mission_desc": "डेटा सिक्युरिटी न गमावता तात्काळ, उच्च दर्जाचे आणि परवडणारे रिपेअर सोल्यूशन्स प्रदान करणे.",
+                "vmg_goal_title": "आमचे उद्दिष्ट", "vmg_goal_desc": "प्रत्येक डिव्हाइस नवीन सारखे काम करेल याची खात्री करून १००% ग्राहकांचे समाधान मिळवणे.",
+                "service_label": "तज्ञ उपाय", "service_title": "सर्वसमावेशक रिपेअर सेवा",
+                "srv1_title": "डिस्प्ले रिप्लेसमेंट", "srv1_desc": "सर्व ब्रँडसाठी टच कॅलिब्रेशनसह मूळ OEM स्क्रीन.",
+                "srv2_title": "बॅटरी रिप्लेसमेंट", "srv2_desc": "६ महिन्यांच्या वॉरंटीसह उच्च-क्षमतेच्या, प्रमाणित बॅटरी.",
+                "srv3_title": "चिप-लेव्हल रिपेअर", "srv3_desc": "डेड मदरबोर्डसाठी प्रगत मायक्रो-सोल्डरिंग.",
+                "srv4_title": "पाण्यात पडलेला फोन", "srv4_desc": "लिक्विड-डॅमेज फोन वाचवण्यासाठी अल्ट्रासोनिक क्लिनिंग.",
+                "srv5_title": "चार्जिंग पोर्ट", "srv5_desc": "फास्ट-चार्जिंग समस्यांसाठी सीसी बोर्ड रिप्लेसमेंट.",
+                "srv6_title": "कॅमेरा लेन्स रिपेअर", "srv6_desc": "नवीन कॅमेरा मॉड्युलसह स्पष्ट फोटो पुनर्संचयित करा.",
+                "srv7_title": "स्पीकर आणि माइक", "srv7_desc": "कॉल आणि मीडियासाठी स्पष्ट ऑडिओ.",
+                "srv8_title": "सॉफ्टवेअर फ्लॅशिंग", "srv8_desc": "बूटलूप फिक्स, एफआरपी बायपास आणि ओएस अपग्रेड.",
+                "srv9_title": "बॅक ग्लास रिप्लेसमेंट", "srv9_desc": "अचूक फिनिशसाठी लेझर मशीन रिमूव्हल.",
+                "acc_label": "प्रीमियम गियर", "acc_title": "टॉप अॅक्सेसरीज", "btn_view_all": "सर्व पहा <i class='fa-solid fa-arrow-right ml-1'></i>",
+                "acc1_title": "प्रो वायरलेस इयरबड्स", "acc2_title": "स्पोर्ट स्मार्टवॉच", "acc3_title": "20000mAh पॉवर बँक", "acc4_title": "टफ आर्मर कव्हर",
+                "acc5_title": "65W फास्ट चार्जर", "acc6_title": "बास नेकबँड", "acc7_title": "मॅग्नेटिक कार माउंट", "acc8_title": "टाईप-सी केबल",
+                "rev_label": "प्रतिक्रिया", "rev_title": "ग्राहकांचे अभिप्राय",
+                "btn_whatsapp": "आमच्याशी चॅट करा",
+                "modal_track_title": "रिपेअर स्टेटस ट्रॅक करा", "modal_book_title": "रिपेअर बुक करा", "modal_rate_title": "तुमचा अनुभव सांगा",
+                "lbl_rating": "तुमचे रेटिंग", "btn_submit_review": "रिव्ह्यू सबमिट करा"
+            },
+            'en': {
+                "top_track": "<i class='fa-solid fa-truck-fast'></i> Track Repair",
+                "nav_about": "About Us", "nav_services": "Repairs", "nav_accessories": "Accessories", "nav_reviews": "Reviews", "nav_rate": "Rate Us",
+                "hero_badge": "#1 Mobile Experts in Udgir",
+                "hero_title": "Revive Your Device.<br>Upgrade Your Life.",
+                "hero_desc": "Professional mobile repairing, certified micro-soldering, and premium accessories with guaranteed reliability.",
+                "hero_btn_book": "<i class='fa-solid fa-screwdriver-wrench'></i> Book Repair",
+                "hero_btn_shop": "<i class='fa-solid fa-bag-shopping'></i> Shop Accessories",
+                "about_years": "Years Exp.", "about_label": "About Us", "about_title": "Trusted by Thousands in Udgir",
+                "about_desc1": "At Bhakti Mobile & Repairing Center, we don't just fix phones; we bring them back to life. With over 15 years of deep industry experience, our certified technicians have seen and solved it all—from shattered screens to complex motherboard failures.",
+                "about_desc2": "We believe in transparent pricing, genuine spare parts, and incredibly fast turnaround times so you are never disconnected for long.",
+                "vmg_vision_title": "Our Vision", "vmg_vision_desc": "To be the most trusted and technologically advanced mobile care destination in Maharashtra.",
+                "vmg_mission_title": "Our Mission", "vmg_mission_desc": "Providing instant, high-quality, and affordable repair solutions without compromising on data security or part integrity.",
+                "vmg_goal_title": "Our Goal", "vmg_goal_desc": "To achieve 100% customer satisfaction by ensuring every device leaves our store performing like new.",
+                "service_label": "Expert Solutions", "service_title": "Comprehensive Repair Services",
+                "srv1_title": "Display Replacement", "srv1_desc": "Original OEM screens for all brands with touch calibration.",
+                "srv2_title": "Battery Replacement", "srv2_desc": "High-capacity, certified batteries with 6-month warranty.",
+                "srv3_title": "Chip-Level Repair", "srv3_desc": "Advanced micro-soldering for dead motherboards.",
+                "srv4_title": "Water Damage Recovery", "srv4_desc": "Ultrasonic cleaning to save liquid-damaged phones.",
+                "srv5_title": "Charging Port Fix", "srv5_desc": "CC board replacement for fast-charging issues.",
+                "srv6_title": "Camera Lens Repair", "srv6_desc": "Restore blur-free photos with new camera modules.",
+                "srv7_title": "Speaker & Mic Fix", "srv7_desc": "Clear audio restoration for calls and media.",
+                "srv8_title": "Software Flashing", "srv8_desc": "Bootloop fixes, FRP bypass, and OS upgrades.",
+                "srv9_title": "Back Glass Replacement", "srv9_desc": "Laser machine removal for seamless finish.",
+                "acc_label": "Premium Gear", "acc_title": "Top Accessories", "btn_view_all": "View All <i class='fa-solid fa-arrow-right ml-1'></i>",
+                "acc1_title": "Pro Wireless Earbuds", "acc2_title": "Sport Smartwatch", "acc3_title": "20000mAh Power Bank", "acc4_title": "Tough Armor Case",
+                "acc5_title": "65W GaN Fast Charger", "acc6_title": "Bass Neckband Bluetooth", "acc7_title": "Magnetic Car Mount", "acc8_title": "Braided Type-C Cable",
+                "rev_label": "Testimonials", "rev_title": "Customer Feedback",
+                "btn_whatsapp": "Chat with us",
+                "modal_track_title": "Track Repair Status", "modal_book_title": "Book Repair", "modal_rate_title": "Rate Your Experience",
+                "lbl_rating": "Your Rating", "btn_submit_review": "Submit Review"
+            }
+        };
+
+        window.toggleLanguage = function() {
+            window.isMarathi = !window.isMarathi;
+            document.getElementById('langToggle').innerText = window.isMarathi ? "English (EN)" : "मराठी (MR)";
+            const lang = window.isMarathi ? 'mr' : 'en';
+            
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (dict[lang][key]) {
+                    el.innerHTML = dict[lang][key];
+                }
+            });
+        }
+    </script>
+</body>
+</html>
