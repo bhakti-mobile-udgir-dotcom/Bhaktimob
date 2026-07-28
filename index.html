@@ -27,6 +27,9 @@
 </head>
 <body class="font-sans text-slate-800 bg-slate-50">
 
+    <!-- Firebase Connection Status Debugger -->
+    <div id="firebaseDebug" class="fixed bottom-24 left-6 bg-red-500 text-white text-xs px-4 py-2 rounded-lg hidden z-50 shadow-xl border-2 border-white max-w-sm"></div>
+
     <!-- Top Contact & Utility Bar -->
     <div class="bg-slate-900 text-slate-300 text-xs py-2 hidden md:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -445,6 +448,7 @@
                     <option>Apple</option><option>Samsung</option><option>OnePlus</option><option>Xiaomi/Redmi</option><option>Vivo/Oppo</option><option>Other</option>
                 </select>
                 <textarea id="b_issue" required rows="2" placeholder="Describe the issue (e.g., Screen broken, battery draining)" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500"></textarea>
+                <p id="bookingDbError" class="text-red-500 text-xs hidden font-bold bg-red-50 p-2 rounded"></p>
                 <button type="submit" id="b_submit_btn" class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold hover:bg-brand-700 shadow-lg shadow-brand-500/30 transition-all">Submit Request</button>
             </form>
             <div id="bookingSuccess" class="hidden text-center py-6">
@@ -476,6 +480,7 @@
                     </div>
                     <p id="rateError" class="text-red-500 text-xs hidden mt-2 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Please select a star rating.</p>
                 </div>
+                <p id="rateDbError" class="text-red-500 text-xs hidden mb-2 font-bold bg-red-50 p-2 rounded border border-red-100"></p>
                 <input type="text" id="r_name" required placeholder="Your Name" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500">
                 <textarea id="r_text" required rows="3" placeholder="Your Feedback" class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500"></textarea>
                 <button type="submit" id="r_submit_btn" class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold hover:bg-brand-700 shadow-lg shadow-brand-500/30 transition-all" data-translate="btn_submit_review">Submit Review</button>
@@ -511,73 +516,97 @@
         let app, db, auth, currentUser;
         let bookingsRef, reviewsRef;
 
-        if (firebaseConfig && Object.keys(firebaseConfig).length > 0) {
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-            
-            bookingsRef = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
-            reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
-
-            const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-            if (token) {
-                // If the test token fails (because we are using your custom Firebase), fallback to Anonymous Auth
-                signInWithCustomToken(auth, token).catch((err) => {
-                    console.log("Using personal Firebase instance, falling back to Anonymous Auth.");
-                    signInAnonymously(auth).catch(console.error);
-                });
-            } else {
-                signInAnonymously(auth).catch(console.error);
+        window.showFirebaseError = function(msg) {
+            console.error(msg);
+            const debugEl = document.getElementById('firebaseDebug');
+            if (debugEl) {
+                debugEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <b>Database Setup Error:</b><br>${msg}`;
+                debugEl.classList.remove('hidden');
             }
-            
-            // Wait for authentication to complete before reading from the database
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    currentUser = user;
-                    
-                    if (reviewsRef) {
-                        onSnapshot(reviewsRef, (snapshot) => {
-                            let liveReviews = [];
-                            snapshot.forEach(doc => liveReviews.push(doc.data()));
-                            liveReviews.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-                            
-                            if(liveReviews.length > 0) {
-                                const container = document.getElementById('liveReviewsContainer');
-                                if (container) {
-                                    let html = '';
-                                    liveReviews.forEach(r => {
-                                        const name = r.name || 'Guest';
-                                        const initials = name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
-                                        let stars = '';
-                                        for(let i=1; i<=5; i++) stars += `<i class="fa-solid fa-star ${i <= r.rating ? 'text-yellow-400' : 'text-slate-300'}"></i>`;
-                                        
-                                        html += `
-                                            <div class="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] snap-center shrink-0 border border-brand-200 relative overflow-hidden">
-                                                <div class="absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black uppercase px-2 py-1 rounded-bl-lg">New</div>
-                                                <div class="flex text-xs mb-3">${stars}</div>
-                                                <p class="text-slate-600 mb-4 text-sm h-16 overflow-hidden">"${r.text}"</p>
-                                                <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
-                                                    <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-xs">${initials}</div>
-                                                    <div><h4 class="font-bold text-slate-900 text-sm">${name}</h4></div>
-                                                </div>
-                                            </div>
-                                        `;
-                                    });
-                                    container.innerHTML = html;
-                                }
-                            }
-                        }, (error) => console.error(error));
-                    }
+        }
+
+        if (firebaseConfig && Object.keys(firebaseConfig).length > 0) {
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                bookingsRef = collection(db, 'artifacts', appId, 'public', 'data', 'bookings');
+                reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
+
+                const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                
+                const performAnonymousLogin = () => {
+                    signInAnonymously(auth).catch((err) => {
+                        window.showFirebaseError(`Authentication failed. Did you enable 'Anonymous' sign-in in Firebase Console? (${err.message})`);
+                    });
+                };
+
+                if (token) {
+                    signInWithCustomToken(auth, token).catch((err) => {
+                        console.log("Using personal Firebase instance, falling back to Anonymous Auth.");
+                        performAnonymousLogin();
+                    });
+                } else {
+                    performAnonymousLogin();
                 }
-            });
+                
+                // Wait for authentication to complete before reading from the database
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                        if (document.getElementById('firebaseDebug')) {
+                            document.getElementById('firebaseDebug').classList.add('hidden');
+                        }
+                        
+                        if (reviewsRef) {
+                            onSnapshot(reviewsRef, (snapshot) => {
+                                let liveReviews = [];
+                                snapshot.forEach(doc => liveReviews.push(doc.data()));
+                                liveReviews.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+                                
+                                if(liveReviews.length > 0) {
+                                    const container = document.getElementById('liveReviewsContainer');
+                                    if (container) {
+                                        let html = '';
+                                        liveReviews.forEach(r => {
+                                            const name = r.name || 'Guest';
+                                            const initials = name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
+                                            let stars = '';
+                                            for(let i=1; i<=5; i++) stars += `<i class="fa-solid fa-star ${i <= r.rating ? 'text-yellow-400' : 'text-slate-300'}"></i>`;
+                                            
+                                            html += `
+                                                <div class="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] snap-center shrink-0 border border-brand-200 relative overflow-hidden">
+                                                    <div class="absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black uppercase px-2 py-1 rounded-bl-lg">New</div>
+                                                    <div class="flex text-xs mb-3">${stars}</div>
+                                                    <p class="text-slate-600 mb-4 text-sm h-16 overflow-hidden">"${r.text}"</p>
+                                                    <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                                                        <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-xs">${initials}</div>
+                                                        <div><h4 class="font-bold text-slate-900 text-sm">${name}</h4></div>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        });
+                                        container.innerHTML = html;
+                                    }
+                                }
+                            }, (error) => {
+                                window.showFirebaseError(`Could not read database. Please verify Firestore Rules. (${error.message})`);
+                            });
+                        }
+                    }
+                });
+            } catch (initErr) {
+                window.showFirebaseError(`Firebase Initialization Failed: ${initErr.message}`);
+            }
         }
 
         window.openModal = function(id) { document.getElementById(id).classList.remove('hidden'); }
         window.closeModal = function(id) { 
             document.getElementById(id).classList.add('hidden'); 
             if(id === 'trackingModal') { document.getElementById('trackingResult').classList.add('hidden'); document.getElementById('trackingError').classList.add('hidden'); document.getElementById('trackingLoading').classList.add('hidden'); }
-            if(id === 'bookingModal') { document.getElementById('bookingForm').classList.remove('hidden'); document.getElementById('bookingSuccess').classList.add('hidden'); document.getElementById('bookingForm').reset(); }
-            if(id === 'rateModal') { document.getElementById('rateForm').classList.remove('hidden'); document.getElementById('rateSuccess').classList.add('hidden'); document.getElementById('rateForm').reset(); window.setRating(0); }
+            if(id === 'bookingModal') { document.getElementById('bookingForm').classList.remove('hidden'); document.getElementById('bookingSuccess').classList.add('hidden'); document.getElementById('bookingDbError').classList.add('hidden'); document.getElementById('bookingForm').reset(); }
+            if(id === 'rateModal') { document.getElementById('rateForm').classList.remove('hidden'); document.getElementById('rateSuccess').classList.add('hidden'); document.getElementById('rateDbError').classList.add('hidden'); document.getElementById('rateForm').reset(); window.setRating(0); }
         }
 
         window.searchRepair = async function() {
@@ -622,6 +651,8 @@
             } catch (err) {
                 document.getElementById('trackingLoading').classList.add('hidden');
                 console.error(err);
+                document.getElementById('trackingError').innerText = "Error accessing cloud. Did you set Firestore Rules to true?";
+                document.getElementById('trackingError').classList.remove('hidden');
             }
         }
 
@@ -645,6 +676,15 @@
 
         window.submitBooking = async function(e) {
             e.preventDefault();
+            const errBox = document.getElementById('bookingDbError');
+            errBox.classList.add('hidden');
+
+            if (!currentUser) {
+                errBox.innerText = "Error: Database disconnected. Did you enable Anonymous Auth in Firebase?";
+                errBox.classList.remove('hidden');
+                return;
+            }
+
             const id = 'BMR-' + Math.floor(1000 + Math.random() * 9000);
             const btn = document.getElementById('b_submit_btn');
             const originalText = btn.innerHTML;
@@ -661,19 +701,20 @@
                 createdAt: new Date().toISOString()
             };
 
-            if (currentUser && db) {
-                try {
-                    await addDoc(bookingsRef, bookingData);
-                } catch (err) {
-                    console.error("Error saving booking:", err);
-                }
+            try {
+                await addDoc(bookingsRef, bookingData);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                document.getElementById('bookingForm').classList.add('hidden');
+                document.getElementById('bookingSuccess').classList.remove('hidden');
+                document.getElementById('newTrackingId').innerText = id;
+            } catch (err) {
+                console.error("Error saving booking:", err);
+                errBox.innerText = "Error saving to cloud. Did you set Firestore Rules correctly?";
+                errBox.classList.remove('hidden');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
             }
-
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            document.getElementById('bookingForm').classList.add('hidden');
-            document.getElementById('bookingSuccess').classList.remove('hidden');
-            document.getElementById('newTrackingId').innerText = id;
         }
 
         window.currentRating = 0;
@@ -690,8 +731,17 @@
         
         window.submitReview = async function(e) {
             e.preventDefault();
+            const errBox = document.getElementById('rateDbError');
+            errBox.classList.add('hidden');
+
             if(window.currentRating === 0) {
                 document.getElementById('rateError').classList.remove('hidden');
+                return;
+            }
+
+            if (!currentUser) {
+                errBox.innerText = "Error: Database disconnected. Did you enable Anonymous Auth in Firebase?";
+                errBox.classList.remove('hidden');
                 return;
             }
             
@@ -707,18 +757,19 @@
                 createdAt: new Date().toISOString()
             };
 
-            if (currentUser && db) {
-                try {
-                    await addDoc(reviewsRef, reviewData);
-                } catch (err) {
-                    console.error("Error saving review:", err);
-                }
+            try {
+                await addDoc(reviewsRef, reviewData);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                document.getElementById('rateForm').classList.add('hidden');
+                document.getElementById('rateSuccess').classList.remove('hidden');
+            } catch (err) {
+                console.error("Error saving review:", err);
+                errBox.innerText = "Error saving to cloud. Did you set Firestore Rules correctly?";
+                errBox.classList.remove('hidden');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
             }
-
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            document.getElementById('rateForm').classList.add('hidden');
-            document.getElementById('rateSuccess').classList.remove('hidden');
         }
 
         window.isMarathi = false;
