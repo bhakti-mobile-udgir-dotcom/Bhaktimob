@@ -93,37 +93,9 @@
             <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="services-title">Expert Repair Services</h2>
             <p class="text-slate-500 mb-10" data-lang="services-subtitle">Professional fixes for all brands (Apple, Samsung, OnePlus, Vivo, Oppo, Xiaomi)</p>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1605170439002-90845e8c0137?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Screen">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s1-title">Screen Replacement</h3>
-                    <p class="text-sm text-slate-500" data-lang="s1-desc">Original LCD & OLED displays.</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Battery">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s2-title">Battery Replacement</h3>
-                    <p class="text-sm text-slate-500" data-lang="s2-desc">100% Health & fast charging fix.</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1592833259051-16eb1d120a10?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Water Damage">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s3-title">Water Damage</h3>
-                    <p class="text-sm text-slate-500" data-lang="s3-desc">Chemical wash & short-circuit repair.</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Motherboard">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s4-title">Motherboard IC Repair</h3>
-                    <p class="text-sm text-slate-500" data-lang="s4-desc">Micro-soldering & dead boot fix.</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Software">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s5-title">Software Unlocking</h3>
-                    <p class="text-sm text-slate-500" data-lang="s5-desc">FRP Bypass, Flashing & OS Restore.</p>
-                </div>
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1616423641443-470a273b4009?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-lg mb-4" alt="Charging Port">
-                    <h3 class="font-bold text-lg mb-1" data-lang="s8-title">Charging Port Fix</h3>
-                    <p class="text-sm text-slate-500" data-lang="s8-desc">Loose port & connection repair.</p>
-                </div>
+            <div id="public-services-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Services load dynamically via JS -->
+                <div class="p-10 text-center text-slate-500 font-bold col-span-full animate-pulse">Loading Services...</div>
             </div>
         </div>
     </section>
@@ -139,19 +111,19 @@
                     <h3 class="text-xl font-bold mb-4 text-blue-600 border-b border-slate-200 pb-2" data-lang="p-cat-1">Android Repairs</h3>
                     <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
                         <span class="font-semibold text-slate-700" data-lang="p-item-1">Screen Replacement (LCD)</span>
-                        <span class="font-bold text-slate-900" id="val-p-and-screen">₹800+</span>
+                        <span class="font-bold text-slate-900" id="val-p-and-screen">...</span>
                     </div>
                     <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
                         <span class="font-semibold text-slate-700" data-lang="p-item-2">Battery Replacement</span>
-                        <span class="font-bold text-slate-900" id="val-p-and-batt">₹600+</span>
+                        <span class="font-bold text-slate-900" id="val-p-and-batt">...</span>
                     </div>
                     <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
                         <span class="font-semibold text-slate-700" data-lang="p-item-3">Charging Port Repair</span>
-                        <span class="font-bold text-slate-900" id="val-p-and-port">₹350+</span>
+                        <span class="font-bold text-slate-900" id="val-p-and-port">...</span>
                     </div>
                     <div class="flex justify-between py-3">
                         <span class="font-semibold text-slate-700" data-lang="p-item-4">Software / FRP Unlock</span>
-                        <span class="font-bold text-slate-900" id="val-p-and-soft">₹300+</span>
+                        <span class="font-bold text-slate-900" id="val-p-and-soft">...</span>
                     </div>
                 </div>
 
@@ -160,19 +132,19 @@
                     <h3 class="text-xl font-bold mb-4 text-amber-400 border-b border-slate-700 pb-2" data-lang="p-cat-2">iPhone Repairs</h3>
                     <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
                         <span class="font-semibold text-slate-300" data-lang="p-item-5">Screen Replacement</span>
-                        <span class="font-bold text-white" id="val-p-iph-screen">₹1500+</span>
+                        <span class="font-bold text-white" id="val-p-iph-screen">...</span>
                     </div>
                     <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
                         <span class="font-semibold text-slate-300" data-lang="p-item-6">Battery Replacement</span>
-                        <span class="font-bold text-white" id="val-p-iph-batt">₹1200+</span>
+                        <span class="font-bold text-white" id="val-p-iph-batt">...</span>
                     </div>
                     <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
                         <span class="font-semibold text-slate-300" data-lang="p-item-7">Back Glass Replacement</span>
-                        <span class="font-bold text-white" id="val-p-iph-glass">₹1000+</span>
+                        <span class="font-bold text-white" id="val-p-iph-glass">...</span>
                     </div>
                     <div class="flex justify-between py-3">
                         <span class="font-semibold text-slate-300" data-lang="p-item-8">TrueTone Restoration</span>
-                        <span class="font-bold text-white" id="val-p-iph-true">₹500+</span>
+                        <span class="font-bold text-white" id="val-p-iph-true">...</span>
                     </div>
                 </div>
             </div>
@@ -197,29 +169,10 @@
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="acc-title">Premium Accessories</h2>
             <p class="text-slate-500 mb-10" data-lang="acc-subtitle">Top brands available in-store.</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale relative">
-                    <span class="absolute top-2 left-2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-sale">Sale</span>
-                    <img src="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Case">
-                    <h3 class="font-bold text-sm mb-1" data-lang="a1-title">Tough Armor Cases</h3>
-                    <p class="text-blue-600 font-bold text-sm">₹ 299</p>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale relative">
-                    <span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-new">New</span>
-                    <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Earbuds">
-                    <h3 class="font-bold text-sm mb-1" data-lang="a2-title">TWS Earbuds</h3>
-                    <p class="text-blue-600 font-bold text-sm">₹ 999</p>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Charger">
-                    <h3 class="font-bold text-sm mb-1" data-lang="a3-title">65W Fast Chargers</h3>
-                    <p class="text-blue-600 font-bold text-sm">₹ 499</p>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale">
-                    <img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?q=80&w=300&auto=format&fit=crop" class="w-full h-32 object-cover rounded-lg mb-3" alt="Powerbank">
-                    <h3 class="font-bold text-sm mb-1" data-lang="a4-title">10000mAh Powerbank</h3>
-                    <p class="text-blue-600 font-bold text-sm">₹ 899</p>
-                </div>
+            
+            <div id="public-accessories-container" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Accessories load dynamically via JS -->
+                <div class="p-10 text-center text-slate-500 font-bold col-span-full animate-pulse">Loading Accessories...</div>
             </div>
         </div>
     </section>
@@ -243,14 +196,11 @@
         <h2 class="text-2xl font-bold text-white mb-2">Bhakti Mobile & Repairing Center</h2>
         <p class="mb-4">Udgir, Maharashtra - 413517</p>
         <p class="mb-4">📞 +91 9049555270 | 📞 +91 8788131515</p>
-        <p class="text-sm flex items-center justify-center gap-2">
+        <p class="text-sm flex items-center justify-center gap-2 cursor-pointer select-none" onclick="handleAdminTap()" title="Secret Admin Entry">
             &copy; 2026 Bhakti Mobile. All rights reserved. 
-            <!-- Secret Admin Login Button -->
-            <button onclick="openModal('adminLoginModal')" class="hover:text-white transition ml-2">🔒 Admin</button>
         </p>
     </footer>
 
-    <!-- Fixed Buttons & Indicators -->
     <a href="https://wa.me/919049555270" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 hover:scale-110 transition z-40 group flex items-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.005-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
         <span class="hidden group-hover:block font-bold text-sm mr-1" data-lang="wa-chat">WhatsApp</span>
@@ -271,7 +221,7 @@
                 <input type="text" id="b-phone" placeholder="Phone Number" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500" required>
                 <input type="text" id="b-device" placeholder="Device (e.g. iPhone 13)" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500" required>
                 <textarea id="b-issue" placeholder="Describe the issue..." class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500 h-24" required></textarea>
-                <div id="bookError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
+                <div id="bookError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200 overflow-hidden text-ellipsis"></div>
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition" id="bookSubmitBtn" data-lang="modal-submit">Submit Booking</button>
             </form>
             <div id="bookResult" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-center">
@@ -317,7 +267,7 @@
                 <input type="hidden" id="r-stars" value="0" required>
                 <input type="text" id="r-name" placeholder="Your Name" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50" required>
                 <textarea id="r-text" placeholder="Write your review..." class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 h-20" required></textarea>
-                <div id="rateError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
+                <div id="rateError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200 overflow-hidden text-ellipsis"></div>
                 <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg transition" id="rateSubmitBtn" data-lang="modal-submit-rev">Submit Review</button>
             </form>
             <div id="rateSuccess" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-center font-bold" data-lang="rate-thanks">Thank you! Your review is live.</div>
@@ -329,33 +279,35 @@
         <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl relative">
             <button onclick="closeModal('adminLoginModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
             <h2 class="text-2xl font-bold mb-4 text-center">Admin Access</h2>
-            <input type="password" id="adminPinInput" placeholder="Enter 4-Digit PIN" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 text-center text-2xl tracking-widest focus:outline-blue-500 mb-4">
-            <p id="adminLoginError" class="hidden text-red-500 text-center text-sm font-bold mb-4">Incorrect PIN</p>
+            <input type="password" id="adminPinInput" placeholder="Enter Password" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 text-center text-xl tracking-widest focus:outline-blue-500 mb-4">
+            <p id="adminLoginError" class="hidden text-red-500 text-center text-sm font-bold mb-4">Incorrect Password</p>
             <button onclick="checkAdminPin()" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-lg transition">Login</button>
         </div>
     </div>
 
     <!-- Admin Dashboard Modal -->
     <div id="adminDashboardModal" class="hidden fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[70] justify-center items-center p-2 sm:p-4">
-        <div class="bg-white rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col shadow-2xl relative overflow-hidden">
-            <div class="p-4 sm:p-6 bg-slate-900 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div class="bg-white rounded-2xl w-full max-w-6xl h-[95vh] sm:h-[90vh] flex flex-col shadow-2xl relative overflow-hidden">
+            <div class="p-4 sm:p-6 bg-slate-900 text-white flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
                 <div>
                     <h2 class="text-2xl font-bold">Admin Dashboard</h2>
-                    <div class="flex gap-2 mt-2">
+                    <div class="flex flex-wrap gap-2 mt-2">
                         <button onclick="switchAdminTab('bookings')" id="tab-btn-bookings" class="px-4 py-1.5 bg-blue-600 rounded-md text-sm font-bold transition">Bookings</button>
-                        <button onclick="switchAdminTab('pricing')" id="tab-btn-pricing" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Edit Pricing</button>
+                        <button onclick="switchAdminTab('pricing')" id="tab-btn-pricing" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Pricing</button>
+                        <button onclick="switchAdminTab('services')" id="tab-btn-services" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Services</button>
+                        <button onclick="switchAdminTab('accessories')" id="tab-btn-accessories" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Accessories</button>
+                        <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Settings ⚙️</button>
                     </div>
                 </div>
-                <div class="flex gap-4 self-end sm:self-auto">
+                <div class="flex gap-4 self-end lg:self-auto">
                     <button onclick="loadAdminBookings()" id="adminRefreshBtn" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition">🔄 Refresh</button>
                     <button onclick="closeModal('adminDashboardModal')" class="text-slate-300 hover:text-white text-3xl font-bold leading-none">&times;</button>
                 </div>
             </div>
             
-            <div class="p-4 sm:p-6 flex-1 overflow-y-auto bg-slate-50">
+            <div class="p-4 sm:p-6 flex-1 overflow-y-auto bg-slate-50 relative">
                 
-                <!-- Bookings Tab -->
-                <div id="adminBookingsView" class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white">
+                <div id="adminBookingsView" class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white flex">
                     <table class="w-full text-left border-collapse min-w-[600px]">
                         <thead>
                             <tr class="bg-slate-100 text-slate-700 uppercase text-xs">
@@ -373,12 +325,11 @@
                     </table>
                 </div>
 
-                <!-- Pricing Editor Tab -->
-                <div id="adminPricingView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <div id="adminPricingView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col h-full">
                     <h3 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Manage Public Pricing</h3>
-                    <p class="text-sm text-slate-500 mb-6">Enter prices as text (e.g. "₹800+", "Call for Price"). Changes are live instantly.</p>
+                    <p class="text-sm text-slate-500 mb-6">Enter prices as text (e.g. "₹800+", "Call for Price"). Changes apply live instantly.</p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1">
                         <div>
                             <h4 class="font-bold text-blue-600 mb-3 bg-blue-50 p-2 rounded">Android Repairs</h4>
                             <div class="space-y-3">
@@ -405,6 +356,137 @@
                     </div>
                 </div>
 
+                <div id="adminServicesView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
+                    <div class="flex justify-between items-center mb-6 border-b pb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">Manage Services</h3>
+                            <p class="text-sm text-slate-500">Add or edit the repair services listed on your website.</p>
+                        </div>
+                        <button onclick="openServiceForm()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-bold shadow-sm transition">+ Add Service</button>
+                    </div>
+
+                    <div id="adminServicesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                        <div class="p-4 text-center text-slate-500 font-bold">Loading services...</div>
+                    </div>
+                    
+                    <div id="adminServiceForm" class="hidden bg-slate-100 p-6 border border-slate-300 rounded-xl mt-4 shadow-inner">
+                        <h4 class="font-bold text-lg mb-4 text-blue-700" id="srvFormTitle">Add/Edit Service</h4>
+                        <input type="hidden" id="srv-id">
+                        
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Image URL</label>
+                        <input type="text" id="srv-img" placeholder="https://..." class="w-full mb-4 p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                            <div class="w-full sm:w-1/2">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Title (English)</label>
+                                <input type="text" id="srv-title-en" placeholder="e.g., Screen Repair" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                            </div>
+                            <div class="w-full sm:w-1/2">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Title (Marathi)</label>
+                                <input type="text" id="srv-title-mr" placeholder="e.g., स्क्रीन दुरुस्ती" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                            <div class="w-full sm:w-1/2">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Description (English)</label>
+                                <input type="text" id="srv-desc-en" placeholder="Short description..." class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                            </div>
+                            <div class="w-full sm:w-1/2">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Description (Marathi)</label>
+                                <input type="text" id="srv-desc-mr" placeholder="Short description..." class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-bold text-slate-700 mb-1">Display Order (1 appears first)</label>
+                            <input type="number" id="srv-order" placeholder="e.g., 1" class="w-1/3 p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                        </div>
+
+                        <div class="flex gap-3">
+                            <button onclick="saveAdminService()" id="btnSaveService" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold shadow transition">Save to Cloud</button>
+                            <button onclick="cancelServiceForm()" class="bg-slate-400 hover:bg-slate-500 text-white px-6 py-3 rounded-lg font-bold transition">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="adminAccessoriesView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
+                    <div class="flex justify-between items-center mb-6 border-b pb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">Manage Accessories</h3>
+                            <p class="text-sm text-slate-500">Add or edit the products sold in your shop.</p>
+                        </div>
+                        <button onclick="openAccessoryForm()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-bold shadow-sm transition">+ Add Accessory</button>
+                    </div>
+
+                    <div id="adminAccessoriesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <div class="p-4 text-center text-slate-500 font-bold col-span-full">Loading accessories...</div>
+                    </div>
+                    
+                    <div id="adminAccessoryForm" class="hidden bg-slate-100 p-6 border border-slate-300 rounded-xl mt-4 shadow-inner">
+                        <h4 class="font-bold text-lg mb-4 text-blue-700" id="accFormTitle">Add/Edit Accessory</h4>
+                        <input type="hidden" id="acc-id">
+                        
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Image URL</label>
+                        <input type="text" id="acc-img" placeholder="https://..." class="w-full mb-4 p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                            <div class="w-full sm:w-1/2">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Product Name (English)</label>
+                                <input type="text" id="acc-title-en" placeholder="e.g., TWS Earbuds" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                            </div>
+                            <div class="w-full sm:w-1/2">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Product Name (Marathi)</label>
+                                <input type="text" id="acc-title-mr" placeholder="e.g., TWS इयरबड्स" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                            <div class="w-full sm:w-1/3">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Price Text</label>
+                                <input type="text" id="acc-price" placeholder="e.g., ₹ 299" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                            </div>
+                            <div class="w-full sm:w-1/3">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Corner Badge</label>
+                                <select id="acc-badge" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                                    <option value="none">None</option>
+                                    <option value="sale">Sale (Green)</option>
+                                    <option value="new">New (Blue)</option>
+                                </select>
+                            </div>
+                            <div class="w-full sm:w-1/3">
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Display Order</label>
+                                <input type="number" id="acc-order" placeholder="e.g., 1" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <button onclick="saveAdminAccessory()" id="btnSaveAccessory" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold shadow transition">Save to Cloud</button>
+                            <button onclick="cancelAccessoryForm()" class="bg-slate-400 hover:bg-slate-500 text-white px-6 py-3 rounded-lg font-bold transition">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="adminSettingsView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
+                    <h3 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Admin Security Settings</h3>
+                    <p class="text-sm text-slate-500 mb-6">Update the master password required to access this dashboard. Minimum 8 characters.</p>
+                    
+                    <div class="max-w-md bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-700 mb-4">Change Admin Password</h4>
+                        
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">New Password</label>
+                        <input type="password" id="newAdminPass" placeholder="Enter new password" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-blue-500">
+                        
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Confirm Password</label>
+                        <input type="password" id="confirmAdminPass" placeholder="Re-enter new password" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-blue-500">
+                        
+                        <p id="passErrorMsg" class="hidden text-red-500 text-sm mb-4 font-bold"></p>
+                        <p id="passSuccessMsg" class="hidden text-green-600 text-sm mb-4 font-bold">✔ Password Updated Successfully!</p>
+                        
+                        <button onclick="updateAdminPassword()" class="w-full bg-slate-800 hover:bg-black text-white font-bold py-3 rounded-lg shadow-md transition">Save New Password</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -412,7 +494,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyBu1kxGU6-JtHlyfT2qDaaznTOD8gMZQDI",
@@ -429,6 +511,14 @@
         let app, db, auth;
         const statusText = document.getElementById('db-text');
         const statusDot = document.getElementById('db-dot');
+        
+        window.currentServices = [];
+        window.currentAccessories = []; 
+        
+        // Secret Admin Variables
+        let currentAdminPassword = "15151515"; // Default 8-character password
+        let tapCount = 0;
+        let tapTimer = null;
 
         try {
             app = initializeApp(firebaseConfig);
@@ -436,8 +526,7 @@
             auth = getAuth(app);
             
             signInAnonymously(auth).catch(err => {
-                showDbError(`Auth Error: ${err.message}`);
-                console.error("Firebase Auth Error:", err);
+                showDbError(`Auth Error: Enable Anonymous Auth in Firebase.`);
             });
 
             onAuthStateChanged(auth, (user) => {
@@ -445,16 +534,19 @@
                     statusText.innerText = "Firebase Connected";
                     statusDot.classList.remove('bg-red-500', 'animate-pulse');
                     statusDot.classList.add('bg-green-500');
-                    // Load dynamic data on connect
+                    
+                    // Load dynamic cloud data safely
                     loadLiveReviews();
                     loadLivePricing();
+                    loadLiveServices();
+                    loadLiveAccessories();
+                    loadAdminSettings(); // Fetch custom password if set
                 } else {
                     showDbError("Disconnected from Cloud");
                 }
             });
         } catch (error) {
-            showDbError("Init Error: Check Config");
-            console.error("Firebase Init Error:", error);
+            showDbError("Init Error: Check Firebase Config");
         }
 
         function showDbError(msg) {
@@ -463,7 +555,6 @@
             statusDot.classList.remove('animate-pulse');
         }
 
-        // Global Modal Controls
         window.openModal = function(id) {
             document.getElementById(id).classList.add('modal-active');
             document.getElementById(id).classList.remove('hidden');
@@ -476,21 +567,126 @@
         function showFormError(boxId, errorMsg) {
             const box = document.getElementById(boxId);
             box.classList.remove('hidden');
-            box.innerText = `Database Error: ${errorMsg}`;
+            box.innerHTML = `<b>Firebase Error:</b><br/>${errorMsg}<br/><br/><i>Check your Firebase Console Rules & Authorized Domains.</i>`;
         }
         function hideFormError(boxId) { document.getElementById(boxId).classList.add('hidden'); }
 
         const dbTimeout = (promise, ms = 8000) => {
             return Promise.race([
                 promise,
-                new Promise((_, reject) => setTimeout(() => reject(new Error("Database Timeout: Ensure 'Create Database' is clicked in Firebase Console.")), ms))
+                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout: Database missing or unreachable. Did you click 'Create Database' in Firestore?")), ms))
             ]);
         };
+
+        window.handleAdminTap = function() {
+            tapCount++;
+            if (tapTimer) clearTimeout(tapTimer);
+            
+            tapTimer = setTimeout(() => { tapCount = 0; }, 1500); // Reset if they stop tapping for 1.5s
+            
+            if (tapCount === 5) {
+                openModal('adminLoginModal');
+                tapCount = 0; // reset for next time
+            }
+        };
+
+        window.loadAdminSettings = async function() {
+            try {
+                const snap = await getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'adminAuth'));
+                if (snap.exists() && snap.data().password) {
+                    currentAdminPassword = snap.data().password;
+                }
+            } catch(e) {
+                console.log("Using default admin password.");
+            }
+        };
+
+        window.checkAdminPin = function() {
+            const pin = document.getElementById('adminPinInput').value;
+            if (pin === currentAdminPassword) {
+                closeModal('adminLoginModal');
+                openModal('adminDashboardModal');
+                document.getElementById('adminPinInput').value = ''; 
+                switchAdminTab('bookings'); 
+            } else {
+                document.getElementById('adminLoginError').classList.remove('hidden');
+            }
+        };
+
+        window.updateAdminPassword = async function() {
+            const newP = document.getElementById('newAdminPass').value;
+            const confP = document.getElementById('confirmAdminPass').value;
+            const err = document.getElementById('passErrorMsg');
+            const succ = document.getElementById('passSuccessMsg');
+            
+            err.classList.add('hidden'); 
+            succ.classList.add('hidden');
+
+            if(newP.length < 8) {
+                err.innerText = "Password must be at least 8 characters.";
+                err.classList.remove('hidden'); 
+                return;
+            }
+            if(newP !== confP) {
+                err.innerText = "Passwords do not match. Try again.";
+                err.classList.remove('hidden'); 
+                return;
+            }
+            
+            try {
+                const btn = document.querySelector('#adminSettingsView button');
+                btn.innerText = "Saving...";
+                
+                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'adminAuth'), { password: newP });
+                currentAdminPassword = newP;
+                
+                succ.classList.remove('hidden');
+                document.getElementById('newAdminPass').value = '';
+                document.getElementById('confirmAdminPass').value = '';
+                
+                setTimeout(() => succ.classList.add('hidden'), 3000);
+                btn.innerText = "Save New Password";
+            } catch(e) {
+                err.innerText = "Firebase Error: " + e.message;
+                err.classList.remove('hidden');
+            }
+        };
+
+        window.switchAdminTab = function(tab) {
+            const tabs = ['bookings', 'pricing', 'services', 'accessories', 'settings'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                const view = document.getElementById(`admin${t.charAt(0).toUpperCase() + t.slice(1)}View`);
+                const refresh = document.getElementById('adminRefreshBtn');
+                
+                if (t === tab) {
+                    btn.classList.replace('bg-slate-700', 'bg-blue-600');
+                    btn.classList.remove('hover:bg-slate-600');
+                    view.classList.remove('hidden');
+                    view.classList.add('flex');
+                    if(t === 'bookings') refresh.classList.remove('hidden');
+                    else refresh.classList.add('hidden');
+                } else {
+                    btn.classList.replace('bg-blue-600', 'bg-slate-700');
+                    btn.classList.add('hover:bg-slate-600');
+                    view.classList.add('hidden');
+                    view.classList.remove('flex');
+                }
+            });
+
+            if(tab === 'bookings') loadAdminBookings();
+            if(tab === 'services') loadAdminServicesList();
+            if(tab === 'accessories') loadAdminAccessoriesList();
+        }
 
         document.getElementById('bookForm').addEventListener('submit', async (e) => {
             e.preventDefault(); 
             hideFormError('bookError');
-            if(!auth.currentUser) return showFormError('bookError', "Connection failed. Please ensure Firebase Auth is enabled.");
+            
+            if(!auth || !auth.currentUser) {
+                showFormError('bookError', "Connection failed. Please ensure Firebase Auth is enabled in the console.");
+                return;
+            }
             
             const btn = document.getElementById('bookSubmitBtn');
             const originalText = btn.innerText;
@@ -516,6 +712,7 @@
                 document.getElementById('generatedId').innerText = tid;
             } catch (err) {
                 showFormError('bookError', err.message);
+            } finally {
                 btn.innerText = originalText;
                 btn.disabled = false;
             }
@@ -524,7 +721,11 @@
         document.getElementById('trackForm').addEventListener('submit', async (e) => {
             e.preventDefault(); 
             hideFormError('trackError');
-            if(!auth.currentUser) return showFormError('trackError', "Connection failed.");
+            
+            if(!auth || !auth.currentUser) {
+                showFormError('trackError', "Connection failed. Ensure Auth is enabled.");
+                return;
+            }
 
             const btn = document.getElementById('trackSubmitBtn');
             const originalText = btn.innerText;
@@ -547,114 +748,109 @@
                 document.getElementById('trackResult').classList.remove('hidden');
             } catch (err) {
                 showFormError('trackError', err.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
-            btn.innerText = originalText;
-            btn.disabled = false;
         });
 
-        // Default prices incase DB is empty
-        const defaultPrices = {
-            'val-p-and-screen': '₹800+', 'val-p-and-batt': '₹600+', 'val-p-and-port': '₹350+', 'val-p-and-soft': '₹300+',
-            'val-p-iph-screen': '₹1500+', 'val-p-iph-batt': '₹1200+', 'val-p-iph-glass': '₹1000+', 'val-p-iph-true': '₹500+'
-        };
+        const defaultServices = [
+            { id: "s1", img: "https://images.unsplash.com/photo-1605170439002-90845e8c0137?q=80&w=400&auto=format&fit=crop", title_en: "Screen Replacement", title_mr: "स्क्रीन बदलणे", desc_en: "Original LCD & OLED displays.", desc_mr: "ओरिजिनल LCD आणि OLED डिस्प्ले.", order: 1 },
+            { id: "s2", img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=400&auto=format&fit=crop", title_en: "Battery Replacement", title_mr: "बॅटरी बदलणे", desc_en: "100% Health & fast charging fix.", desc_mr: "100% हेल्थ आणि फास्ट चार्जिंग.", order: 2 },
+            { id: "s3", img: "https://images.unsplash.com/photo-1592833259051-16eb1d120a10?q=80&w=400&auto=format&fit=crop", title_en: "Water Damage", title_mr: "पाण्यात पडलेले फोन", desc_en: "Chemical wash & short-circuit repair.", desc_mr: "केमिकल वॉश आणि शॉर्ट सर्किट दुरुस्ती.", order: 3 },
+            { id: "s4", img: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=400&auto=format&fit=crop", title_en: "Motherboard IC Repair", title_mr: "मदरबोर्ड IC दुरुस्ती", desc_en: "Micro-soldering & dead boot fix.", desc_mr: "मायक्रो सोल्डरिंग आणि डेड बूट फिक्स.", order: 4 },
+            { id: "s5", img: "https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?q=80&w=400&auto=format&fit=crop", title_en: "Software Unlocking", title_mr: "सॉफ्टवेअर अनलॉकिंग", desc_en: "FRP Bypass, Flashing & OS Restore.", desc_mr: "FRP बायपास, फ्लॅशिंग आणि OS रिस्टोअर.", order: 5 },
+            { id: "s6", img: "https://images.unsplash.com/photo-1616423641443-470a273b4009?q=80&w=400&auto=format&fit=crop", title_en: "Charging Port Fix", title_mr: "चार्जिंग पोर्ट दुरुस्ती", desc_en: "Loose port & connection repair.", desc_mr: "लूज पोर्ट आणि कनेक्शन दुरुस्ती.", order: 6 }
+        ];
 
-        window.loadLivePricing = async function() {
+        window.loadLiveServices = async function() {
             try {
-                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing');
-                const snap = await dbTimeout(getDoc(docRef));
+                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'services');
+                const snap = await dbTimeout(getDocs(q));
                 
-                let pricesToLoad = defaultPrices;
-                if (snap.exists()) {
-                    pricesToLoad = { ...defaultPrices, ...snap.data() };
+                let services = [];
+                if(snap.empty) { services = defaultServices; } 
+                else {
+                    snap.forEach(doc => services.push({id: doc.id, ...doc.data()}));
+                    services.sort((a,b) => a.order - b.order);
                 }
-                
-                // Update public UI
-                for (const key in pricesToLoad) {
-                    const el = document.getElementById(key);
-                    if (el) el.innerText = pricesToLoad[key];
-                    // Also prepopulate admin inputs if they exist
-                    const inputEl = document.getElementById(key.replace('val-', 'edit-'));
-                    if (inputEl) inputEl.value = pricesToLoad[key];
-                }
-            } catch (err) {
-                console.log("Could not load custom pricing. Using defaults.", err.message);
+                window.currentServices = services;
+                renderPublicServices(services);
+                if(!document.getElementById('adminServicesView').classList.contains('hidden')) loadAdminServicesList();
+            } catch(e) {
+                console.log("Services fallback.", e.message);
+                window.currentServices = defaultServices;
+                renderPublicServices(defaultServices);
             }
         }
 
-        window.saveAdminPricing = async function() {
-            const btn = document.getElementById('savePricingBtn');
-            const msg = document.getElementById('priceSaveMsg');
-            btn.innerText = "Saving...";
-            
-            const newPrices = {
-                'val-p-and-screen': document.getElementById('edit-p-and-screen').value,
-                'val-p-and-batt': document.getElementById('edit-p-and-batt').value,
-                'val-p-and-port': document.getElementById('edit-p-and-port').value,
-                'val-p-and-soft': document.getElementById('edit-p-and-soft').value,
-                'val-p-iph-screen': document.getElementById('edit-p-iph-screen').value,
-                'val-p-iph-batt': document.getElementById('edit-p-iph-batt').value,
-                'val-p-iph-glass': document.getElementById('edit-p-iph-glass').value,
-                'val-p-iph-true': document.getElementById('edit-p-iph-true').value
-            };
+        function renderPublicServices(services) {
+            const container = document.getElementById('public-services-container');
+            let html = '';
+            services.forEach(s => {
+                dict[`dyn-s-title-${s.id}`] = { mr: s.title_mr };
+                dict[`dyn-s-desc-${s.id}`] = { mr: s.desc_mr };
+                let initialTitle = currentLang === 'mr' ? s.title_mr : s.title_en;
+                let initialDesc = currentLang === 'mr' ? s.desc_mr : s.desc_en;
+                
+                html += `
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale text-left">
+                    <img src="${s.img}" class="w-full h-40 object-cover rounded-lg mb-4" alt="${s.title_en}" onerror="this.src='https://images.unsplash.com/photo-1597740985671-2a8a3b80502e?w=400'">
+                    <h3 class="font-bold text-lg mb-1" data-lang="dyn-s-title-${s.id}" data-orig="${s.title_en}">${initialTitle}</h3>
+                    <p class="text-sm text-slate-500" data-lang="dyn-s-desc-${s.id}" data-orig="${s.desc_en}">${initialDesc}</p>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
 
+        const defaultAccessories = [
+            { id: "a1", img: "https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=300&auto=format&fit=crop", title_en: "Tough Armor Cases", title_mr: "टफ आर्मर कव्हर", price: "₹ 299", badge: "sale", order: 1 },
+            { id: "a2", img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=300&auto=format&fit=crop", title_en: "TWS Earbuds", title_mr: "TWS इयरबड्स", price: "₹ 999", badge: "new", order: 2 },
+            { id: "a3", img: "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=300&auto=format&fit=crop", title_en: "65W Fast Chargers", title_mr: "65W फास्ट चार्जर", price: "₹ 499", badge: "none", order: 3 },
+            { id: "a4", img: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?q=80&w=300&auto=format&fit=crop", title_en: "10000mAh Powerbank", title_mr: "10000mAh पॉवरबँक", price: "₹ 899", badge: "none", order: 4 }
+        ];
+
+        window.loadLiveAccessories = async function() {
             try {
-                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing');
-                await setDoc(docRef, newPrices);
+                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'accessories');
+                const snap = await dbTimeout(getDocs(q));
                 
-                // Update public view immediately
-                for (const key in newPrices) {
-                    const el = document.getElementById(key);
-                    if (el) el.innerText = newPrices[key];
+                let accs = [];
+                if(snap.empty) { accs = defaultAccessories; } 
+                else {
+                    snap.forEach(doc => accs.push({id: doc.id, ...doc.data()}));
+                    accs.sort((a,b) => a.order - b.order);
                 }
-                
-                btn.innerText = "Save to Cloud";
-                msg.classList.remove('hidden');
-                setTimeout(() => msg.classList.add('hidden'), 3000);
-            } catch (err) {
-                alert("Error saving pricing: " + err.message);
-                btn.innerText = "Save to Cloud";
+                window.currentAccessories = accs;
+                renderPublicAccessories(accs);
+                if(!document.getElementById('adminAccessoriesView').classList.contains('hidden')) loadAdminAccessoriesList();
+            } catch(e) {
+                console.log("Accessories fallback.", e.message);
+                window.currentAccessories = defaultAccessories;
+                renderPublicAccessories(defaultAccessories);
             }
         }
 
-        window.checkAdminPin = function() {
-            const pin = document.getElementById('adminPinInput').value;
-            if (pin === '1515') {
-                closeModal('adminLoginModal');
-                openModal('adminDashboardModal');
-                document.getElementById('adminPinInput').value = ''; 
-                switchAdminTab('bookings'); // Default open bookings
-            } else {
-                document.getElementById('adminLoginError').classList.remove('hidden');
-            }
-        }
-
-        window.switchAdminTab = function(tab) {
-            const btnBookings = document.getElementById('tab-btn-bookings');
-            const btnPricing = document.getElementById('tab-btn-pricing');
-            const viewBookings = document.getElementById('adminBookingsView');
-            const viewPricing = document.getElementById('adminPricingView');
-            const refreshBtn = document.getElementById('adminRefreshBtn');
-
-            if (tab === 'bookings') {
-                btnBookings.classList.replace('bg-slate-700', 'bg-blue-600');
-                btnBookings.classList.remove('hover:bg-slate-600');
-                btnPricing.classList.replace('bg-blue-600', 'bg-slate-700');
-                btnPricing.classList.add('hover:bg-slate-600');
+        function renderPublicAccessories(accs) {
+            const container = document.getElementById('public-accessories-container');
+            let html = '';
+            accs.forEach(a => {
+                dict[`dyn-a-title-${a.id}`] = { mr: a.title_mr };
+                let initialTitle = currentLang === 'mr' ? a.title_mr : a.title_en;
                 
-                viewBookings.classList.remove('hidden');
-                viewPricing.classList.add('hidden');
-                refreshBtn.classList.remove('hidden');
-                loadAdminBookings();
-            } else {
-                btnPricing.classList.replace('bg-slate-700', 'bg-blue-600');
-                btnPricing.classList.remove('hover:bg-slate-600');
-                btnBookings.classList.replace('bg-blue-600', 'bg-slate-700');
-                btnBookings.classList.add('hover:bg-slate-600');
-
-                viewPricing.classList.remove('hidden');
-                viewBookings.classList.add('hidden');
-                refreshBtn.classList.add('hidden');
-            }
+                let badgeHtml = '';
+                if(a.badge === 'sale') badgeHtml = `<span class="absolute top-2 left-2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-sale">${currentLang === 'mr' ? dict['badge-sale'].mr : 'Sale'}</span>`;
+                else if(a.badge === 'new') badgeHtml = `<span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-new">${currentLang === 'mr' ? dict['badge-new'].mr : 'New'}</span>`;
+                
+                html += `
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale relative text-left">
+                    ${badgeHtml}
+                    <img src="${a.img}" class="w-full h-32 object-cover rounded-lg mb-3" alt="${a.title_en}" onerror="this.src='https://placehold.co/300x300'">
+                    <h3 class="font-bold text-sm mb-1" data-lang="dyn-a-title-${a.id}" data-orig="${a.title_en}">${initialTitle}</h3>
+                    <p class="text-blue-600 font-bold text-sm">${a.price}</p>
+                </div>`;
+            });
+            container.innerHTML = html;
         }
 
         window.loadAdminBookings = async function() {
@@ -667,13 +863,9 @@
                 
                 let bookings = [];
                 querySnapshot.forEach((doc) => { bookings.push({ id: doc.id, ...doc.data() }); });
-                
                 bookings.sort((a,b) => new Date(b.date) - new Date(a.date));
                 
-                if(bookings.length === 0) {
-                    table.innerHTML = `<tr><td colspan="6" class="text-center p-10 text-slate-500">No bookings found in database.</td></tr>`;
-                    return;
-                }
+                if(bookings.length === 0) { table.innerHTML = `<tr><td colspan="6" class="text-center p-10 text-slate-500">No bookings found.</td></tr>`; return; }
 
                 let html = '';
                 bookings.forEach(b => {
@@ -682,14 +874,8 @@
                         <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
                             <td class="p-4 font-mono font-bold text-blue-600">${b.id}</td>
                             <td class="p-4 text-xs text-slate-500">${formattedDate}</td>
-                            <td class="p-4">
-                                <div class="font-bold">${b.name}</div>
-                                <div class="text-xs text-slate-500">📞 ${b.phone}</div>
-                            </td>
-                            <td class="p-4">
-                                <div class="font-bold">${b.device}</div>
-                                <div class="text-xs text-red-500 truncate w-32" title="${b.issue}">${b.issue}</div>
-                            </td>
+                            <td class="p-4"><div class="font-bold">${b.name}</div><div class="text-xs text-slate-500">📞 ${b.phone}</div></td>
+                            <td class="p-4"><div class="font-bold">${b.device}</div><div class="text-xs text-red-500 truncate w-32" title="${b.issue}">${b.issue}</div></td>
                             <td class="p-4">
                                 <select id="status-${b.id}" class="p-2 border border-slate-300 rounded-lg text-sm bg-white outline-none">
                                     <option value="Received" ${b.status === 'Received' ? 'selected' : ''}>Received</option>
@@ -699,86 +885,196 @@
                                     <option value="Delivered" ${b.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
                                 </select>
                             </td>
-                            <td class="p-4">
-                                <button onclick="saveAdminStatus('${b.id}')" id="btn-${b.id}" class="bg-green-100 hover:bg-green-200 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold transition">Update</button>
-                            </td>
-                        </tr>
-                    `;
+                            <td class="p-4"><button onclick="saveAdminStatus('${b.id}')" id="btn-${b.id}" class="bg-green-100 hover:bg-green-200 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold transition">Update</button></td>
+                        </tr>`;
                 });
                 table.innerHTML = html;
-            } catch (err) {
-                table.innerHTML = `<tr><td colspan="6" class="text-center p-10 font-bold text-red-500">Error: ${err.message}</td></tr>`;
-            }
+            } catch (err) { table.innerHTML = `<tr><td colspan="6" class="text-center p-10 font-bold text-red-500">Error: ${err.message}</td></tr>`; }
         }
 
         window.saveAdminStatus = async function(docId) {
             const newStatus = document.getElementById(`status-${docId}`).value;
             const btn = document.getElementById(`btn-${docId}`);
             btn.innerText = 'Saving...';
-            
             try {
-                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', docId);
-                await updateDoc(docRef, { status: newStatus });
+                await updateDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', docId), { status: newStatus });
                 btn.innerText = 'Saved!';
-                btn.classList.replace('bg-green-100', 'bg-blue-100');
-                btn.classList.replace('text-green-700', 'text-blue-700');
-                setTimeout(() => {
-                    btn.innerText = 'Update';
-                    btn.classList.replace('bg-blue-100', 'bg-green-100');
-                    btn.classList.replace('text-blue-700', 'text-green-700');
-                }, 2000);
+                btn.classList.replace('bg-green-100', 'bg-blue-100'); btn.classList.replace('text-green-700', 'text-blue-700');
+                setTimeout(() => { btn.innerText = 'Update'; btn.classList.replace('bg-blue-100', 'bg-green-100'); btn.classList.replace('text-blue-700', 'text-green-700'); }, 2000);
+            } catch (err) { alert("Error saving: " + err.message); btn.innerText = 'Failed'; }
+        }
+
+        const defaultPrices = {
+            'val-p-and-screen': '₹800+', 'val-p-and-batt': '₹600+', 'val-p-and-port': '₹350+', 'val-p-and-soft': '₹300+',
+            'val-p-iph-screen': '₹1500+', 'val-p-iph-batt': '₹1200+', 'val-p-iph-glass': '₹1000+', 'val-p-iph-true': '₹500+'
+        };
+
+        window.loadLivePricing = async function() {
+            try {
+                const snap = await dbTimeout(getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing')));
+                let pToLoad = snap.exists() ? { ...defaultPrices, ...snap.data() } : defaultPrices;
+                for (const key in pToLoad) {
+                    if (document.getElementById(key)) document.getElementById(key).innerText = pToLoad[key];
+                    if (document.getElementById(key.replace('val-', 'edit-'))) document.getElementById(key.replace('val-', 'edit-')).value = pToLoad[key];
+                }
             } catch (err) {
-                alert("Error saving: " + err.message);
-                btn.innerText = 'Failed';
+                for (const key in defaultPrices) { if (document.getElementById(key)) document.getElementById(key).innerText = defaultPrices[key]; }
             }
+        }
+
+        window.saveAdminPricing = async function() {
+            const btn = document.getElementById('savePricingBtn'); const msg = document.getElementById('priceSaveMsg');
+            btn.innerText = "Saving...";
+            const nP = {
+                'val-p-and-screen': document.getElementById('edit-p-and-screen').value, 'val-p-and-batt': document.getElementById('edit-p-and-batt').value,
+                'val-p-and-port': document.getElementById('edit-p-and-port').value, 'val-p-and-soft': document.getElementById('edit-p-and-soft').value,
+                'val-p-iph-screen': document.getElementById('edit-p-iph-screen').value, 'val-p-iph-batt': document.getElementById('edit-p-iph-batt').value,
+                'val-p-iph-glass': document.getElementById('edit-p-iph-glass').value, 'val-p-iph-true': document.getElementById('edit-p-iph-true').value
+            };
+            try {
+                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing'), nP);
+                for (const key in nP) { if (document.getElementById(key)) document.getElementById(key).innerText = nP[key]; }
+                btn.innerText = "Save to Cloud"; msg.classList.remove('hidden'); setTimeout(() => msg.classList.add('hidden'), 3000);
+            } catch (err) { alert("Error saving pricing: " + err.message); btn.innerText = "Save to Cloud"; }
+        }
+
+        window.loadAdminServicesList = function() {
+            const container = document.getElementById('adminServicesList');
+            let html = '';
+            window.currentServices.forEach(s => {
+                html += `
+                <div class="bg-white border border-slate-200 p-4 rounded-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2"><span class="bg-slate-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">Order: ${s.order}</span></div>
+                        <img src="${s.img}" class="w-full h-24 object-cover rounded mb-2 bg-slate-100" onerror="this.src='https://placehold.co/400x200'">
+                        <h5 class="font-bold text-sm text-slate-900">${s.title_en}</h5><p class="text-xs text-slate-500 mb-1">MR: ${s.title_mr}</p>
+                    </div>
+                    <div class="flex gap-2 mt-3 pt-3 border-t">
+                        <button onclick="editService('${s.id}')" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-700 py-1 rounded text-xs font-bold transition">Edit</button>
+                        <button onclick="deleteAdminService('${s.id}')" class="flex-1 bg-red-100 hover:bg-red-200 text-red-700 py-1 rounded text-xs font-bold transition">Delete</button>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        window.openServiceForm = function(service = null) {
+            document.getElementById('adminServiceForm').classList.remove('hidden');
+            document.getElementById('srvFormTitle').innerText = service ? "Edit Service" : "Add New Service";
+            document.getElementById('srv-id').value = service ? service.id : '';
+            document.getElementById('srv-img').value = service ? (service.img || '') : '';
+            document.getElementById('srv-title-en').value = service ? (service.title_en || '') : '';
+            document.getElementById('srv-title-mr').value = service ? (service.title_mr || '') : '';
+            document.getElementById('srv-desc-en').value = service ? (service.desc_en || '') : '';
+            document.getElementById('srv-desc-mr').value = service ? (service.desc_mr || '') : '';
+            document.getElementById('srv-order').value = service ? (service.order || '') : (window.currentServices.length + 1);
+            document.getElementById('adminServiceForm').scrollIntoView({behavior: 'smooth'});
+        }
+
+        window.editService = function(id) { const srv = window.currentServices.find(s => s.id === id); if(srv) openServiceForm(srv); }
+        window.cancelServiceForm = function() { document.getElementById('adminServiceForm').classList.add('hidden'); }
+
+        window.saveAdminService = async function() {
+            const btn = document.getElementById('btnSaveService'); const originalText = btn.innerText; btn.innerText = "Saving...";
+            const id = document.getElementById('srv-id').value || 'srv-' + Date.now();
+            const data = {
+                img: document.getElementById('srv-img').value, title_en: document.getElementById('srv-title-en').value, title_mr: document.getElementById('srv-title-mr').value,
+                desc_en: document.getElementById('srv-desc-en').value, desc_mr: document.getElementById('srv-desc-mr').value, order: parseInt(document.getElementById('srv-order').value) || 99
+            };
+            try {
+                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', id), data);
+                cancelServiceForm(); await loadLiveServices(); 
+            } catch(e) { alert("Error saving service: " + e.message); } finally { btn.innerText = originalText; }
+        }
+
+        window.deleteAdminService = async function(id) {
+            if(!confirm("Are you sure you want to completely delete this service from the website?")) return;
+            try { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', id)); await loadLiveServices(); } catch(e) { alert("Error deleting: " + e.message); }
+        }
+
+        window.loadAdminAccessoriesList = function() {
+            const container = document.getElementById('adminAccessoriesList');
+            let html = '';
+            window.currentAccessories.forEach(a => {
+                html += `
+                <div class="bg-white border border-slate-200 p-4 rounded-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-slate-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">Order: ${a.order}</span>
+                            ${a.badge && a.badge !== 'none' ? `<span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase">${a.badge}</span>` : ''}
+                        </div>
+                        <img src="${a.img}" class="w-full h-24 object-cover rounded mb-2 bg-slate-100" onerror="this.src='https://placehold.co/300x300'">
+                        <h5 class="font-bold text-sm text-slate-900">${a.title_en}</h5>
+                        <p class="text-xs text-blue-600 font-bold mb-1">${a.price}</p>
+                    </div>
+                    <div class="flex gap-2 mt-3 pt-3 border-t">
+                        <button onclick="editAccessory('${a.id}')" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-700 py-1 rounded text-xs font-bold transition">Edit</button>
+                        <button onclick="deleteAdminAccessory('${a.id}')" class="flex-1 bg-red-100 hover:bg-red-200 text-red-700 py-1 rounded text-xs font-bold transition">Delete</button>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        window.openAccessoryForm = function(acc = null) {
+            document.getElementById('adminAccessoryForm').classList.remove('hidden');
+            document.getElementById('accFormTitle').innerText = acc ? "Edit Accessory" : "Add New Accessory";
+            document.getElementById('acc-id').value = acc ? acc.id : '';
+            document.getElementById('acc-img').value = acc ? (acc.img || '') : '';
+            document.getElementById('acc-title-en').value = acc ? (acc.title_en || '') : '';
+            document.getElementById('acc-title-mr').value = acc ? (acc.title_mr || '') : '';
+            document.getElementById('acc-price').value = acc ? (acc.price || '') : '';
+            document.getElementById('acc-badge').value = acc ? (acc.badge || 'none') : 'none';
+            document.getElementById('acc-order').value = acc ? (acc.order || '') : (window.currentAccessories.length + 1);
+            document.getElementById('adminAccessoryForm').scrollIntoView({behavior: 'smooth'});
+        }
+
+        window.editAccessory = function(id) { const acc = window.currentAccessories.find(a => a.id === id); if(acc) openAccessoryForm(acc); }
+        window.cancelAccessoryForm = function() { document.getElementById('adminAccessoryForm').classList.add('hidden'); }
+
+        window.saveAdminAccessory = async function() {
+            const btn = document.getElementById('btnSaveAccessory'); const originalText = btn.innerText; btn.innerText = "Saving...";
+            const id = document.getElementById('acc-id').value || 'acc-' + Date.now();
+            const data = {
+                img: document.getElementById('acc-img').value, title_en: document.getElementById('acc-title-en').value, title_mr: document.getElementById('acc-title-mr').value,
+                price: document.getElementById('acc-price').value, badge: document.getElementById('acc-badge').value, order: parseInt(document.getElementById('acc-order').value) || 99
+            };
+            try {
+                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', id), data);
+                cancelAccessoryForm(); await loadLiveAccessories(); 
+            } catch(e) { alert("Error saving accessory: " + e.message); } finally { btn.innerText = originalText; }
+        }
+
+        window.deleteAdminAccessory = async function(id) {
+            if(!confirm("Are you sure you want to completely delete this accessory from the website?")) return;
+            try { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', id)); await loadLiveAccessories(); } catch(e) { alert("Error deleting: " + e.message); }
         }
 
         let selectedStars = 0;
         document.querySelectorAll('.star').forEach(star => {
             star.addEventListener('click', function() {
-                selectedStars = this.getAttribute('data-val');
-                document.getElementById('r-stars').value = selectedStars;
+                selectedStars = this.getAttribute('data-val'); document.getElementById('r-stars').value = selectedStars;
                 document.querySelectorAll('.star').forEach(s => {
-                    s.classList.remove('text-yellow-400');
-                    if (s.getAttribute('data-val') <= selectedStars) {
-                        s.classList.add('text-yellow-400');
-                    }
+                    s.classList.remove('text-yellow-400'); if (s.getAttribute('data-val') <= selectedStars) { s.classList.add('text-yellow-400'); }
                 });
             });
         });
 
         document.getElementById('rateForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            hideFormError('rateError');
+            e.preventDefault(); hideFormError('rateError');
             if(selectedStars == 0) { alert("Please select a star rating!"); return; }
-            if(!auth.currentUser) return showFormError('rateError', "Connection failed.");
+            if(!auth || !auth.currentUser) { showFormError('rateError', "Connection failed. Please ensure Firebase Auth is enabled."); return; }
 
-            const btn = document.getElementById('rateSubmitBtn');
-            const originalText = btn.innerText;
-            btn.innerText = "Publishing to Cloud...";
-            btn.disabled = true;
+            const btn = document.getElementById('rateSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Publishing to Cloud..."; btn.disabled = true;
 
             const rid = "REV-" + Date.now();
-            const reviewData = {
-                name: document.getElementById('r-name').value,
-                text: document.getElementById('r-text').value,
-                stars: parseInt(selectedStars),
-                date: Date.now()
-            };
+            const reviewData = { name: document.getElementById('r-name').value, text: document.getElementById('r-text').value, stars: parseInt(selectedStars), date: Date.now() };
 
             try {
-                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'reviews', rid);
-                await dbTimeout(setDoc(docRef, reviewData));
-                
-                document.getElementById('rateForm').classList.add('hidden');
-                document.getElementById('rateSuccess').classList.remove('hidden');
-                
+                await dbTimeout(setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'reviews', rid), reviewData));
+                document.getElementById('rateForm').classList.add('hidden'); document.getElementById('rateSuccess').classList.remove('hidden');
                 injectReviewCard(reviewData, true);
-            } catch (err) {
-                showFormError('rateError', err.message);
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
+            } catch (err) { showFormError('rateError', err.message); } finally { btn.innerText = originalText; btn.disabled = false; }
         });
 
         const staticReviews = [
@@ -791,33 +1087,24 @@
             {n:"Kavita J.", t:"Trustworthy shop. They explain the issue clearly.", s:5},
             {n:"Vishal T.", t:"Purchased a power bank. Good quality and warranty provided.", s:4},
             {n:"नेहा रा.", t:"Highly recommended for any software or unlocking issues.", s:5},
-            {n:"Ganesh K.", t:"Fast service and polite staff.", s:5},
-            {n:"संतोष प.", t:"माझा मोबाईल पाण्यात पडला होता, इथे लगेच दुरुस्त करून मिळाला. खूप छान सर्व्हिस.", s:5},
-            {n:"प्रशांत कु.", t:"उदगीर मधील सर्वात भारी मोबाईल दुकान. दर पण योग्य आहेत.", s:5},
-            {n:"दीपाली म.", t:"स्क्रीन बदलून घेतली, ओरिजिनल लावली आहे. खूप धन्यवाद.", s:5}
+            {n:"Ganesh K.", t:"Fast service and polite staff.", s:5}
         ];
 
         function getStars(count) { return "⭐".repeat(count); }
 
         function injectReviewCard(rev, isNew = false) {
             const container = document.getElementById('review-container');
-            const card = document.createElement('div');
-            card.className = "min-w-[300px] max-w-[300px] bg-white p-5 rounded-2xl shadow-sm border border-slate-100 snap-center relative";
+            const card = document.createElement('div'); card.className = "min-w-[300px] max-w-[300px] bg-white p-5 rounded-2xl shadow-sm border border-slate-100 snap-center relative";
             let badge = isNew ? `<span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>` : '';
+            const rName = rev.name || rev.n || 'User'; const rText = rev.text || rev.t || ''; const rStars = rev.stars || rev.s || 5;
             
-            const rName = rev.name || rev.n || 'User';
-            const rText = rev.text || rev.t || '';
-            const rStars = rev.stars || rev.s || 5;
-            const initial = rName.charAt(0) || 'U';
+            const initial = typeof rName === 'string' && rName.length > 0 ? rName.charAt(0) : 'U';
 
             card.innerHTML = `
                 ${badge}
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center">${initial}</div>
-                    <div>
-                        <h4 class="font-bold text-sm text-slate-800">${rName}</h4>
-                        <div class="text-xs tracking-widest">${getStars(rStars)}</div>
-                    </div>
+                    <div><h4 class="font-bold text-sm text-slate-800">${rName}</h4><div class="text-xs tracking-widest">${getStars(rStars)}</div></div>
                 </div>
                 <p class="text-slate-600 text-sm italic">"${rText}"</p>
             `;
@@ -825,130 +1112,64 @@
         }
 
         async function loadLiveReviews() {
-            const container = document.getElementById('review-container');
-            container.innerHTML = ""; 
-            
+            const container = document.getElementById('review-container'); container.innerHTML = ""; 
             try {
-                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'reviews');
-                const querySnapshot = await dbTimeout(getDocs(q));
-                
+                const querySnapshot = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'reviews')));
                 let cloudReviews = [];
                 querySnapshot.forEach((doc) => { cloudReviews.push(doc.data()); });
-                
-                cloudReviews.sort((a,b) => b.date - a.date);
-                cloudReviews.forEach(rev => injectReviewCard(rev, true));
-            } catch (err) {
-                console.log("Could not load cloud reviews:", err.message);
-            }
+                cloudReviews.sort((a,b) => b.date - a.date); cloudReviews.forEach(rev => injectReviewCard(rev, true));
+            } catch (err) { console.log("Cloud reviews fallback:", err.message); }
             staticReviews.forEach(rev => injectReviewCard(rev));
         }
-        
-        staticReviews.forEach(rev => injectReviewCard(rev));
 
         let currentLang = 'en';
         const dict = {
-            'call-us': { mr: '📞 +९१ ९०४९५५५२७० | +९१ ८७८८१३१५१५' },
-            'location': { mr: '📍 उदगीर, महाराष्ट्र' },
-            'subtitle': { mr: 'रिपेअरिंग सेंटर' },
-            'nav-home': { mr: 'मुख्यपृष्ठ' },
-            'nav-repairs': { mr: 'दुरुस्ती' },
-            'nav-pricing': { mr: 'दरपत्रक' },
-            'nav-accessories': { mr: 'अॅक्सेसरीज' },
-            'nav-gallery': { mr: 'गॅलरी' },
-            'nav-reviews': { mr: 'अभिप्राय' },
-            'nav-track': { mr: 'स्टेटस पहा' },
-            'nav-rate': { mr: 'रेटिंग द्या ⭐' },
-            'hero-title': { mr: 'खात्रीशीर मोबाईल दुरुस्ती आणि सर्वोत्तम अॅक्सेसरीज' },
-            'hero-desc': { mr: 'उदगीरमध्ये घरपोच दुरुस्ती आणि उत्तम दर्जाच्या वस्तूंचा अनुभव घ्या.' },
-            'hero-book': { mr: 'आत्ताच दुरुस्ती बूक करा' },
-            'about-title': { mr: 'उदगीर मधील विश्वासार्ह मोबाईल तज्ञ' },
-            'about-desc': { mr: '१५ वर्षांहून अधिक अनुभवासह, भक्ती मोबाईलने हजारो ग्राहकांचे फोन यशस्वीरित्या दुरुस्त केले आहेत. आम्ही ओरिजिनल पार्ट्स आणि प्रगत तंत्रज्ञान वापरतो.' },
-            'services-title': { mr: 'आमच्या सेवा' },
-            'services-subtitle': { mr: 'सर्व ब्रँड्ससाठी व्यावसायिक दुरुस्ती (Apple, Samsung, OnePlus, Vivo, Oppo, Xiaomi)' },
-            's1-title': { mr: 'स्क्रीन बदलणे' },
-            's1-desc': { mr: 'ओरिजिनल LCD आणि OLED डिस्प्ले.' },
-            's2-title': { mr: 'बॅटरी बदलणे' },
-            's2-desc': { mr: '100% हेल्थ आणि फास्ट चार्जिंग.' },
-            's3-title': { mr: 'पाण्यात पडलेले फोन' },
-            's3-desc': { mr: 'केमिकल वॉश आणि शॉर्ट सर्किट दुरुस्ती.' },
-            's4-title': { mr: 'मदरबोर्ड IC दुरुस्ती' },
-            's4-desc': { mr: 'मायक्रो सोल्डरिंग आणि डेड बूट फिक्स.' },
-            's5-title': { mr: 'सॉफ्टवेअर अनलॉकिंग' },
-            's5-desc': { mr: 'FRP बायपास, फ्लॅशिंग आणि OS रिस्टोअर.' },
-            's8-title': { mr: 'चार्जिंग पोर्ट दुरुस्ती' },
-            's8-desc': { mr: 'लूज पोर्ट आणि कनेक्शन दुरुस्ती.' },
-            'price-title': { mr: 'पारदर्शक दरपत्रक' },
-            'price-sub': { mr: 'दुरुस्तीचे अंदाजे दर. दुकानाच्या प्रशासकाद्वारे हे दर थेट व्यवस्थापित केले जातात.' },
-            'p-cat-1': { mr: 'अँड्रॉइड दुरुस्ती' },
-            'p-item-1': { mr: 'स्क्रीन बदलणे (LCD)' },
-            'p-item-2': { mr: 'बॅटरी बदलणे' },
-            'p-item-3': { mr: 'चार्जिंग पोर्ट दुरुस्ती' },
-            'p-item-4': { mr: 'सॉफ्टवेअर / FRP अनलॉक' },
-            'p-cat-2': { mr: 'आयफोन दुरुस्ती' },
-            'p-item-5': { mr: 'स्क्रीन बदलणे' },
-            'p-item-6': { mr: 'बॅटरी बदलणे' },
-            'p-item-7': { mr: 'बॅक ग्लास बदलणे' },
-            'p-item-8': { mr: 'ट्रू-टोन रिस्टोरेशन' },
+            'call-us': { mr: '📞 +९१ ९०४९५५५२७० | +९१ ८७८८१३१५१५' }, 'location': { mr: '📍 उदगीर, महाराष्ट्र' }, 'subtitle': { mr: 'रिपेअरिंग सेंटर' },
+            'nav-home': { mr: 'मुख्यपृष्ठ' }, 'nav-repairs': { mr: 'दुरुस्ती' }, 'nav-pricing': { mr: 'दरपत्रक' }, 'nav-accessories': { mr: 'अॅक्सेसरीज' }, 'nav-gallery': { mr: 'गॅलरी' }, 'nav-reviews': { mr: 'अभिप्राय' },
+            'nav-track': { mr: 'स्टेटस पहा' }, 'nav-rate': { mr: 'रेटिंग द्या ⭐' },
+            'hero-title': { mr: 'खात्रीशीर मोबाईल दुरुस्ती आणि सर्वोत्तम अॅक्सेसरीज' }, 'hero-desc': { mr: 'उदगीरमध्ये घरपोच दुरुस्ती आणि उत्तम दर्जाच्या वस्तूंचा अनुभव घ्या.' }, 'hero-book': { mr: 'आत्ताच दुरुस्ती बूक करा' },
+            'about-title': { mr: 'उदगीर मधील विश्वासार्ह मोबाईल तज्ञ' }, 'about-desc': { mr: '१५ वर्षांहून अधिक अनुभवासह, भक्ती मोबाईलने हजारो ग्राहकांचे फोन यशस्वीरित्या दुरुस्त केले आहेत. आम्ही ओरिजिनल पार्ट्स आणि प्रगत तंत्रज्ञान वापरतो.' },
+            'services-title': { mr: 'आमच्या सेवा' }, 'services-subtitle': { mr: 'सर्व ब्रँड्ससाठी व्यावसायिक दुरुस्ती (Apple, Samsung, OnePlus, Vivo, Oppo, Xiaomi)' },
+            'price-title': { mr: 'पारदर्शक दरपत्रक' }, 'price-sub': { mr: 'दुरुस्तीचे अंदाजे दर. दुकानाच्या प्रशासकाद्वारे हे दर थेट व्यवस्थापित केले जातात.' },
+            'p-cat-1': { mr: 'अँड्रॉइड दुरुस्ती' }, 'p-item-1': { mr: 'स्क्रीन बदलणे (LCD)' }, 'p-item-2': { mr: 'बॅटरी बदलणे' }, 'p-item-3': { mr: 'चार्जिंग पोर्ट दुरुस्ती' }, 'p-item-4': { mr: 'सॉफ्टवेअर / FRP अनलॉक' },
+            'p-cat-2': { mr: 'आयफोन दुरुस्ती' }, 'p-item-5': { mr: 'स्क्रीन बदलणे' }, 'p-item-6': { mr: 'बॅटरी बदलणे' }, 'p-item-7': { mr: 'बॅक ग्लास बदलणे' }, 'p-item-8': { mr: 'ट्रू-टोन रिस्टोरेशन' },
             'price-note': { mr: '* किमती ग्राहकांनी निवडलेल्या पार्ट्सच्या गुणवत्तेनुसार बदलू शकतात.' },
-            'gallery-title': { mr: 'आमचे काम आणि दुकान' },
-            'gallery-sub': { mr: 'आमच्या प्रगत दुरुस्ती सेटअपची एक झलक.' },
-            'acc-title': { mr: 'प्रीमियम अॅक्सेसरीज' },
-            'acc-subtitle': { mr: 'टॉप ब्रँड्स दुकानात उपलब्ध आहेत.' },
-            'badge-sale': { mr: 'सूट' },
-            'badge-new': { mr: 'नवीन' },
-            'a1-title': { mr: 'टफ आर्मर कव्हर' },
-            'a2-title': { mr: 'TWS इयरबड्स' },
-            'a3-title': { mr: '65W फास्ट चार्जर' },
-            'a4-title': { mr: '10000mAh पॉवरबँक' },
-            'rev-title': { mr: 'ग्राहकांचा अभिप्राय' },
-            'rev-subtitle': { mr: 'उदगीर मधील लोकांचे आमच्याबद्दल मत.' },
-            'rev-btn': { mr: 'अभिप्राय लिहा' },
-            'modal-book-title': { mr: 'दुरुस्ती बूक करा' },
-            'modal-submit': { mr: 'माहिती पाठवा' },
-            'book-success': { mr: 'तुमची दुरुस्ती बूक झाली आहे!' },
-            'book-save-id': { mr: 'हा ट्रॅकिंग ID सेव्ह करा:' },
-            'modal-track-title': { mr: 'दुरुस्तीचे स्टेटस पहा' },
-            'modal-search': { mr: 'शोधा' },
-            'track-status': { mr: 'सध्याची स्थिती:' },
-            'modal-rate-title': { mr: 'आम्हाला रेट करा' },
-            'modal-rate-sub': { mr: 'तुमचा अभिप्राय आम्हाला सुधारण्यास मदत करतो.' },
-            'modal-submit-rev': { mr: 'अभिप्राय पाठवा' },
-            'rate-thanks': { mr: 'धन्यवाद! तुमचा अभिप्राय लाईव्ह झाला आहे.' },
+            'gallery-title': { mr: 'आमचे काम आणि दुकान' }, 'gallery-sub': { mr: 'आमच्या प्रगत दुरुस्ती सेटअपची एक झलक.' },
+            'acc-title': { mr: 'प्रीमियम अॅक्सेसरीज' }, 'acc-subtitle': { mr: 'टॉप ब्रँड्स दुकानात उपलब्ध आहेत.' },
+            'badge-sale': { mr: 'सूट' }, 'badge-new': { mr: 'नवीन' },
+            'rev-title': { mr: 'ग्राहकांचा अभिप्राय' }, 'rev-subtitle': { mr: 'उदगीर मधील लोकांचे आमच्याबद्दल मत.' }, 'rev-btn': { mr: 'अभिप्राय लिहा' },
+            'modal-book-title': { mr: 'दुरुस्ती बूक करा' }, 'modal-submit': { mr: 'माहिती पाठवा' }, 'book-success': { mr: 'तुमची दुरुस्ती बूक झाली आहे!' }, 'book-save-id': { mr: 'हा ट्रॅकिंग ID सेव्ह करा:' },
+            'modal-track-title': { mr: 'दुरुस्तीचे स्टेटस पहा' }, 'modal-search': { mr: 'शोधा' }, 'track-status': { mr: 'सध्याची स्थिती:' },
+            'modal-rate-title': { mr: 'आम्हाला रेट करा' }, 'modal-rate-sub': { mr: 'तुमचा अभिप्राय आम्हाला सुधारण्यास मदत करतो.' }, 'modal-submit-rev': { mr: 'अभिप्राय पाठवा' }, 'rate-thanks': { mr: 'धन्यवाद! तुमचा अभिप्राय लाईव्ह झाला action.' },
             'wa-chat': { mr: 'आम्हाला मेसेज करा' }
         };
 
         const placeholderDict = {
-            'b-name': { mr: 'पूर्ण नाव' }, 'b-phone': { mr: 'मोबाईल क्रमांक' },
-            'b-device': { mr: 'डिव्हाइस (उदा. iPhone 13)' }, 'b-issue': { mr: 'अडचण काय आहे ते लिहा...' },
-            't-id': { mr: 'ट्रॅकिंग ID टाका (उदा. BMR-1234)' }, 'r-name': { mr: 'तुमचे नाव' },
-            'r-text': { mr: 'तुमचा अभिप्राय लिहा...' }
+            'b-name': { mr: 'पूर्ण नाव' }, 'b-phone': { mr: 'मोबाईल क्रमांक' }, 'b-device': { mr: 'डिव्हाइस (उदा. iPhone 13)' }, 'b-issue': { mr: 'अडचण काय आहे ते लिहा...' },
+            't-id': { mr: 'ट्रॅकिंग ID टाका (उदा. BMR-1234)' }, 'r-name': { mr: 'तुमचे नाव' }, 'r-text': { mr: 'तुमचा अभिप्राय लिहा...' }
         };
 
         window.toggleLanguage = function() {
             currentLang = currentLang === 'en' ? 'mr' : 'en';
-            
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const key = el.getAttribute('data-lang');
                 if (!el.dataset.orig) el.dataset.orig = el.innerHTML; 
-                if (currentLang === 'mr' && dict[key] && dict[key].mr) {
-                    el.innerHTML = dict[key].mr;
-                } else {
-                    el.innerHTML = el.dataset.orig;
-                }
+                if (currentLang === 'mr' && dict[key] && dict[key].mr) { el.innerHTML = dict[key].mr; } else { el.innerHTML = el.dataset.orig; }
             });
-
             for(let id in placeholderDict) {
                 const input = document.getElementById(id);
                 if(input) {
                     if (!input.dataset.origPlaceholder) input.dataset.origPlaceholder = input.placeholder;
-                    if (currentLang === 'mr' && placeholderDict[id].mr) {
-                        input.placeholder = placeholderDict[id].mr;
-                    } else {
-                        input.placeholder = input.dataset.origPlaceholder;
-                    }
+                    if (currentLang === 'mr' && placeholderDict[id].mr) { input.placeholder = placeholderDict[id].mr; } else { input.placeholder = input.dataset.origPlaceholder; }
                 }
             }
         }
+        
+        // Initial fallbacks before cloud loads
+        renderPublicServices(defaultServices);
+        renderPublicAccessories(defaultAccessories);
+        staticReviews.forEach(rev => injectReviewCard(rev));
+
     </script>
 </body>
 </html>
