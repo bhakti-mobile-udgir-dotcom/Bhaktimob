@@ -17,12 +17,31 @@
         /* Modal Animation */
         .modal-active { display: flex !important; animation: fadeIn 0.2s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* FAQ Icon Animation */
+        .faq-icon { transition: transform 0.3s ease; }
+        
+        /* Invoice Print Styling */
+        @media print {
+            body * { visibility: hidden; }
+            #invoicePrintArea, #invoicePrintArea * { visibility: visible; }
+            #invoicePrintArea { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 20px; }
+            .no-print { display: none !important; }
+        }
     </style>
 </head>
 <body class="text-slate-800">
 
-    <div class="bg-slate-900 text-white text-xs sm:text-sm py-2 px-4 flex justify-between items-center z-50 relative">
-        <div class="flex gap-4">
+    <div id="promo-banner" class="hidden bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center text-xs sm:text-sm py-2 px-4 font-semibold tracking-wide shadow-md z-50 relative">
+        <span id="promo-text"></span>
+    </div>
+
+    <div class="bg-slate-900 text-white text-xs sm:text-sm py-2 px-4 flex flex-wrap justify-between items-center z-50 relative gap-2">
+        <div class="flex flex-wrap gap-3 items-center">
+            <div id="shop-status" class="flex items-center gap-1 font-bold rounded px-2 py-0.5 text-xs bg-slate-800 border border-slate-700 shadow-inner">
+                <span id="shop-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+                <span id="shop-text" data-lang="shop-open">Checking...</span>
+            </div>
             <span class="hidden sm:inline" data-lang="call-us">📞 +91 9049555270 | +91 8788131515</span>
             <span class="sm:hidden">📞 +91 9049555270</span>
             <span data-lang="location">📍 Udgir, Maharashtra</span>
@@ -46,8 +65,10 @@
                 <a href="#home" class="hover:text-blue-600 transition" data-lang="nav-home">Home</a>
                 <a href="#services" class="hover:text-blue-600 transition" data-lang="nav-repairs">Repairs</a>
                 <a href="#pricing" class="hover:text-blue-600 transition" data-lang="nav-pricing">Pricing</a>
+                <a href="#used-phones" class="hover:text-purple-600 transition font-bold" data-lang="nav-used">Used Phones</a>
                 <a href="#accessories" class="hover:text-blue-600 transition" data-lang="nav-accessories">Accessories</a>
                 <a href="#gallery" class="hover:text-blue-600 transition" data-lang="nav-gallery">Gallery</a>
+                <a href="#faq" class="hover:text-blue-600 transition" data-lang="nav-faq">FAQs</a>
                 <a href="#reviews" class="hover:text-blue-600 transition" data-lang="nav-reviews">Reviews</a>
             </div>
 
@@ -64,8 +85,9 @@
             <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg" data-lang="hero-title">Expert Mobile Repairs & Premium Accessories</h1>
             <p class="text-lg md:text-xl text-slate-200 mb-8 drop-shadow-md" data-lang="hero-desc">Fast, reliable doorstep repairs and high-quality accessories in Udgir.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="openModal('bookModal')" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-1" data-lang="hero-book">Book Repair Now</button>
-                <button onclick="openModal('trackModal')" class="sm:hidden px-8 py-4 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white rounded-xl font-bold text-lg shadow-lg transition" data-lang="nav-track">Track Repair</button>
+                <button onclick="openModal('bookModal')" class="px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-1" data-lang="hero-book">Book Repair Now</button>
+                <button onclick="openModal('sellModal')" class="px-6 py-4 bg-green-500 hover:bg-green-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-green-500/30 transition transform hover:-translate-y-1" data-lang="hero-sell">Sell Old Phone 💵</button>
+                <button onclick="openModal('trackModal')" class="sm:hidden px-6 py-4 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white rounded-xl font-bold text-lg shadow-lg transition" data-lang="nav-track">Track Repair</button>
             </div>
         </div>
     </section>
@@ -106,46 +128,20 @@
             <p class="text-slate-500 mb-10" data-lang="price-sub">Estimated starting prices. These are managed live by the shop admin.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Pricing List 1 -->
-                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm text-left">
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm text-left hover-scale">
                     <h3 class="text-xl font-bold mb-4 text-blue-600 border-b border-slate-200 pb-2" data-lang="p-cat-1">Android Repairs</h3>
-                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
-                        <span class="font-semibold text-slate-700" data-lang="p-item-1">Screen Replacement (LCD)</span>
-                        <span class="font-bold text-slate-900" id="val-p-and-screen">...</span>
-                    </div>
-                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
-                        <span class="font-semibold text-slate-700" data-lang="p-item-2">Battery Replacement</span>
-                        <span class="font-bold text-slate-900" id="val-p-and-batt">...</span>
-                    </div>
-                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed">
-                        <span class="font-semibold text-slate-700" data-lang="p-item-3">Charging Port Repair</span>
-                        <span class="font-bold text-slate-900" id="val-p-and-port">...</span>
-                    </div>
-                    <div class="flex justify-between py-3">
-                        <span class="font-semibold text-slate-700" data-lang="p-item-4">Software / FRP Unlock</span>
-                        <span class="font-bold text-slate-900" id="val-p-and-soft">...</span>
-                    </div>
+                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed"><span class="font-semibold text-slate-700" data-lang="p-item-1">Screen Replacement (LCD)</span><span class="font-bold text-slate-900" id="val-p-and-screen">...</span></div>
+                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed"><span class="font-semibold text-slate-700" data-lang="p-item-2">Battery Replacement</span><span class="font-bold text-slate-900" id="val-p-and-batt">...</span></div>
+                    <div class="flex justify-between py-3 border-b border-slate-200 border-dashed"><span class="font-semibold text-slate-700" data-lang="p-item-3">Charging Port Repair</span><span class="font-bold text-slate-900" id="val-p-and-port">...</span></div>
+                    <div class="flex justify-between py-3"><span class="font-semibold text-slate-700" data-lang="p-item-4">Software / FRP Unlock</span><span class="font-bold text-slate-900" id="val-p-and-soft">...</span></div>
                 </div>
 
-                <!-- Pricing List 2 -->
-                <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-sm text-left text-white">
+                <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-sm text-left text-white hover-scale">
                     <h3 class="text-xl font-bold mb-4 text-amber-400 border-b border-slate-700 pb-2" data-lang="p-cat-2">iPhone Repairs</h3>
-                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
-                        <span class="font-semibold text-slate-300" data-lang="p-item-5">Screen Replacement</span>
-                        <span class="font-bold text-white" id="val-p-iph-screen">...</span>
-                    </div>
-                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
-                        <span class="font-semibold text-slate-300" data-lang="p-item-6">Battery Replacement</span>
-                        <span class="font-bold text-white" id="val-p-iph-batt">...</span>
-                    </div>
-                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed">
-                        <span class="font-semibold text-slate-300" data-lang="p-item-7">Back Glass Replacement</span>
-                        <span class="font-bold text-white" id="val-p-iph-glass">...</span>
-                    </div>
-                    <div class="flex justify-between py-3">
-                        <span class="font-semibold text-slate-300" data-lang="p-item-8">TrueTone Restoration</span>
-                        <span class="font-bold text-white" id="val-p-iph-true">...</span>
-                    </div>
+                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed"><span class="font-semibold text-slate-300" data-lang="p-item-5">Screen Replacement</span><span class="font-bold text-white" id="val-p-iph-screen">...</span></div>
+                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed"><span class="font-semibold text-slate-300" data-lang="p-item-6">Battery Replacement</span><span class="font-bold text-white" id="val-p-iph-batt">...</span></div>
+                    <div class="flex justify-between py-3 border-b border-slate-700 border-dashed"><span class="font-semibold text-slate-300" data-lang="p-item-7">Back Glass Replacement</span><span class="font-bold text-white" id="val-p-iph-glass">...</span></div>
+                    <div class="flex justify-between py-3"><span class="font-semibold text-slate-300" data-lang="p-item-8">TrueTone Restoration</span><span class="font-bold text-white" id="val-p-iph-true">...</span></div>
                 </div>
             </div>
             <p class="mt-6 text-sm text-slate-400 italic" data-lang="price-note">* Prices vary by exact make, model, and part quality chosen by customer.</p>
@@ -169,10 +165,31 @@
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="acc-title">Premium Accessories</h2>
             <p class="text-slate-500 mb-10" data-lang="acc-subtitle">Top brands available in-store.</p>
-            
             <div id="public-accessories-container" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- Accessories load dynamically via JS -->
                 <div class="p-10 text-center text-slate-500 font-bold col-span-full animate-pulse">Loading Accessories...</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="used-phones" class="py-16 bg-indigo-50/50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="used-title">Refurbished & Used Phones</h2>
+            <p class="text-slate-500 mb-10" data-lang="used-subtitle">Quality tested second-hand phones at the best prices.</p>
+            <div id="public-used-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Dynamically loaded -->
+                <div class="p-10 text-center text-slate-500 font-bold col-span-full animate-pulse">Loading Used Phones...</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-16 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="faq-title">Frequently Asked Questions</h2>
+                <p class="text-slate-500" data-lang="faq-sub">Common queries about our repair process.</p>
+            </div>
+            <div id="public-faq-container" class="space-y-4">
+                <div class="p-6 text-center text-slate-500 font-bold animate-pulse">Loading FAQs...</div>
             </div>
         </div>
     </section>
@@ -192,12 +209,12 @@
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-400 py-10 text-center">
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center relative z-30">
         <h2 class="text-2xl font-bold text-white mb-2">Bhakti Mobile & Repairing Center</h2>
         <p class="mb-4">Udgir, Maharashtra - 413517</p>
         <p class="mb-4">📞 +91 9049555270 | 📞 +91 8788131515</p>
-        <p class="text-sm flex items-center justify-center gap-2 cursor-pointer select-none" onclick="handleAdminTap()" title="Secret Admin Entry">
-            &copy; 2026 Bhakti Mobile. All rights reserved. 
+        <p class="text-sm flex items-center justify-center gap-2 cursor-pointer select-none" onclick="handleAdminTap()" title="Tap 5 times for Admin">
+            &copy; <span id="cur-year">2026</span> Bhakti Mobile. All rights reserved. 
         </p>
     </footer>
 
@@ -208,7 +225,7 @@
 
     <div id="db-status" class="fixed bottom-6 left-6 bg-slate-900 text-white text-xs font-mono px-3 py-1.5 rounded-full shadow-lg z-50 flex items-center gap-2 opacity-90 pointer-events-none">
         <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse" id="db-dot"></span>
-        <span id="db-text">Connecting to Firebase...</span>
+        <span id="db-text">Connecting...</span>
     </div>
 
     <!-- Booking Modal -->
@@ -216,7 +233,7 @@
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
             <button onclick="closeModal('bookModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
             <h2 class="text-2xl font-bold mb-4" data-lang="modal-book-title">Book a Repair</h2>
-            <form id="bookForm" class="flex flex-col gap-4">
+            <form id="bookForm" class="flex flex-col gap-4" onsubmit="return false;">
                 <input type="text" id="b-name" placeholder="Full Name" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500" required>
                 <input type="text" id="b-phone" placeholder="Phone Number" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500" required>
                 <input type="text" id="b-device" placeholder="Device (e.g. iPhone 13)" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500" required>
@@ -232,20 +249,54 @@
         </div>
     </div>
 
+    <!-- Sell Phone Modal -->
+    <div id="sellModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
+            <button onclick="closeModal('sellModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold mb-1 text-green-600" data-lang="modal-sell-title">Sell Your Old Phone</h2>
+            <p class="text-sm text-slate-500 mb-4" data-lang="modal-sell-sub">Get instant cash for your used devices.</p>
+            <form id="sellForm" class="flex flex-col gap-3" onsubmit="return false;">
+                <input type="text" id="s-name" placeholder="Full Name" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-green-500" required>
+                <input type="text" id="s-phone" placeholder="Phone Number" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-green-500" required>
+                <div class="flex gap-2">
+                    <input type="text" id="s-brand" placeholder="Brand (e.g. Apple)" class="w-1/2 p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-green-500" required>
+                    <input type="text" id="s-model" placeholder="Model (e.g. 11)" class="w-1/2 p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-green-500" required>
+                </div>
+                <select id="s-condition" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-green-500" required>
+                    <option value="" disabled selected data-lang="s-cond-default">Select Condition...</option>
+                    <option value="Excellent">Excellent (Like New)</option>
+                    <option value="Good">Good (Minor Scratches)</option>
+                    <option value="Broken Screen">Broken Screen / Back</option>
+                    <option value="Dead">Dead / Not Turning On</option>
+                </select>
+                <div id="sellError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition" id="sellSubmitBtn" data-lang="modal-submit-sell">Get Quote</button>
+            </form>
+            <div id="sellResult" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-center font-bold" data-lang="sell-thanks">Request sent! We will call you shortly.</div>
+        </div>
+    </div>
+
     <!-- Tracking Modal -->
     <div id="trackModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
             <button onclick="closeModal('trackModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
             <h2 class="text-2xl font-bold mb-4" data-lang="modal-track-title">Track Repair Status</h2>
-            <form id="trackForm" class="flex flex-col gap-4">
+            <form id="trackForm" class="flex flex-col gap-4" onsubmit="return false;">
                 <input type="text" id="t-id" placeholder="Enter Tracking ID (e.g. BMR-1234)" oninput="this.value = this.value.toUpperCase()" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 focus:outline-blue-500 font-mono uppercase" required>
                 <div id="trackError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
                 <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-lg transition" id="trackSubmitBtn" data-lang="modal-search">Search</button>
             </form>
-            <div id="trackResult" class="hidden mt-6 text-center border-t border-slate-100 pt-4">
+            <div id="trackResult" class="hidden mt-6 text-center border-t border-slate-100 pt-4 flex flex-col items-center">
                 <p class="text-slate-500 text-sm mb-1" data-lang="track-status">Current Status:</p>
                 <p class="text-2xl font-bold text-blue-600" id="statusDisplay">Checking...</p>
-                <p class="text-slate-600 mt-2 text-sm" id="deviceDisplay"></p>
+                <p class="text-slate-600 mt-2 text-sm font-semibold" id="deviceDisplay"></p>
+                
+                <!-- Digital Warranty Card -->
+                <div id="warrantyCard" class="hidden mt-4 w-full bg-green-50 border border-green-200 p-4 rounded-xl shadow-sm text-center">
+                    <p class="text-[10px] font-bold text-green-700 uppercase tracking-widest mb-1">Digital Warranty</p>
+                    <p class="text-xl font-bold text-green-600" id="warrantyDaysLeft"></p>
+                    <p class="text-xs text-green-800 mt-1" id="warrantyDateDisplay"></p>
+                </div>
             </div>
         </div>
     </div>
@@ -256,7 +307,7 @@
             <button onclick="closeModal('rateModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
             <h2 class="text-2xl font-bold mb-1" data-lang="modal-rate-title">Rate Our Service</h2>
             <p class="text-slate-500 text-sm mb-4" data-lang="modal-rate-sub">Your feedback helps us grow.</p>
-            <form id="rateForm" class="flex flex-col gap-4">
+            <form id="rateForm" class="flex flex-col gap-4" onsubmit="return false;">
                 <div class="flex justify-center gap-2 text-3xl cursor-pointer mb-2" id="star-container">
                     <span class="star text-slate-300 hover:text-yellow-400" data-val="1">★</span>
                     <span class="star text-slate-300 hover:text-yellow-400" data-val="2">★</span>
@@ -267,7 +318,7 @@
                 <input type="hidden" id="r-stars" value="0" required>
                 <input type="text" id="r-name" placeholder="Your Name" class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50" required>
                 <textarea id="r-text" placeholder="Write your review..." class="w-full p-3 border border-slate-200 rounded-lg bg-slate-50 h-20" required></textarea>
-                <div id="rateError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200 overflow-hidden text-ellipsis"></div>
+                <div id="rateError" class="hidden bg-red-100 text-red-700 p-3 rounded-lg text-sm font-semibold border border-red-200"></div>
                 <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg transition" id="rateSubmitBtn" data-lang="modal-submit-rev">Submit Review</button>
             </form>
             <div id="rateSuccess" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-center font-bold" data-lang="rate-thanks">Thank you! Your review is live.</div>
@@ -290,42 +341,85 @@
         <div class="bg-white rounded-2xl w-full max-w-6xl h-[95vh] sm:h-[90vh] flex flex-col shadow-2xl relative overflow-hidden">
             <div class="p-4 sm:p-6 bg-slate-900 text-white flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
                 <div>
-                    <h2 class="text-2xl font-bold">Admin Dashboard</h2>
+                    <h2 class="text-2xl font-bold text-blue-400">Admin Dashboard</h2>
                     <div class="flex flex-wrap gap-2 mt-2">
-                        <button onclick="switchAdminTab('bookings')" id="tab-btn-bookings" class="px-4 py-1.5 bg-blue-600 rounded-md text-sm font-bold transition">Bookings</button>
-                        <button onclick="switchAdminTab('pricing')" id="tab-btn-pricing" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Pricing</button>
-                        <button onclick="switchAdminTab('services')" id="tab-btn-services" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Services</button>
-                        <button onclick="switchAdminTab('accessories')" id="tab-btn-accessories" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Accessories</button>
-                        <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="px-4 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Settings ⚙️</button>
+                        <button onclick="switchAdminTab('bookings')" id="tab-btn-bookings" class="px-3 py-1 bg-blue-600 rounded-md text-sm font-bold transition">Bookings</button>
+                        <button onclick="switchAdminTab('buy')" id="tab-btn-buy" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition text-green-400">Buy Leads</button>
+                        <button onclick="switchAdminTab('pricing')" id="tab-btn-pricing" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Pricing</button>
+                        <button onclick="switchAdminTab('services')" id="tab-btn-services" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Services</button>
+                        <button onclick="switchAdminTab('used')" id="tab-btn-used" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition text-purple-400">Used Phones</button>
+                        <button onclick="switchAdminTab('accessories')" id="tab-btn-accessories" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Accessories</button>
+                        <button onclick="switchAdminTab('faqs')" id="tab-btn-faqs" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">FAQs</button>
+                        <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-md text-sm font-bold transition">Settings ⚙️</button>
                     </div>
                 </div>
                 <div class="flex gap-4 self-end lg:self-auto">
-                    <button onclick="loadAdminBookings()" id="adminRefreshBtn" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition">🔄 Refresh</button>
+                    <button onclick="loadCurrentAdminData()" id="adminRefreshBtn" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm font-bold transition">🔄 Refresh</button>
                     <button onclick="closeModal('adminDashboardModal')" class="text-slate-300 hover:text-white text-3xl font-bold leading-none">&times;</button>
                 </div>
             </div>
             
             <div class="p-4 sm:p-6 flex-1 overflow-y-auto bg-slate-50 relative">
                 
-                <div id="adminBookingsView" class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white flex">
-                    <table class="w-full text-left border-collapse min-w-[600px]">
-                        <thead>
-                            <tr class="bg-slate-100 text-slate-700 uppercase text-xs">
-                                <th class="p-4 border-b font-bold">Track ID</th>
-                                <th class="p-4 border-b font-bold">Date & Time</th>
-                                <th class="p-4 border-b font-bold">Customer Info</th>
-                                <th class="p-4 border-b font-bold">Device & Issue</th>
-                                <th class="p-4 border-b font-bold">Status Update</th>
-                                <th class="p-4 border-b font-bold">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminBookingsTable" class="text-sm text-slate-700">
-                            <tr><td colspan="6" class="text-center p-10 font-bold text-slate-400">Loading bookings from cloud...</td></tr>
-                        </tbody>
-                    </table>
+                <div id="adminBookingsView" class="flex-col gap-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-2">
+                        <div class="bg-blue-50 border border-blue-100 p-4 rounded-xl text-center shadow-sm">
+                            <h4 class="text-3xl font-bold text-blue-600" id="stat-total">0</h4>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Total Bookings</p>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-100 p-4 rounded-xl text-center shadow-sm">
+                            <h4 class="text-3xl font-bold text-amber-500" id="stat-pending">0</h4>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Active / Pending</p>
+                        </div>
+                        <div class="bg-green-50 border border-green-100 p-4 rounded-xl text-center shadow-sm">
+                            <h4 class="text-3xl font-bold text-green-600" id="stat-ready">0</h4>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Ready / Delivered</p>
+                        </div>
+                        <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-xl text-center shadow-sm">
+                            <h4 class="text-3xl font-bold text-indigo-600" id="stat-leads">0</h4>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Buy Leads</p>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white flex">
+                        <table class="w-full text-left border-collapse min-w-[900px]">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700 uppercase text-xs">
+                                    <th class="p-4 border-b font-bold">Track ID</th>
+                                    <th class="p-4 border-b font-bold">Customer Info</th>
+                                    <th class="p-4 border-b font-bold">Device & Issue</th>
+                                    <th class="p-4 border-b font-bold w-48">Status & Warranty</th>
+                                    <th class="p-4 border-b font-bold text-center w-56">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminBookingsTable" class="text-sm text-slate-700">
+                                <tr><td colspan="5" class="text-center p-10 font-bold text-slate-400">Loading bookings from cloud...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                <div id="adminPricingView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col h-full">
+                <div id="adminBuyView" class="hidden flex-col gap-4">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Customer Phones for Sale</h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white flex">
+                        <table class="w-full text-left border-collapse min-w-[700px]">
+                            <thead>
+                                <tr class="bg-green-50 text-green-800 uppercase text-xs">
+                                    <th class="p-4 border-b font-bold">Date</th>
+                                    <th class="p-4 border-b font-bold">Customer</th>
+                                    <th class="p-4 border-b font-bold">Device Brand/Model</th>
+                                    <th class="p-4 border-b font-bold">Condition</th>
+                                    <th class="p-4 border-b font-bold text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminBuyTable" class="text-sm text-slate-700">
+                                <tr><td colspan="5" class="text-center p-10 font-bold text-slate-400">Loading leads...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="adminPricingView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col h-full overflow-y-auto">
                     <h3 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Manage Public Pricing</h3>
                     <p class="text-sm text-slate-500 mb-6">Enter prices as text (e.g. "₹800+", "Call for Price"). Changes apply live instantly.</p>
                     
@@ -358,135 +452,187 @@
 
                 <div id="adminServicesView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-800">Manage Services</h3>
-                            <p class="text-sm text-slate-500">Add or edit the repair services listed on your website.</p>
-                        </div>
+                        <div><h3 class="text-xl font-bold text-slate-800">Manage Services</h3></div>
                         <button onclick="openServiceForm()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-bold shadow-sm transition">+ Add Service</button>
                     </div>
-
-                    <div id="adminServicesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                        <div class="p-4 text-center text-slate-500 font-bold">Loading services...</div>
-                    </div>
+                    <div id="adminServicesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"></div>
                     
                     <div id="adminServiceForm" class="hidden bg-slate-100 p-6 border border-slate-300 rounded-xl mt-4 shadow-inner">
                         <h4 class="font-bold text-lg mb-4 text-blue-700" id="srvFormTitle">Add/Edit Service</h4>
                         <input type="hidden" id="srv-id">
-                        
                         <label class="block text-sm font-bold text-slate-700 mb-1">Image URL</label>
-                        <input type="text" id="srv-img" placeholder="https://..." class="w-full mb-4 p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                        
-                        <div class="flex flex-col sm:flex-row gap-4 mb-4">
-                            <div class="w-full sm:w-1/2">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Title (English)</label>
-                                <input type="text" id="srv-title-en" placeholder="e.g., Screen Repair" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                            </div>
-                            <div class="w-full sm:w-1/2">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Title (Marathi)</label>
-                                <input type="text" id="srv-title-mr" placeholder="e.g., स्क्रीन दुरुस्ती" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                            </div>
+                        <input type="text" id="srv-img" class="w-full mb-4 p-3 border border-slate-300 rounded-lg focus:outline-blue-500">
+                        <div class="flex gap-4 mb-4">
+                            <div class="w-1/2"><label class="block text-sm font-bold text-slate-700 mb-1">Title (EN)</label><input type="text" id="srv-title-en" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
+                            <div class="w-1/2"><label class="block text-sm font-bold text-slate-700 mb-1">Title (MR)</label><input type="text" id="srv-title-mr" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
                         </div>
-
-                        <div class="flex flex-col sm:flex-row gap-4 mb-4">
-                            <div class="w-full sm:w-1/2">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Description (English)</label>
-                                <input type="text" id="srv-desc-en" placeholder="Short description..." class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                            </div>
-                            <div class="w-full sm:w-1/2">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Description (Marathi)</label>
-                                <input type="text" id="srv-desc-mr" placeholder="Short description..." class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                            </div>
+                        <div class="flex gap-4 mb-4">
+                            <div class="w-1/2"><label class="block text-sm font-bold text-slate-700 mb-1">Desc (EN)</label><input type="text" id="srv-desc-en" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
+                            <div class="w-1/2"><label class="block text-sm font-bold text-slate-700 mb-1">Desc (MR)</label><input type="text" id="srv-desc-mr" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
                         </div>
-
-                        <div class="mb-6">
-                            <label class="block text-sm font-bold text-slate-700 mb-1">Display Order (1 appears first)</label>
-                            <input type="number" id="srv-order" placeholder="e.g., 1" class="w-1/3 p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                        </div>
-
-                        <div class="flex gap-3">
-                            <button onclick="saveAdminService()" id="btnSaveService" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold shadow transition">Save to Cloud</button>
-                            <button onclick="cancelServiceForm()" class="bg-slate-400 hover:bg-slate-500 text-white px-6 py-3 rounded-lg font-bold transition">Cancel</button>
-                        </div>
+                        <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-1">Order</label><input type="number" id="srv-order" class="w-1/3 p-3 border rounded-lg focus:outline-blue-500"></div>
+                        <div class="flex gap-3"><button onclick="saveAdminService()" id="btnSaveService" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold shadow transition">Save</button><button onclick="cancelServiceForm()" class="bg-slate-400 hover:bg-slate-500 text-white px-6 py-3 rounded-lg font-bold transition">Cancel</button></div>
                     </div>
                 </div>
 
                 <div id="adminAccessoriesView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-800">Manage Accessories</h3>
-                            <p class="text-sm text-slate-500">Add or edit the products sold in your shop.</p>
-                        </div>
+                        <div><h3 class="text-xl font-bold text-slate-800">Manage Accessories</h3></div>
                         <button onclick="openAccessoryForm()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-bold shadow-sm transition">+ Add Accessory</button>
                     </div>
-
-                    <div id="adminAccessoriesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                        <div class="p-4 text-center text-slate-500 font-bold col-span-full">Loading accessories...</div>
-                    </div>
+                    <div id="adminAccessoriesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"></div>
                     
                     <div id="adminAccessoryForm" class="hidden bg-slate-100 p-6 border border-slate-300 rounded-xl mt-4 shadow-inner">
                         <h4 class="font-bold text-lg mb-4 text-blue-700" id="accFormTitle">Add/Edit Accessory</h4>
                         <input type="hidden" id="acc-id">
-                        
                         <label class="block text-sm font-bold text-slate-700 mb-1">Image URL</label>
-                        <input type="text" id="acc-img" placeholder="https://..." class="w-full mb-4 p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                        
+                        <input type="text" id="acc-img" class="w-full mb-4 p-3 border rounded-lg focus:outline-blue-500">
+                        <div class="flex gap-4 mb-4">
+                            <div class="w-1/2"><label class="block text-sm font-bold text-slate-700 mb-1">Name (EN)</label><input type="text" id="acc-title-en" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
+                            <div class="w-1/2"><label class="block text-sm font-bold text-slate-700 mb-1">Name (MR)</label><input type="text" id="acc-title-mr" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
+                        </div>
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-1/3"><label class="block text-sm font-bold text-slate-700 mb-1">Price Text</label><input type="text" id="acc-price" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
+                            <div class="w-1/3"><label class="block text-sm font-bold text-slate-700 mb-1">Badge</label><select id="acc-badge" class="w-full p-3 border rounded-lg focus:outline-blue-500"><option value="none">None</option><option value="sale">Sale</option><option value="new">New</option></select></div>
+                            <div class="w-1/3"><label class="block text-sm font-bold text-slate-700 mb-1">Order</label><input type="number" id="acc-order" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
+                        </div>
+                        <div class="flex gap-3"><button onclick="saveAdminAccessory()" id="btnSaveAccessory" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold shadow transition">Save</button><button onclick="cancelAccessoryForm()" class="bg-slate-400 text-white px-6 py-3 rounded-lg font-bold transition">Cancel</button></div>
+                    </div>
+                </div>
+
+                <div id="adminUsedView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
+                    <div class="flex justify-between items-center mb-6 border-b pb-4">
+                        <div><h3 class="text-xl font-bold text-slate-800">Manage Used Phones</h3></div>
+                        <button onclick="openUsedForm()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-bold shadow-sm transition">+ Add Phone</button>
+                    </div>
+                    <div id="adminUsedList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"></div>
+                    
+                    <div id="adminUsedForm" class="hidden bg-slate-100 p-6 border border-slate-300 rounded-xl mt-4 shadow-inner">
+                        <h4 class="font-bold text-lg mb-4 text-purple-700" id="usedFormTitle">Add/Edit Used Phone</h4>
+                        <input type="hidden" id="used-id">
+                        <label class="block text-sm font-bold text-slate-700 mb-1">Image URL</label>
+                        <input type="text" id="used-img" placeholder="https://..." class="w-full mb-4 p-3 border rounded-lg focus:outline-purple-500">
                         <div class="flex flex-col sm:flex-row gap-4 mb-4">
-                            <div class="w-full sm:w-1/2">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Product Name (English)</label>
-                                <input type="text" id="acc-title-en" placeholder="e.g., TWS Earbuds" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                            </div>
-                            <div class="w-full sm:w-1/2">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Product Name (Marathi)</label>
-                                <input type="text" id="acc-title-mr" placeholder="e.g., TWS इयरबड्स" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                            </div>
+                            <div class="w-full sm:w-1/2"><label class="block text-sm font-bold text-slate-700 mb-1">Model Name</label><input type="text" id="used-model" placeholder="e.g. iPhone 12 (64GB)" class="w-full p-3 border rounded-lg focus:outline-purple-500"></div>
+                            <div class="w-full sm:w-1/2"><label class="block text-sm font-bold text-slate-700 mb-1">Condition Details</label><input type="text" id="used-cond" placeholder="e.g. Excellent / Like New" class="w-full p-3 border rounded-lg focus:outline-purple-500"></div>
                         </div>
-
                         <div class="flex flex-col sm:flex-row gap-4 mb-6">
-                            <div class="w-full sm:w-1/3">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Price Text</label>
-                                <input type="text" id="acc-price" placeholder="e.g., ₹ 299" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                            </div>
-                            <div class="w-full sm:w-1/3">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Corner Badge</label>
-                                <select id="acc-badge" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                                    <option value="none">None</option>
-                                    <option value="sale">Sale (Green)</option>
-                                    <option value="new">New (Blue)</option>
-                                </select>
-                            </div>
-                            <div class="w-full sm:w-1/3">
-                                <label class="block text-sm font-bold text-slate-700 mb-1">Display Order</label>
-                                <input type="number" id="acc-order" placeholder="e.g., 1" class="w-full p-3 border border-slate-300 rounded-lg bg-white focus:outline-blue-500">
-                            </div>
+                            <div class="w-full sm:w-1/3"><label class="block text-sm font-bold text-slate-700 mb-1">Price</label><input type="text" id="used-price" placeholder="₹ 25,000" class="w-full p-3 border rounded-lg focus:outline-purple-500"></div>
+                            <div class="w-full sm:w-1/3"><label class="block text-sm font-bold text-slate-700 mb-1">Status</label><select id="used-status" class="w-full p-3 border rounded-lg focus:outline-purple-500"><option value="available">Available</option><option value="sold">Sold Out</option></select></div>
+                            <div class="w-full sm:w-1/3"><label class="block text-sm font-bold text-slate-700 mb-1">Display Order</label><input type="number" id="used-order" class="w-full p-3 border rounded-lg focus:outline-purple-500"></div>
                         </div>
+                        <div class="flex gap-3"><button onclick="saveAdminUsed()" id="btnSaveUsed" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold shadow transition">Save Phone</button><button onclick="cancelUsedForm()" class="bg-slate-400 text-white px-6 py-3 rounded-lg font-bold transition">Cancel</button></div>
+                    </div>
+                </div>
 
-                        <div class="flex gap-3">
-                            <button onclick="saveAdminAccessory()" id="btnSaveAccessory" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold shadow transition">Save to Cloud</button>
-                            <button onclick="cancelAccessoryForm()" class="bg-slate-400 hover:bg-slate-500 text-white px-6 py-3 rounded-lg font-bold transition">Cancel</button>
+                <div id="adminFaqsView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
+                    <div class="flex justify-between items-center mb-6 border-b pb-4">
+                        <div><h3 class="text-xl font-bold text-slate-800">Manage FAQs</h3></div>
+                        <button onclick="openFaqForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow-sm">+ Add FAQ</button>
+                    </div>
+                    <div id="adminFaqsList" class="flex flex-col gap-3 mb-8"></div>
+                    
+                    <div id="adminFaqForm" class="hidden bg-slate-100 p-6 border border-slate-300 rounded-xl mt-4 shadow-inner">
+                        <input type="hidden" id="faq-id">
+                        <div class="flex flex-col gap-4 mb-4">
+                            <div class="w-full"><label class="block text-sm font-bold">Q (EN)</label><input type="text" id="faq-q-en" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
+                            <div class="w-full"><label class="block text-sm font-bold">Q (MR)</label><input type="text" id="faq-q-mr" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
+                            <div class="w-full"><label class="block text-sm font-bold">A (EN)</label><textarea id="faq-a-en" class="w-full p-3 border rounded-lg h-20 focus:outline-blue-500"></textarea></div>
+                            <div class="w-full"><label class="block text-sm font-bold">A (MR)</label><textarea id="faq-a-mr" class="w-full p-3 border rounded-lg h-20 focus:outline-blue-500"></textarea></div>
+                            <div class="w-1/3"><label class="block text-sm font-bold">Order</label><input type="number" id="faq-order" class="w-full p-3 border rounded-lg focus:outline-blue-500"></div>
                         </div>
+                        <div class="flex gap-3"><button onclick="saveAdminFaq()" id="btnSaveFaq" class="bg-green-600 text-white px-6 py-3 rounded-lg font-bold shadow">Save</button><button onclick="cancelFaqForm()" class="bg-slate-400 text-white px-6 py-3 rounded-lg font-bold">Cancel</button></div>
                     </div>
                 </div>
 
                 <div id="adminSettingsView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
-                    <h3 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Admin Security Settings</h3>
-                    <p class="text-sm text-slate-500 mb-6">Update the master password required to access this dashboard. Minimum 8 characters.</p>
+                    <h3 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Admin Settings</h3>
                     
-                    <div class="max-w-md bg-slate-50 p-6 rounded-xl border border-slate-200">
-                        <h4 class="font-bold text-slate-700 mb-4">Change Admin Password</h4>
-                        
-                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">New Password</label>
-                        <input type="password" id="newAdminPass" placeholder="Enter new password" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-blue-500">
-                        
-                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Confirm Password</label>
-                        <input type="password" id="confirmAdminPass" placeholder="Re-enter new password" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-blue-500">
-                        
-                        <p id="passErrorMsg" class="hidden text-red-500 text-sm mb-4 font-bold"></p>
-                        <p id="passSuccessMsg" class="hidden text-green-600 text-sm mb-4 font-bold">✔ Password Updated Successfully!</p>
-                        
-                        <button onclick="updateAdminPassword()" class="w-full bg-slate-800 hover:bg-black text-white font-bold py-3 rounded-lg shadow-md transition">Save New Password</button>
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="w-full md:w-1/2 bg-blue-50 p-6 rounded-xl border border-blue-100">
+                            <h4 class="font-bold text-blue-800 mb-4">Live Announcement Banner</h4>
+                            <p class="text-xs text-blue-600 mb-4">Type a message to show a banner at the top of the website. Clear the box to hide the banner.</p>
+                            <input type="text" id="editPromoBanner" placeholder="e.g., 10% Off on Screen Repair!" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-blue-500">
+                            <p id="promoMsg" class="hidden text-green-600 text-sm mb-4 font-bold">✔ Banner Updated!</p>
+                            <button onclick="updateBannerSetting()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow-md transition">Update Banner</button>
+                        </div>
+
+                        <div class="w-full md:w-1/2 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-800 mb-4">Security Password</h4>
+                            <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">New Password (Min 8 chars)</label>
+                            <input type="password" id="newAdminPass" placeholder="Enter new password" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-slate-500">
+                            <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Confirm Password</label>
+                            <input type="password" id="confirmAdminPass" placeholder="Re-enter new password" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-slate-500">
+                            <p id="passErrorMsg" class="hidden text-red-500 text-sm mb-4 font-bold"></p>
+                            <p id="passSuccessMsg" class="hidden text-green-600 text-sm mb-4 font-bold">✔ Password Updated Successfully!</p>
+                            <button onclick="updateAdminPassword()" class="w-full bg-slate-800 hover:bg-black text-white font-bold py-3 rounded-lg shadow-md transition">Save New Password</button>
+                        </div>
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div id="invoicePrintArea" class="hidden fixed inset-0 bg-white z-[100] p-8 overflow-y-auto">
+        <div class="max-w-2xl mx-auto border-2 border-slate-800 p-8 rounded-xl bg-white relative">
+            <button onclick="closeInvoice()" class="absolute top-4 right-4 text-red-500 font-bold hover:text-red-700 no-print text-xl">&times; Close</button>
+            <div class="text-center border-b-2 border-slate-200 pb-6 mb-6">
+                <h1 class="text-3xl font-bold text-slate-900 mb-1">Bhakti Mobile & Repairing Center</h1>
+                <p class="text-slate-600">Udgir, Maharashtra - 413517</p>
+                <p class="text-slate-600">📞 +91 9049555270 | +91 8788131515</p>
+            </div>
+            
+            <div class="flex justify-between mb-8 text-sm">
+                <div>
+                    <p class="text-slate-500 uppercase tracking-widest text-[10px] font-bold">Customer Info</p>
+                    <p class="font-bold text-lg text-slate-900" id="invName">Name</p>
+                    <p class="text-slate-700" id="invPhone">Phone</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-500 uppercase tracking-widest text-[10px] font-bold">Booking ID</p>
+                    <p class="font-bold text-xl text-blue-600 font-mono" id="invId">BMR-0000</p>
+                    <p class="text-slate-500 mt-1" id="invDate">Date</p>
+                </div>
+            </div>
+
+            <table class="w-full text-left border-collapse mb-8">
+                <thead>
+                    <tr class="bg-slate-100 border-b border-slate-300">
+                        <th class="p-3 font-bold text-slate-800">Device Details & Issue</th>
+                        <th class="p-3 font-bold text-slate-800 text-right">Amount (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-slate-200">
+                        <td class="p-3">
+                            <p class="font-bold text-slate-900" id="invDevice">Device</p>
+                            <p class="text-sm text-slate-500 mt-1" id="invIssue">Issue</p>
+                        </td>
+                        <td class="p-3 text-right">
+                            <input type="number" id="invAmount" placeholder="0" class="text-right font-bold text-lg w-24 p-1 border border-slate-300 rounded no-print">
+                            <span class="hidden font-bold text-lg text-slate-900 print:inline" id="invAmountPrint">0</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="flex justify-between items-end border-t-2 border-slate-800 pt-4">
+                <div class="text-xs text-slate-500">
+                    <p>* 3 Months warranty on selected parts only.</p>
+                    <p>* Physical or water damage voids warranty.</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-500 uppercase tracking-widest text-[10px] font-bold">Total Paid</p>
+                    <p class="font-bold text-2xl text-slate-900">₹ <span id="invTotalDisplay">0</span></p>
+                </div>
+            </div>
+
+            <div class="mt-12 flex justify-center no-print">
+                <button onclick="printInvoice()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-bold shadow-lg flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/><path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg>
+                    Print / Save as PDF
+                </button>
             </div>
         </div>
     </div>
@@ -505,629 +651,22 @@
           appId: "1:626681125968:web:c9843e8e59d946a0b78555",
           measurementId: "G-0DX7Y85TPX"
         };
-
         const appIdName = "bhakti-mobile"; 
 
         let app, db, auth;
         const statusText = document.getElementById('db-text');
         const statusDot = document.getElementById('db-dot');
         
-        window.currentServices = [];
-        window.currentAccessories = []; 
+        window.currentServices = []; window.currentAccessories = []; window.currentFaqs = []; window.currentUsedPhones = [];
         
-        // Secret Admin Variables
-        let currentAdminPassword = "15151515"; // Default 8-character password
-        let tapCount = 0;
-        let tapTimer = null;
-
-        try {
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-            
-            signInAnonymously(auth).catch(err => {
-                showDbError(`Auth Error: Enable Anonymous Auth in Firebase.`);
-            });
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    statusText.innerText = "Firebase Connected";
-                    statusDot.classList.remove('bg-red-500', 'animate-pulse');
-                    statusDot.classList.add('bg-green-500');
-                    
-                    // Load dynamic cloud data safely
-                    loadLiveReviews();
-                    loadLivePricing();
-                    loadLiveServices();
-                    loadLiveAccessories();
-                    loadAdminSettings(); // Fetch custom password if set
-                } else {
-                    showDbError("Disconnected from Cloud");
-                }
-            });
-        } catch (error) {
-            showDbError("Init Error: Check Firebase Config");
-        }
-
-        function showDbError(msg) {
-            statusText.innerText = msg;
-            statusText.classList.add('text-red-400');
-            statusDot.classList.remove('animate-pulse');
-        }
-
-        window.openModal = function(id) {
-            document.getElementById(id).classList.add('modal-active');
-            document.getElementById(id).classList.remove('hidden');
-        }
-        window.closeModal = function(id) {
-            document.getElementById(id).classList.remove('modal-active');
-            document.getElementById(id).classList.add('hidden');
-            if(id === 'adminLoginModal') document.getElementById('adminLoginError').classList.add('hidden');
-        }
-        function showFormError(boxId, errorMsg) {
-            const box = document.getElementById(boxId);
-            box.classList.remove('hidden');
-            box.innerHTML = `<b>Firebase Error:</b><br/>${errorMsg}<br/><br/><i>Check your Firebase Console Rules & Authorized Domains.</i>`;
-        }
-        function hideFormError(boxId) { document.getElementById(boxId).classList.add('hidden'); }
-
-        const dbTimeout = (promise, ms = 8000) => {
-            return Promise.race([
-                promise,
-                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout: Database missing or unreachable. Did you click 'Create Database' in Firestore?")), ms))
-            ]);
-        };
-
-        window.handleAdminTap = function() {
-            tapCount++;
-            if (tapTimer) clearTimeout(tapTimer);
-            
-            tapTimer = setTimeout(() => { tapCount = 0; }, 1500); // Reset if they stop tapping for 1.5s
-            
-            if (tapCount === 5) {
-                openModal('adminLoginModal');
-                tapCount = 0; // reset for next time
-            }
-        };
-
-        window.loadAdminSettings = async function() {
-            try {
-                const snap = await getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'adminAuth'));
-                if (snap.exists() && snap.data().password) {
-                    currentAdminPassword = snap.data().password;
-                }
-            } catch(e) {
-                console.log("Using default admin password.");
-            }
-        };
-
-        window.checkAdminPin = function() {
-            const pin = document.getElementById('adminPinInput').value;
-            if (pin === currentAdminPassword) {
-                closeModal('adminLoginModal');
-                openModal('adminDashboardModal');
-                document.getElementById('adminPinInput').value = ''; 
-                switchAdminTab('bookings'); 
-            } else {
-                document.getElementById('adminLoginError').classList.remove('hidden');
-            }
-        };
-
-        window.updateAdminPassword = async function() {
-            const newP = document.getElementById('newAdminPass').value;
-            const confP = document.getElementById('confirmAdminPass').value;
-            const err = document.getElementById('passErrorMsg');
-            const succ = document.getElementById('passSuccessMsg');
-            
-            err.classList.add('hidden'); 
-            succ.classList.add('hidden');
-
-            if(newP.length < 8) {
-                err.innerText = "Password must be at least 8 characters.";
-                err.classList.remove('hidden'); 
-                return;
-            }
-            if(newP !== confP) {
-                err.innerText = "Passwords do not match. Try again.";
-                err.classList.remove('hidden'); 
-                return;
-            }
-            
-            try {
-                const btn = document.querySelector('#adminSettingsView button');
-                btn.innerText = "Saving...";
-                
-                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'adminAuth'), { password: newP });
-                currentAdminPassword = newP;
-                
-                succ.classList.remove('hidden');
-                document.getElementById('newAdminPass').value = '';
-                document.getElementById('confirmAdminPass').value = '';
-                
-                setTimeout(() => succ.classList.add('hidden'), 3000);
-                btn.innerText = "Save New Password";
-            } catch(e) {
-                err.innerText = "Firebase Error: " + e.message;
-                err.classList.remove('hidden');
-            }
-        };
-
-        window.switchAdminTab = function(tab) {
-            const tabs = ['bookings', 'pricing', 'services', 'accessories', 'settings'];
-            tabs.forEach(t => {
-                const btn = document.getElementById(`tab-btn-${t}`);
-                const view = document.getElementById(`admin${t.charAt(0).toUpperCase() + t.slice(1)}View`);
-                const refresh = document.getElementById('adminRefreshBtn');
-                
-                if (t === tab) {
-                    btn.classList.replace('bg-slate-700', 'bg-blue-600');
-                    btn.classList.remove('hover:bg-slate-600');
-                    view.classList.remove('hidden');
-                    view.classList.add('flex');
-                    if(t === 'bookings') refresh.classList.remove('hidden');
-                    else refresh.classList.add('hidden');
-                } else {
-                    btn.classList.replace('bg-blue-600', 'bg-slate-700');
-                    btn.classList.add('hover:bg-slate-600');
-                    view.classList.add('hidden');
-                    view.classList.remove('flex');
-                }
-            });
-
-            if(tab === 'bookings') loadAdminBookings();
-            if(tab === 'services') loadAdminServicesList();
-            if(tab === 'accessories') loadAdminAccessoriesList();
-        }
-
-        document.getElementById('bookForm').addEventListener('submit', async (e) => {
-            e.preventDefault(); 
-            hideFormError('bookError');
-            
-            if(!auth || !auth.currentUser) {
-                showFormError('bookError', "Connection failed. Please ensure Firebase Auth is enabled in the console.");
-                return;
-            }
-            
-            const btn = document.getElementById('bookSubmitBtn');
-            const originalText = btn.innerText;
-            btn.innerText = "Saving to Cloud...";
-            btn.disabled = true;
-            
-            const tid = "BMR-" + Math.floor(1000 + Math.random() * 9000);
-            const data = {
-                name: document.getElementById('b-name').value,
-                phone: document.getElementById('b-phone').value,
-                device: document.getElementById('b-device').value,
-                issue: document.getElementById('b-issue').value,
-                status: "Received",
-                date: new Date().toISOString()
-            };
-
-            try {
-                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid);
-                await dbTimeout(setDoc(docRef, data));
-                
-                document.getElementById('bookForm').classList.add('hidden');
-                document.getElementById('bookResult').classList.remove('hidden');
-                document.getElementById('generatedId').innerText = tid;
-            } catch (err) {
-                showFormError('bookError', err.message);
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
-        });
-
-        document.getElementById('trackForm').addEventListener('submit', async (e) => {
-            e.preventDefault(); 
-            hideFormError('trackError');
-            
-            if(!auth || !auth.currentUser) {
-                showFormError('trackError', "Connection failed. Ensure Auth is enabled.");
-                return;
-            }
-
-            const btn = document.getElementById('trackSubmitBtn');
-            const originalText = btn.innerText;
-            btn.innerText = "Searching Cloud...";
-            btn.disabled = true;
-            const tid = document.getElementById('t-id').value.toUpperCase();
-
-            try {
-                const docRef = doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid);
-                const docSnap = await dbTimeout(getDoc(docRef));
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    document.getElementById('statusDisplay').innerText = data.status || "In Progress";
-                    document.getElementById('deviceDisplay').innerText = `Device: ${data.device}`;
-                } else {
-                    document.getElementById('statusDisplay').innerText = "Not Found";
-                    document.getElementById('deviceDisplay').innerText = "Check ID and try again.";
-                }
-                document.getElementById('trackResult').classList.remove('hidden');
-            } catch (err) {
-                showFormError('trackError', err.message);
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
-        });
-
-        const defaultServices = [
-            { id: "s1", img: "https://images.unsplash.com/photo-1605170439002-90845e8c0137?q=80&w=400&auto=format&fit=crop", title_en: "Screen Replacement", title_mr: "स्क्रीन बदलणे", desc_en: "Original LCD & OLED displays.", desc_mr: "ओरिजिनल LCD आणि OLED डिस्प्ले.", order: 1 },
-            { id: "s2", img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?q=80&w=400&auto=format&fit=crop", title_en: "Battery Replacement", title_mr: "बॅटरी बदलणे", desc_en: "100% Health & fast charging fix.", desc_mr: "100% हेल्थ आणि फास्ट चार्जिंग.", order: 2 },
-            { id: "s3", img: "https://images.unsplash.com/photo-1592833259051-16eb1d120a10?q=80&w=400&auto=format&fit=crop", title_en: "Water Damage", title_mr: "पाण्यात पडलेले फोन", desc_en: "Chemical wash & short-circuit repair.", desc_mr: "केमिकल वॉश आणि शॉर्ट सर्किट दुरुस्ती.", order: 3 },
-            { id: "s4", img: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=400&auto=format&fit=crop", title_en: "Motherboard IC Repair", title_mr: "मदरबोर्ड IC दुरुस्ती", desc_en: "Micro-soldering & dead boot fix.", desc_mr: "मायक्रो सोल्डरिंग आणि डेड बूट फिक्स.", order: 4 },
-            { id: "s5", img: "https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?q=80&w=400&auto=format&fit=crop", title_en: "Software Unlocking", title_mr: "सॉफ्टवेअर अनलॉकिंग", desc_en: "FRP Bypass, Flashing & OS Restore.", desc_mr: "FRP बायपास, फ्लॅशिंग आणि OS रिस्टोअर.", order: 5 },
-            { id: "s6", img: "https://images.unsplash.com/photo-1616423641443-470a273b4009?q=80&w=400&auto=format&fit=crop", title_en: "Charging Port Fix", title_mr: "चार्जिंग पोर्ट दुरुस्ती", desc_en: "Loose port & connection repair.", desc_mr: "लूज पोर्ट आणि कनेक्शन दुरुस्ती.", order: 6 }
-        ];
-
-        window.loadLiveServices = async function() {
-            try {
-                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'services');
-                const snap = await dbTimeout(getDocs(q));
-                
-                let services = [];
-                if(snap.empty) { services = defaultServices; } 
-                else {
-                    snap.forEach(doc => services.push({id: doc.id, ...doc.data()}));
-                    services.sort((a,b) => a.order - b.order);
-                }
-                window.currentServices = services;
-                renderPublicServices(services);
-                if(!document.getElementById('adminServicesView').classList.contains('hidden')) loadAdminServicesList();
-            } catch(e) {
-                console.log("Services fallback.", e.message);
-                window.currentServices = defaultServices;
-                renderPublicServices(defaultServices);
-            }
-        }
-
-        function renderPublicServices(services) {
-            const container = document.getElementById('public-services-container');
-            let html = '';
-            services.forEach(s => {
-                dict[`dyn-s-title-${s.id}`] = { mr: s.title_mr };
-                dict[`dyn-s-desc-${s.id}`] = { mr: s.desc_mr };
-                let initialTitle = currentLang === 'mr' ? s.title_mr : s.title_en;
-                let initialDesc = currentLang === 'mr' ? s.desc_mr : s.desc_en;
-                
-                html += `
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale text-left">
-                    <img src="${s.img}" class="w-full h-40 object-cover rounded-lg mb-4" alt="${s.title_en}" onerror="this.src='https://images.unsplash.com/photo-1597740985671-2a8a3b80502e?w=400'">
-                    <h3 class="font-bold text-lg mb-1" data-lang="dyn-s-title-${s.id}" data-orig="${s.title_en}">${initialTitle}</h3>
-                    <p class="text-sm text-slate-500" data-lang="dyn-s-desc-${s.id}" data-orig="${s.desc_en}">${initialDesc}</p>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        const defaultAccessories = [
-            { id: "a1", img: "https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=300&auto=format&fit=crop", title_en: "Tough Armor Cases", title_mr: "टफ आर्मर कव्हर", price: "₹ 299", badge: "sale", order: 1 },
-            { id: "a2", img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=300&auto=format&fit=crop", title_en: "TWS Earbuds", title_mr: "TWS इयरबड्स", price: "₹ 999", badge: "new", order: 2 },
-            { id: "a3", img: "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=300&auto=format&fit=crop", title_en: "65W Fast Chargers", title_mr: "65W फास्ट चार्जर", price: "₹ 499", badge: "none", order: 3 },
-            { id: "a4", img: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?q=80&w=300&auto=format&fit=crop", title_en: "10000mAh Powerbank", title_mr: "10000mAh पॉवरबँक", price: "₹ 899", badge: "none", order: 4 }
-        ];
-
-        window.loadLiveAccessories = async function() {
-            try {
-                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'accessories');
-                const snap = await dbTimeout(getDocs(q));
-                
-                let accs = [];
-                if(snap.empty) { accs = defaultAccessories; } 
-                else {
-                    snap.forEach(doc => accs.push({id: doc.id, ...doc.data()}));
-                    accs.sort((a,b) => a.order - b.order);
-                }
-                window.currentAccessories = accs;
-                renderPublicAccessories(accs);
-                if(!document.getElementById('adminAccessoriesView').classList.contains('hidden')) loadAdminAccessoriesList();
-            } catch(e) {
-                console.log("Accessories fallback.", e.message);
-                window.currentAccessories = defaultAccessories;
-                renderPublicAccessories(defaultAccessories);
-            }
-        }
-
-        function renderPublicAccessories(accs) {
-            const container = document.getElementById('public-accessories-container');
-            let html = '';
-            accs.forEach(a => {
-                dict[`dyn-a-title-${a.id}`] = { mr: a.title_mr };
-                let initialTitle = currentLang === 'mr' ? a.title_mr : a.title_en;
-                
-                let badgeHtml = '';
-                if(a.badge === 'sale') badgeHtml = `<span class="absolute top-2 left-2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-sale">${currentLang === 'mr' ? dict['badge-sale'].mr : 'Sale'}</span>`;
-                else if(a.badge === 'new') badgeHtml = `<span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase" data-lang="badge-new">${currentLang === 'mr' ? dict['badge-new'].mr : 'New'}</span>`;
-                
-                html += `
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale relative text-left">
-                    ${badgeHtml}
-                    <img src="${a.img}" class="w-full h-32 object-cover rounded-lg mb-3" alt="${a.title_en}" onerror="this.src='https://placehold.co/300x300'">
-                    <h3 class="font-bold text-sm mb-1" data-lang="dyn-a-title-${a.id}" data-orig="${a.title_en}">${initialTitle}</h3>
-                    <p class="text-blue-600 font-bold text-sm">${a.price}</p>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        window.loadAdminBookings = async function() {
-            const table = document.getElementById('adminBookingsTable');
-            table.innerHTML = `<tr><td colspan="6" class="text-center p-10 font-bold text-slate-500">Fetching live bookings...</td></tr>`;
-            
-            try {
-                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'bookings');
-                const querySnapshot = await getDocs(q);
-                
-                let bookings = [];
-                querySnapshot.forEach((doc) => { bookings.push({ id: doc.id, ...doc.data() }); });
-                bookings.sort((a,b) => new Date(b.date) - new Date(a.date));
-                
-                if(bookings.length === 0) { table.innerHTML = `<tr><td colspan="6" class="text-center p-10 text-slate-500">No bookings found.</td></tr>`; return; }
-
-                let html = '';
-                bookings.forEach(b => {
-                    const formattedDate = new Date(b.date).toLocaleString('en-IN');
-                    html += `
-                        <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
-                            <td class="p-4 font-mono font-bold text-blue-600">${b.id}</td>
-                            <td class="p-4 text-xs text-slate-500">${formattedDate}</td>
-                            <td class="p-4"><div class="font-bold">${b.name}</div><div class="text-xs text-slate-500">📞 ${b.phone}</div></td>
-                            <td class="p-4"><div class="font-bold">${b.device}</div><div class="text-xs text-red-500 truncate w-32" title="${b.issue}">${b.issue}</div></td>
-                            <td class="p-4">
-                                <select id="status-${b.id}" class="p-2 border border-slate-300 rounded-lg text-sm bg-white outline-none">
-                                    <option value="Received" ${b.status === 'Received' ? 'selected' : ''}>Received</option>
-                                    <option value="In Progress" ${b.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
-                                    <option value="Waiting for Parts" ${b.status === 'Waiting for Parts' ? 'selected' : ''}>Waiting for Parts</option>
-                                    <option value="Ready for Pickup" ${b.status === 'Ready for Pickup' ? 'selected' : ''}>Ready for Pickup</option>
-                                    <option value="Delivered" ${b.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
-                                </select>
-                            </td>
-                            <td class="p-4"><button onclick="saveAdminStatus('${b.id}')" id="btn-${b.id}" class="bg-green-100 hover:bg-green-200 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold transition">Update</button></td>
-                        </tr>`;
-                });
-                table.innerHTML = html;
-            } catch (err) { table.innerHTML = `<tr><td colspan="6" class="text-center p-10 font-bold text-red-500">Error: ${err.message}</td></tr>`; }
-        }
-
-        window.saveAdminStatus = async function(docId) {
-            const newStatus = document.getElementById(`status-${docId}`).value;
-            const btn = document.getElementById(`btn-${docId}`);
-            btn.innerText = 'Saving...';
-            try {
-                await updateDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', docId), { status: newStatus });
-                btn.innerText = 'Saved!';
-                btn.classList.replace('bg-green-100', 'bg-blue-100'); btn.classList.replace('text-green-700', 'text-blue-700');
-                setTimeout(() => { btn.innerText = 'Update'; btn.classList.replace('bg-blue-100', 'bg-green-100'); btn.classList.replace('text-blue-700', 'text-green-700'); }, 2000);
-            } catch (err) { alert("Error saving: " + err.message); btn.innerText = 'Failed'; }
-        }
-
-        const defaultPrices = {
-            'val-p-and-screen': '₹800+', 'val-p-and-batt': '₹600+', 'val-p-and-port': '₹350+', 'val-p-and-soft': '₹300+',
-            'val-p-iph-screen': '₹1500+', 'val-p-iph-batt': '₹1200+', 'val-p-iph-glass': '₹1000+', 'val-p-iph-true': '₹500+'
-        };
-
-        window.loadLivePricing = async function() {
-            try {
-                const snap = await dbTimeout(getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing')));
-                let pToLoad = snap.exists() ? { ...defaultPrices, ...snap.data() } : defaultPrices;
-                for (const key in pToLoad) {
-                    if (document.getElementById(key)) document.getElementById(key).innerText = pToLoad[key];
-                    if (document.getElementById(key.replace('val-', 'edit-'))) document.getElementById(key.replace('val-', 'edit-')).value = pToLoad[key];
-                }
-            } catch (err) {
-                for (const key in defaultPrices) { if (document.getElementById(key)) document.getElementById(key).innerText = defaultPrices[key]; }
-            }
-        }
-
-        window.saveAdminPricing = async function() {
-            const btn = document.getElementById('savePricingBtn'); const msg = document.getElementById('priceSaveMsg');
-            btn.innerText = "Saving...";
-            const nP = {
-                'val-p-and-screen': document.getElementById('edit-p-and-screen').value, 'val-p-and-batt': document.getElementById('edit-p-and-batt').value,
-                'val-p-and-port': document.getElementById('edit-p-and-port').value, 'val-p-and-soft': document.getElementById('edit-p-and-soft').value,
-                'val-p-iph-screen': document.getElementById('edit-p-iph-screen').value, 'val-p-iph-batt': document.getElementById('edit-p-iph-batt').value,
-                'val-p-iph-glass': document.getElementById('edit-p-iph-glass').value, 'val-p-iph-true': document.getElementById('edit-p-iph-true').value
-            };
-            try {
-                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing'), nP);
-                for (const key in nP) { if (document.getElementById(key)) document.getElementById(key).innerText = nP[key]; }
-                btn.innerText = "Save to Cloud"; msg.classList.remove('hidden'); setTimeout(() => msg.classList.add('hidden'), 3000);
-            } catch (err) { alert("Error saving pricing: " + err.message); btn.innerText = "Save to Cloud"; }
-        }
-
-        window.loadAdminServicesList = function() {
-            const container = document.getElementById('adminServicesList');
-            let html = '';
-            window.currentServices.forEach(s => {
-                html += `
-                <div class="bg-white border border-slate-200 p-4 rounded-lg flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-2"><span class="bg-slate-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">Order: ${s.order}</span></div>
-                        <img src="${s.img}" class="w-full h-24 object-cover rounded mb-2 bg-slate-100" onerror="this.src='https://placehold.co/400x200'">
-                        <h5 class="font-bold text-sm text-slate-900">${s.title_en}</h5><p class="text-xs text-slate-500 mb-1">MR: ${s.title_mr}</p>
-                    </div>
-                    <div class="flex gap-2 mt-3 pt-3 border-t">
-                        <button onclick="editService('${s.id}')" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-700 py-1 rounded text-xs font-bold transition">Edit</button>
-                        <button onclick="deleteAdminService('${s.id}')" class="flex-1 bg-red-100 hover:bg-red-200 text-red-700 py-1 rounded text-xs font-bold transition">Delete</button>
-                    </div>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        window.openServiceForm = function(service = null) {
-            document.getElementById('adminServiceForm').classList.remove('hidden');
-            document.getElementById('srvFormTitle').innerText = service ? "Edit Service" : "Add New Service";
-            document.getElementById('srv-id').value = service ? service.id : '';
-            document.getElementById('srv-img').value = service ? (service.img || '') : '';
-            document.getElementById('srv-title-en').value = service ? (service.title_en || '') : '';
-            document.getElementById('srv-title-mr').value = service ? (service.title_mr || '') : '';
-            document.getElementById('srv-desc-en').value = service ? (service.desc_en || '') : '';
-            document.getElementById('srv-desc-mr').value = service ? (service.desc_mr || '') : '';
-            document.getElementById('srv-order').value = service ? (service.order || '') : (window.currentServices.length + 1);
-            document.getElementById('adminServiceForm').scrollIntoView({behavior: 'smooth'});
-        }
-
-        window.editService = function(id) { const srv = window.currentServices.find(s => s.id === id); if(srv) openServiceForm(srv); }
-        window.cancelServiceForm = function() { document.getElementById('adminServiceForm').classList.add('hidden'); }
-
-        window.saveAdminService = async function() {
-            const btn = document.getElementById('btnSaveService'); const originalText = btn.innerText; btn.innerText = "Saving...";
-            const id = document.getElementById('srv-id').value || 'srv-' + Date.now();
-            const data = {
-                img: document.getElementById('srv-img').value, title_en: document.getElementById('srv-title-en').value, title_mr: document.getElementById('srv-title-mr').value,
-                desc_en: document.getElementById('srv-desc-en').value, desc_mr: document.getElementById('srv-desc-mr').value, order: parseInt(document.getElementById('srv-order').value) || 99
-            };
-            try {
-                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', id), data);
-                cancelServiceForm(); await loadLiveServices(); 
-            } catch(e) { alert("Error saving service: " + e.message); } finally { btn.innerText = originalText; }
-        }
-
-        window.deleteAdminService = async function(id) {
-            if(!confirm("Are you sure you want to completely delete this service from the website?")) return;
-            try { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', id)); await loadLiveServices(); } catch(e) { alert("Error deleting: " + e.message); }
-        }
-
-        window.loadAdminAccessoriesList = function() {
-            const container = document.getElementById('adminAccessoriesList');
-            let html = '';
-            window.currentAccessories.forEach(a => {
-                html += `
-                <div class="bg-white border border-slate-200 p-4 rounded-lg flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="bg-slate-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">Order: ${a.order}</span>
-                            ${a.badge && a.badge !== 'none' ? `<span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase">${a.badge}</span>` : ''}
-                        </div>
-                        <img src="${a.img}" class="w-full h-24 object-cover rounded mb-2 bg-slate-100" onerror="this.src='https://placehold.co/300x300'">
-                        <h5 class="font-bold text-sm text-slate-900">${a.title_en}</h5>
-                        <p class="text-xs text-blue-600 font-bold mb-1">${a.price}</p>
-                    </div>
-                    <div class="flex gap-2 mt-3 pt-3 border-t">
-                        <button onclick="editAccessory('${a.id}')" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-700 py-1 rounded text-xs font-bold transition">Edit</button>
-                        <button onclick="deleteAdminAccessory('${a.id}')" class="flex-1 bg-red-100 hover:bg-red-200 text-red-700 py-1 rounded text-xs font-bold transition">Delete</button>
-                    </div>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        window.openAccessoryForm = function(acc = null) {
-            document.getElementById('adminAccessoryForm').classList.remove('hidden');
-            document.getElementById('accFormTitle').innerText = acc ? "Edit Accessory" : "Add New Accessory";
-            document.getElementById('acc-id').value = acc ? acc.id : '';
-            document.getElementById('acc-img').value = acc ? (acc.img || '') : '';
-            document.getElementById('acc-title-en').value = acc ? (acc.title_en || '') : '';
-            document.getElementById('acc-title-mr').value = acc ? (acc.title_mr || '') : '';
-            document.getElementById('acc-price').value = acc ? (acc.price || '') : '';
-            document.getElementById('acc-badge').value = acc ? (acc.badge || 'none') : 'none';
-            document.getElementById('acc-order').value = acc ? (acc.order || '') : (window.currentAccessories.length + 1);
-            document.getElementById('adminAccessoryForm').scrollIntoView({behavior: 'smooth'});
-        }
-
-        window.editAccessory = function(id) { const acc = window.currentAccessories.find(a => a.id === id); if(acc) openAccessoryForm(acc); }
-        window.cancelAccessoryForm = function() { document.getElementById('adminAccessoryForm').classList.add('hidden'); }
-
-        window.saveAdminAccessory = async function() {
-            const btn = document.getElementById('btnSaveAccessory'); const originalText = btn.innerText; btn.innerText = "Saving...";
-            const id = document.getElementById('acc-id').value || 'acc-' + Date.now();
-            const data = {
-                img: document.getElementById('acc-img').value, title_en: document.getElementById('acc-title-en').value, title_mr: document.getElementById('acc-title-mr').value,
-                price: document.getElementById('acc-price').value, badge: document.getElementById('acc-badge').value, order: parseInt(document.getElementById('acc-order').value) || 99
-            };
-            try {
-                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', id), data);
-                cancelAccessoryForm(); await loadLiveAccessories(); 
-            } catch(e) { alert("Error saving accessory: " + e.message); } finally { btn.innerText = originalText; }
-        }
-
-        window.deleteAdminAccessory = async function(id) {
-            if(!confirm("Are you sure you want to completely delete this accessory from the website?")) return;
-            try { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', id)); await loadLiveAccessories(); } catch(e) { alert("Error deleting: " + e.message); }
-        }
-
-        let selectedStars = 0;
-        document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', function() {
-                selectedStars = this.getAttribute('data-val'); document.getElementById('r-stars').value = selectedStars;
-                document.querySelectorAll('.star').forEach(s => {
-                    s.classList.remove('text-yellow-400'); if (s.getAttribute('data-val') <= selectedStars) { s.classList.add('text-yellow-400'); }
-                });
-            });
-        });
-
-        document.getElementById('rateForm').addEventListener('submit', async (e) => {
-            e.preventDefault(); hideFormError('rateError');
-            if(selectedStars == 0) { alert("Please select a star rating!"); return; }
-            if(!auth || !auth.currentUser) { showFormError('rateError', "Connection failed. Please ensure Firebase Auth is enabled."); return; }
-
-            const btn = document.getElementById('rateSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Publishing to Cloud..."; btn.disabled = true;
-
-            const rid = "REV-" + Date.now();
-            const reviewData = { name: document.getElementById('r-name').value, text: document.getElementById('r-text').value, stars: parseInt(selectedStars), date: Date.now() };
-
-            try {
-                await dbTimeout(setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'reviews', rid), reviewData));
-                document.getElementById('rateForm').classList.add('hidden'); document.getElementById('rateSuccess').classList.remove('hidden');
-                injectReviewCard(reviewData, true);
-            } catch (err) { showFormError('rateError', err.message); } finally { btn.innerText = originalText; btn.disabled = false; }
-        });
-
-        const staticReviews = [
-            {n:"Rahul S.", t:"Fixed my iPhone 13 screen in 30 mins! Genuine parts and great behavior.", s:5},
-            {n:"Priya D.", t:"Best mobile shop in Udgir. Got a good deal on earbuds.", s:5},
-            {n:"Amit K.", t:"My Samsung was dead due to water. Bhakti Mobile revived it completely.", s:5},
-            {n:"Sneha P.", t:"Very polite owner and reasonable pricing for accessories.", s:4},
-            {n:"Sagar M.", t:"Battery replacement was quick. Working fine now.", s:5},
-            {n:"Ramesh B.", t:"Excellent micro-soldering work on my dead motherboard.", s:5},
-            {n:"Kavita J.", t:"Trustworthy shop. They explain the issue clearly.", s:5},
-            {n:"Vishal T.", t:"Purchased a power bank. Good quality and warranty provided.", s:4},
-            {n:"नेहा रा.", t:"Highly recommended for any software or unlocking issues.", s:5},
-            {n:"Ganesh K.", t:"Fast service and polite staff.", s:5}
-        ];
-
-        function getStars(count) { return "⭐".repeat(count); }
-
-        function injectReviewCard(rev, isNew = false) {
-            const container = document.getElementById('review-container');
-            const card = document.createElement('div'); card.className = "min-w-[300px] max-w-[300px] bg-white p-5 rounded-2xl shadow-sm border border-slate-100 snap-center relative";
-            let badge = isNew ? `<span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>` : '';
-            const rName = rev.name || rev.n || 'User'; const rText = rev.text || rev.t || ''; const rStars = rev.stars || rev.s || 5;
-            
-            const initial = typeof rName === 'string' && rName.length > 0 ? rName.charAt(0) : 'U';
-
-            card.innerHTML = `
-                ${badge}
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center">${initial}</div>
-                    <div><h4 class="font-bold text-sm text-slate-800">${rName}</h4><div class="text-xs tracking-widest">${getStars(rStars)}</div></div>
-                </div>
-                <p class="text-slate-600 text-sm italic">"${rText}"</p>
-            `;
-            if (isNew) { container.prepend(card); } else { container.appendChild(card); }
-        }
-
-        async function loadLiveReviews() {
-            const container = document.getElementById('review-container'); container.innerHTML = ""; 
-            try {
-                const querySnapshot = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'reviews')));
-                let cloudReviews = [];
-                querySnapshot.forEach((doc) => { cloudReviews.push(doc.data()); });
-                cloudReviews.sort((a,b) => b.date - a.date); cloudReviews.forEach(rev => injectReviewCard(rev, true));
-            } catch (err) { console.log("Cloud reviews fallback:", err.message); }
-            staticReviews.forEach(rev => injectReviewCard(rev));
-        }
-
         let currentLang = 'en';
         const dict = {
             'call-us': { mr: '📞 +९१ ९०४९५५५२७० | +९१ ८७८८१३१५१५' }, 'location': { mr: '📍 उदगीर, महाराष्ट्र' }, 'subtitle': { mr: 'रिपेअरिंग सेंटर' },
-            'nav-home': { mr: 'मुख्यपृष्ठ' }, 'nav-repairs': { mr: 'दुरुस्ती' }, 'nav-pricing': { mr: 'दरपत्रक' }, 'nav-accessories': { mr: 'अॅक्सेसरीज' }, 'nav-gallery': { mr: 'गॅलरी' }, 'nav-reviews': { mr: 'अभिप्राय' },
+            'shop-open': { mr: 'सुरू आहे' }, 'shop-closed': { mr: 'बंद आहे' },
+            'nav-home': { mr: 'मुख्यपृष्ठ' }, 'nav-repairs': { mr: 'दुरुस्ती' }, 'nav-pricing': { mr: 'दरपत्रक' }, 'nav-used': { mr: 'सेकंड हँड फोन' }, 'nav-accessories': { mr: 'अॅक्सेसरीज' }, 'nav-gallery': { mr: 'गॅलरी' }, 'nav-faq': { mr: 'प्रश्नोत्तरे' }, 'nav-reviews': { mr: 'अभिप्राय' },
             'nav-track': { mr: 'स्टेटस पहा' }, 'nav-rate': { mr: 'रेटिंग द्या ⭐' },
-            'hero-title': { mr: 'खात्रीशीर मोबाईल दुरुस्ती आणि सर्वोत्तम अॅक्सेसरीज' }, 'hero-desc': { mr: 'उदगीरमध्ये घरपोच दुरुस्ती आणि उत्तम दर्जाच्या वस्तूंचा अनुभव घ्या.' }, 'hero-book': { mr: 'आत्ताच दुरुस्ती बूक करा' },
+            'hero-title': { mr: 'खात्रीशीर मोबाईल दुरुस्ती आणि सर्वोत्तम अॅक्सेसरीज' }, 'hero-desc': { mr: 'उदगीरमध्ये घरपोच दुरुस्ती आणि उत्तम दर्जाच्या वस्तूंचा अनुभव घ्या.' }, 
+            'hero-book': { mr: 'आत्ताच दुरुस्ती बूक करा' }, 'hero-sell': { mr: 'जुना फोन विका 💵' },
             'about-title': { mr: 'उदगीर मधील विश्वासार्ह मोबाईल तज्ञ' }, 'about-desc': { mr: '१५ वर्षांहून अधिक अनुभवासह, भक्ती मोबाईलने हजारो ग्राहकांचे फोन यशस्वीरित्या दुरुस्त केले आहेत. आम्ही ओरिजिनल पार्ट्स आणि प्रगत तंत्रज्ञान वापरतो.' },
             'services-title': { mr: 'आमच्या सेवा' }, 'services-subtitle': { mr: 'सर्व ब्रँड्ससाठी व्यावसायिक दुरुस्ती (Apple, Samsung, OnePlus, Vivo, Oppo, Xiaomi)' },
             'price-title': { mr: 'पारदर्शक दरपत्रक' }, 'price-sub': { mr: 'दुरुस्तीचे अंदाजे दर. दुकानाच्या प्रशासकाद्वारे हे दर थेट व्यवस्थापित केले जातात.' },
@@ -1135,25 +674,442 @@
             'p-cat-2': { mr: 'आयफोन दुरुस्ती' }, 'p-item-5': { mr: 'स्क्रीन बदलणे' }, 'p-item-6': { mr: 'बॅटरी बदलणे' }, 'p-item-7': { mr: 'बॅक ग्लास बदलणे' }, 'p-item-8': { mr: 'ट्रू-टोन रिस्टोरेशन' },
             'price-note': { mr: '* किमती ग्राहकांनी निवडलेल्या पार्ट्सच्या गुणवत्तेनुसार बदलू शकतात.' },
             'gallery-title': { mr: 'आमचे काम आणि दुकान' }, 'gallery-sub': { mr: 'आमच्या प्रगत दुरुस्ती सेटअपची एक झलक.' },
+            'used-title': { mr: 'रिफर्बिश्ड आणि जुने फोन' }, 'used-subtitle': { mr: 'उत्तम दर्जाचे सेकंड-हँड फोन सर्वोत्तम किमतीत.' },
+            'used-cond-label': { mr: 'स्थिती:' }, 'used-buy-btn': { mr: 'चौकशी करा' }, 'used-sold': { mr: 'विक्री झाली' },
             'acc-title': { mr: 'प्रीमियम अॅक्सेसरीज' }, 'acc-subtitle': { mr: 'टॉप ब्रँड्स दुकानात उपलब्ध आहेत.' },
             'badge-sale': { mr: 'सूट' }, 'badge-new': { mr: 'नवीन' },
+            'faq-title': { mr: 'नेहमी विचारले जाणारे प्रश्न' }, 'faq-sub': { mr: 'आमच्या दुरुस्ती प्रक्रियेबद्दल सामान्य शंका.' },
             'rev-title': { mr: 'ग्राहकांचा अभिप्राय' }, 'rev-subtitle': { mr: 'उदगीर मधील लोकांचे आमच्याबद्दल मत.' }, 'rev-btn': { mr: 'अभिप्राय लिहा' },
             'modal-book-title': { mr: 'दुरुस्ती बूक करा' }, 'modal-submit': { mr: 'माहिती पाठवा' }, 'book-success': { mr: 'तुमची दुरुस्ती बूक झाली आहे!' }, 'book-save-id': { mr: 'हा ट्रॅकिंग ID सेव्ह करा:' },
+            'modal-sell-title': { mr: 'तुमचा जुना फोन विका' }, 'modal-sell-sub': { mr: 'तुमच्या वापरलेल्या फोनसाठी त्वरित रोख रक्कम मिळवा.' }, 'modal-submit-sell': { mr: 'माहिती पाठवा' }, 'sell-thanks': { mr: 'माहिती मिळाली! आम्ही तुम्हाला लवकरच कॉल करू.' }, 's-cond-default': { mr: 'स्थिती निवडा...' },
             'modal-track-title': { mr: 'दुरुस्तीचे स्टेटस पहा' }, 'modal-search': { mr: 'शोधा' }, 'track-status': { mr: 'सध्याची स्थिती:' },
-            'modal-rate-title': { mr: 'आम्हाला रेट करा' }, 'modal-rate-sub': { mr: 'तुमचा अभिप्राय आम्हाला सुधारण्यास मदत करतो.' }, 'modal-submit-rev': { mr: 'अभिप्राय पाठवा' }, 'rate-thanks': { mr: 'धन्यवाद! तुमचा अभिप्राय लाईव्ह झाला action.' },
+            'modal-rate-title': { mr: 'आम्हाला रेट करा' }, 'modal-rate-sub': { mr: 'तुमचा अभिप्राय आम्हाला सुधारण्यास मदत करतो.' }, 'modal-submit-rev': { mr: 'अभिप्राय पाठवा' }, 'rate-thanks': { mr: 'धन्यवाद! तुमचा अभिप्राय लाईव्ह झाला.' },
             'wa-chat': { mr: 'आम्हाला मेसेज करा' }
         };
 
         const placeholderDict = {
             'b-name': { mr: 'पूर्ण नाव' }, 'b-phone': { mr: 'मोबाईल क्रमांक' }, 'b-device': { mr: 'डिव्हाइस (उदा. iPhone 13)' }, 'b-issue': { mr: 'अडचण काय आहे ते लिहा...' },
+            's-name': { mr: 'पूर्ण नाव' }, 's-phone': { mr: 'मोबाईल क्रमांक' }, 's-brand': { mr: 'ब्रँड (उदा. Apple)' }, 's-model': { mr: 'मॉडेल (उदा. 11)' },
             't-id': { mr: 'ट्रॅकिंग ID टाका (उदा. BMR-1234)' }, 'r-name': { mr: 'तुमचे नाव' }, 'r-text': { mr: 'तुमचा अभिप्राय लिहा...' }
         };
+
+        let currentAdminPassword = "15151515"; 
+        let tapCount = 0; let tapTimer = null;
+
+        function updateShopStatus() {
+            const now = new Date(); const hour = now.getHours(); 
+            const sText = document.getElementById('shop-text'); const sDot = document.getElementById('shop-dot');
+            if(hour >= 9 && hour < 21) {
+                sDot.className = 'w-2 h-2 rounded-full bg-green-500 animate-pulse'; sText.setAttribute('data-lang', 'shop-open');
+                sText.innerText = currentLang === 'mr' ? (dict['shop-open'] ? dict['shop-open'].mr : 'सुरू आहे') : 'Open Now';
+            } else {
+                sDot.className = 'w-2 h-2 rounded-full bg-red-500'; sText.setAttribute('data-lang', 'shop-closed');
+                sText.innerText = currentLang === 'mr' ? (dict['shop-closed'] ? dict['shop-closed'].mr : 'बंद आहे') : 'Closed';
+            }
+        }
+        setInterval(updateShopStatus, 60000); updateShopStatus();
+
+        try {
+            app = initializeApp(firebaseConfig); db = getFirestore(app); auth = getAuth(app);
+            signInAnonymously(auth).catch(err => { showDbError(`Auth Error: Ensure Anonymous Auth is enabled. (${err.message})`); });
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    statusText.innerText = "Firebase Connected"; statusDot.className = 'w-2 h-2 rounded-full bg-green-500';
+                    loadLiveSettings(); loadLiveReviews(); loadLivePricing(); loadLiveServices(); loadLiveAccessories(); loadLiveFaqs(); loadLiveUsedPhones();
+                } else { showDbError("Disconnected from Cloud"); }
+            });
+        } catch (error) { showDbError("Init Error: Check Firebase Config"); }
+
+        function showDbError(msg) { statusText.innerText = msg; statusText.classList.add('text-red-400'); statusDot.className = 'w-2 h-2 rounded-full bg-red-500'; }
+
+        window.openModal = function(id) { document.getElementById(id).classList.add('modal-active'); document.getElementById(id).classList.remove('hidden'); }
+        window.closeModal = function(id) { document.getElementById(id).classList.remove('modal-active'); document.getElementById(id).classList.add('hidden'); if(id === 'adminLoginModal') document.getElementById('adminLoginError').classList.add('hidden'); }
+        function showFormError(boxId, msg) { const b = document.getElementById(boxId); b.classList.remove('hidden'); b.innerHTML = `<b>Error:</b><br/>${msg}`; }
+        function hideFormError(boxId) { document.getElementById(boxId).classList.add('hidden'); }
+        const dbTimeout = (promise, ms = 8000) => { return Promise.race([ promise, new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout: Database missing or unreachable. Did you click 'Create Database' in Firestore?")), ms)) ]); };
+
+        window.handleAdminTap = function() {
+            tapCount++; if (tapTimer) clearTimeout(tapTimer);
+            tapTimer = setTimeout(() => { tapCount = 0; }, 1500); 
+            if (tapCount === 5) { openModal('adminLoginModal'); tapCount = 0; }
+        };
+
+        window.loadLiveSettings = async function() {
+            try {
+                const snap = await getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'adminAuth'));
+                if (snap.exists() && snap.data().password) currentAdminPassword = snap.data().password;
+                
+                const bannerSnap = await getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'banner'));
+                if (bannerSnap.exists() && bannerSnap.data().text) {
+                    const txt = bannerSnap.data().text;
+                    document.getElementById('promo-text').innerText = txt;
+                    document.getElementById('promo-banner').classList.remove('hidden');
+                    if(document.getElementById('editPromoBanner')) document.getElementById('editPromoBanner').value = txt;
+                } else { document.getElementById('promo-banner').classList.add('hidden'); }
+            } catch(e) { console.log("Settings load fallback", e.message); }
+        };
+
+        window.checkAdminPin = function() {
+            const pin = document.getElementById('adminPinInput').value;
+            if (pin === currentAdminPassword) {
+                closeModal('adminLoginModal'); openModal('adminDashboardModal'); document.getElementById('adminPinInput').value = ''; switchAdminTab('bookings'); 
+            } else { document.getElementById('adminLoginError').classList.remove('hidden'); }
+        };
+
+        window.updateAdminPassword = async function() {
+            const newP = document.getElementById('newAdminPass').value; const confP = document.getElementById('confirmAdminPass').value;
+            const err = document.getElementById('passErrorMsg'); const succ = document.getElementById('passSuccessMsg');
+            err.classList.add('hidden'); succ.classList.add('hidden');
+            if(newP.length < 8) { err.innerText = "Password must be at least 8 characters."; err.classList.remove('hidden'); return; }
+            if(newP !== confP) { err.innerText = "Passwords do not match."; err.classList.remove('hidden'); return; }
+            
+            try {
+                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'adminAuth'), { password: newP });
+                currentAdminPassword = newP; succ.classList.remove('hidden'); document.getElementById('newAdminPass').value = ''; document.getElementById('confirmAdminPass').value = ''; setTimeout(() => succ.classList.add('hidden'), 3000);
+            } catch(e) { err.innerText = "Error: " + e.message; err.classList.remove('hidden'); }
+        };
+
+        window.updateBannerSetting = async function() {
+            const txt = document.getElementById('editPromoBanner').value;
+            try {
+                await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'banner'), { text: txt });
+                document.getElementById('promoMsg').classList.remove('hidden'); setTimeout(() => document.getElementById('promoMsg').classList.add('hidden'), 3000);
+                if(txt) { document.getElementById('promo-text').innerText = txt; document.getElementById('promo-banner').classList.remove('hidden'); } 
+                else { document.getElementById('promo-banner').classList.add('hidden'); }
+            } catch(e) { alert("Error saving banner: " + e.message); }
+        }
+
+        let currentActiveTab = 'bookings';
+        window.switchAdminTab = function(tab) {
+            currentActiveTab = tab;
+            const tabs = ['bookings', 'buy', 'pricing', 'services', 'used', 'accessories', 'faqs', 'settings'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`); const view = document.getElementById(`admin${t.charAt(0).toUpperCase() + t.slice(1)}View`);
+                if (t === tab) {
+                    btn.classList.replace('bg-slate-700', 'bg-blue-600'); btn.classList.remove('hover:bg-slate-600', 'text-green-400');
+                    view.classList.remove('hidden'); view.classList.add('flex');
+                } else {
+                    btn.classList.replace('bg-blue-600', 'bg-slate-700'); btn.classList.add('hover:bg-slate-600'); 
+                    if(t === 'buy') btn.classList.add('text-green-400');
+                    view.classList.add('hidden'); view.classList.remove('flex');
+                }
+            });
+            loadCurrentAdminData();
+        }
+
+        window.loadCurrentAdminData = function() {
+            if(currentActiveTab === 'bookings') loadAdminBookings();
+            if(currentActiveTab === 'buy') loadAdminBuyLeads();
+            if(currentActiveTab === 'services') loadAdminServicesList();
+            if(currentActiveTab === 'used') loadAdminUsedList();
+            if(currentActiveTab === 'accessories') loadAdminAccessoriesList();
+            if(currentActiveTab === 'faqs') loadAdminFaqsList();
+        }
+
+        document.getElementById('bookSubmitBtn').addEventListener('click', async (e) => {
+            const form = document.getElementById('bookForm'); if(!form.checkValidity()) { form.reportValidity(); return; }
+            hideFormError('bookError');
+            const btn = document.getElementById('bookSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Saving..."; btn.disabled = true;
+            
+            const tid = "BMR-" + Math.floor(1000 + Math.random() * 9000);
+            const data = { name: document.getElementById('b-name').value, phone: document.getElementById('b-phone').value, device: document.getElementById('b-device').value, issue: document.getElementById('b-issue').value, status: "Received", date: new Date().toISOString() };
+
+            try {
+                await dbTimeout(setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid), data));
+                document.getElementById('bookForm').classList.add('hidden'); document.getElementById('bookResult').classList.remove('hidden'); document.getElementById('generatedId').innerText = tid;
+            } catch (err) { showFormError('bookError', err.message); } finally { btn.innerText = originalText; btn.disabled = false; }
+        });
+
+        document.getElementById('sellSubmitBtn').addEventListener('click', async (e) => {
+            const form = document.getElementById('sellForm'); if(!form.checkValidity()) { form.reportValidity(); return; }
+            hideFormError('sellError');
+            const btn = document.getElementById('sellSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Sending Request..."; btn.disabled = true;
+            
+            const id = "LEAD-" + Date.now();
+            const data = { name: document.getElementById('s-name').value, phone: document.getElementById('s-phone').value, brand: document.getElementById('s-brand').value, model: document.getElementById('s-model').value, condition: document.getElementById('s-condition').value, date: new Date().toISOString() };
+
+            try {
+                await dbTimeout(setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'sell_leads', id), data));
+                document.getElementById('sellForm').classList.add('hidden'); document.getElementById('sellResult').classList.remove('hidden');
+            } catch (err) { showFormError('sellError', err.message); } finally { btn.innerText = originalText; btn.disabled = false; }
+        });
+
+        document.getElementById('trackSubmitBtn').addEventListener('click', async (e) => {
+            const form = document.getElementById('trackForm'); if(!form.checkValidity()) { form.reportValidity(); return; }
+            hideFormError('trackError');
+            const btn = document.getElementById('trackSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Searching..."; btn.disabled = true;
+            const tid = document.getElementById('t-id').value.toUpperCase();
+
+            try {
+                const docSnap = await dbTimeout(getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid)));
+                document.getElementById('warrantyCard').classList.add('hidden'); // Reset warranty
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('statusDisplay').innerText = data.status || "In Progress";
+                    document.getElementById('deviceDisplay').innerText = `Device: ${data.device}`;
+                    
+                    // Warranty Display Logic
+                    if (data.status === 'Delivered' && data.warrantyEndsAt) {
+                        const daysLeft = Math.ceil((data.warrantyEndsAt - Date.now()) / (1000 * 60 * 60 * 24));
+                        const wc = document.getElementById('warrantyCard');
+                        wc.classList.remove('hidden');
+                        if(daysLeft > 0) {
+                            wc.className = "hidden mt-4 w-full bg-green-50 border border-green-200 p-4 rounded-xl shadow-sm text-center";
+                            document.getElementById('warrantyDaysLeft').innerText = `Active: ${daysLeft} Days Left`;
+                            document.getElementById('warrantyDaysLeft').className = "text-xl font-bold text-green-600";
+                            document.getElementById('warrantyDateDisplay').innerText = `Valid until: ${new Date(data.warrantyEndsAt).toLocaleDateString('en-IN')}`;
+                        } else {
+                            wc.className = "hidden mt-4 w-full bg-red-50 border border-red-200 p-4 rounded-xl shadow-sm text-center";
+                            document.getElementById('warrantyDaysLeft').innerText = `Warranty Expired`;
+                            document.getElementById('warrantyDaysLeft').className = "text-xl font-bold text-red-600";
+                            document.getElementById('warrantyDateDisplay').innerText = `Expired on: ${new Date(data.warrantyEndsAt).toLocaleDateString('en-IN')}`;
+                        }
+                    }
+
+                } else {
+                    document.getElementById('statusDisplay').innerText = "Not Found";
+                    document.getElementById('deviceDisplay').innerText = "Check ID and try again.";
+                }
+                document.getElementById('trackResult').classList.remove('hidden');
+            } catch (err) { showFormError('trackError', err.message); } finally { btn.innerText = originalText; btn.disabled = false; }
+        });
+
+        window.sendWhatsApp = function(phone, name, device, status, id) {
+            let msg = `Hello ${name || 'Customer'}, this is Bhakti Mobile.\n\nUpdate for your ${device || 'Device'} (ID: ${id || 'Unknown'}):\nStatus: *${status || 'Updated'}*\n\n`;
+            if(status === 'Ready for Pickup') msg += "Your device is repaired and ready for pickup! You can visit our shop anytime during working hours.";
+            else msg += "You can track your repair live on our website.";
+            let cleanPhone = (phone || '').toString().replace(/\D/g, ''); if(cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+            if(cleanPhone.length >= 10) window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank'); else alert("Invalid phone number.");
+        }
+
+        window.openInvoice = function(id, name, phone, device, issue, dateStr) {
+            document.getElementById('invoicePrintArea').classList.remove('hidden');
+            document.getElementById('invId').innerText = id; document.getElementById('invName').innerText = name || 'Customer';
+            document.getElementById('invPhone').innerText = phone || 'N/A'; document.getElementById('invDevice').innerText = device || 'Device';
+            document.getElementById('invIssue').innerText = issue || 'Repairs'; 
+            document.getElementById('invDate').innerText = dateStr ? new Date(dateStr).toLocaleDateString('en-IN') : new Date().toLocaleDateString('en-IN');
+            
+            const amtInput = document.getElementById('invAmount'); const amtDisplay = document.getElementById('invTotalDisplay'); const amtPrint = document.getElementById('invAmountPrint');
+            amtInput.value = ''; amtDisplay.innerText = '0'; amtPrint.innerText = '0';
+            
+            amtInput.oninput = function() { 
+                amtDisplay.innerText = this.value || '0'; 
+                amtPrint.innerText = this.value || '0';
+            };
+        }
+        window.closeInvoice = function() { document.getElementById('invoicePrintArea').classList.add('hidden'); }
+        window.printInvoice = function() { window.print(); }
+
+        window.loadAdminBookings = async function() {
+            const table = document.getElementById('adminBookingsTable'); table.innerHTML = `<tr><td colspan="5" class="text-center p-10 font-bold text-slate-500">Fetching live bookings...</td></tr>`;
+            try {
+                const q = collection(db, 'artifacts', appIdName, 'public', 'data', 'bookings'); const snap = await getDocs(q);
+                let bookings = []; let statTotal = 0; let statPending = 0; let statReady = 0;
+                snap.forEach((doc) => { 
+                    const b = { id: doc.id, ...doc.data() }; bookings.push(b); statTotal++;
+                    if(b.status === 'Ready for Pickup' || b.status === 'Delivered') statReady++; else statPending++;
+                });
+                document.getElementById('stat-total').innerText = statTotal; document.getElementById('stat-pending').innerText = statPending; document.getElementById('stat-ready').innerText = statReady;
+                bookings.sort((a,b) => new Date(b.date || 0) - new Date(a.date || 0));
+                
+                if(bookings.length === 0) { table.innerHTML = `<tr><td colspan="5" class="text-center p-10 text-slate-500">No bookings found.</td></tr>`; return; }
+                let html = '';
+                bookings.forEach(b => {
+                    const fDate = b.date ? new Date(b.date).toLocaleString('en-IN') : 'Unknown';
+                    const safeName = (b.name || 'Unknown').replace(/'/g, "\\'"); const safeDevice = (b.device || 'Device').replace(/'/g, "\\'");
+                    
+                    let wHtml = `<select id="warranty-${b.id}" class="mt-2 p-1.5 border border-slate-300 rounded text-xs w-full bg-slate-50 ${b.status === 'Delivered' ? '' : 'hidden'}">
+                        <option value="0">No Warranty</option><option value="30">1 Month Warranty</option><option value="90">3 Months Warranty</option><option value="180">6 Months Warranty</option>
+                    </select>`;
+
+                    html += `
+                        <tr class="border-b border-slate-100 hover:bg-slate-50">
+                            <td class="p-4 font-mono font-bold text-blue-600 align-top">${b.id}</td>
+                            <td class="p-4 align-top"><div class="font-bold">${b.name || 'Unknown'}</div><div class="text-xs text-slate-500">📞 ${b.phone}</div><div class="text-[10px] text-slate-400 mt-1">${fDate}</div></td>
+                            <td class="p-4 align-top"><div class="font-bold">${b.device || 'Unknown'}</div><div class="text-xs text-red-500">${b.issue || ''}</div></td>
+                            <td class="p-4 align-top">
+                                <select id="status-${b.id}" onchange="document.getElementById('warranty-${b.id}').classList.toggle('hidden', this.value !== 'Delivered')" class="p-2 border border-slate-300 rounded text-sm bg-white w-full font-semibold">
+                                    <option value="Received" ${b.status === 'Received' ? 'selected' : ''}>Received</option><option value="In Progress" ${b.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                                    <option value="Waiting for Parts" ${b.status === 'Waiting for Parts' ? 'selected' : ''}>Wait for Parts</option><option value="Ready for Pickup" ${b.status === 'Ready for Pickup' ? 'selected' : ''}>Ready for Pickup</option>
+                                    <option value="Delivered" ${b.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                                </select>
+                                ${wHtml}
+                            </td>
+                            <td class="p-4 align-top">
+                                <div class="flex flex-wrap gap-2 justify-center">
+                                    <button onclick="saveAdminStatus('${b.id}')" id="btn-${b.id}" class="w-full bg-green-100 hover:bg-green-200 text-green-700 px-3 py-1.5 rounded text-xs font-bold transition">Save Update</button>
+                                    <div class="flex w-full gap-2">
+                                        <button onclick="sendWhatsApp('${b.phone}', '${safeName}', '${safeDevice}', '${b.status}', '${b.id}')" class="flex-1 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-1.5 rounded text-xs font-bold transition flex justify-center items-center gap-1 shadow-sm">WA</button>
+                                        <button onclick="openInvoice('${b.id}', '${safeName}', '${b.phone}', '${safeDevice}', '${(b.issue||'').replace(/'/g, "\\'")}', '${b.date}')" class="flex-1 bg-slate-800 hover:bg-black text-white py-1.5 rounded text-xs font-bold transition flex justify-center items-center shadow-sm">🧾 Bill</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>`;
+                });
+                table.innerHTML = html;
+            } catch (err) { table.innerHTML = `<tr><td colspan="5" class="text-center p-10 font-bold text-red-500">Error: ${err.message}</td></tr>`; }
+        }
+
+        window.saveAdminStatus = async function(docId) {
+            const newStatus = document.getElementById(`status-${docId}`).value; const btn = document.getElementById(`btn-${docId}`); btn.innerText = 'Saving...';
+            let updateData = { status: newStatus };
+            
+            if (newStatus === 'Delivered') {
+                const wDays = parseInt(document.getElementById(`warranty-${docId}`).value) || 0;
+                if (wDays > 0) updateData.warrantyEndsAt = Date.now() + (wDays * 24 * 60 * 60 * 1000);
+            }
+
+            try {
+                await updateDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', docId), updateData);
+                btn.innerText = 'Saved!'; btn.classList.replace('bg-green-100', 'bg-blue-100'); btn.classList.replace('text-green-700', 'text-blue-700');
+                setTimeout(() => { btn.innerText = 'Save Update'; btn.classList.replace('bg-blue-100', 'bg-green-100'); btn.classList.replace('text-blue-700', 'text-green-700'); }, 1500);
+            } catch (err) { alert("Error: " + err.message); btn.innerText = 'Failed'; }
+        }
+
+        window.loadAdminBuyLeads = async function() {
+            const table = document.getElementById('adminBuyTable'); table.innerHTML = `<tr><td colspan="5" class="text-center p-10 font-bold text-slate-500">Fetching leads...</td></tr>`;
+            try {
+                const snap = await getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'sell_leads'));
+                let leads = []; snap.forEach((doc) => leads.push({ id: doc.id, ...doc.data() }));
+                document.getElementById('stat-leads').innerText = leads.length;
+                leads.sort((a,b) => new Date(b.date || 0) - new Date(a.date || 0));
+                
+                if(leads.length === 0) { table.innerHTML = `<tr><td colspan="5" class="text-center p-10 text-slate-500">No leads yet.</td></tr>`; return; }
+                let html = '';
+                leads.forEach(l => {
+                    const fDate = l.date ? new Date(l.date).toLocaleString('en-IN') : 'Unknown';
+                    html += `
+                        <tr class="border-b border-slate-100 hover:bg-green-50/50">
+                            <td class="p-4 text-[10px] text-slate-500">${fDate}</td>
+                            <td class="p-4"><div class="font-bold">${l.name || 'Unknown'}</div><div class="text-xs text-slate-500">📞 ${l.phone}</div></td>
+                            <td class="p-4 font-bold text-slate-800">${l.brand} - ${l.model}</td>
+                            <td class="p-4"><span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs font-bold">${l.condition}</span></td>
+                            <td class="p-4 text-center">
+                                <button onclick="deleteLead('${l.id}')" class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1.5 rounded text-xs font-bold">Clear</button>
+                            </td>
+                        </tr>`;
+                });
+                table.innerHTML = html;
+            } catch (err) { table.innerHTML = `<tr><td colspan="5" class="text-center p-10 font-bold text-red-500">Error: ${err.message}</td></tr>`; }
+        }
+
+        window.deleteLead = async function(id) {
+            if(!confirm("Clear this lead?")) return;
+            try { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'sell_leads', id)); loadAdminBuyLeads(); } catch(e) { alert("Error: "+e.message); }
+        }
+
+        const defaultPrices = { 'val-p-and-screen': '₹800+', 'val-p-and-batt': '₹600+', 'val-p-and-port': '₹350+', 'val-p-and-soft': '₹300+', 'val-p-iph-screen': '₹1500+', 'val-p-iph-batt': '₹1200+', 'val-p-iph-glass': '₹1000+', 'val-p-iph-true': '₹500+' };
+        window.loadLivePricing = async function() {
+            try {
+                const snap = await dbTimeout(getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing')));
+                let p = snap.exists() ? { ...defaultPrices, ...snap.data() } : defaultPrices;
+                for (const key in p) { if (document.getElementById(key)) document.getElementById(key).innerText = p[key]; if (document.getElementById(key.replace('val-', 'edit-'))) document.getElementById(key.replace('val-', 'edit-')).value = p[key]; }
+            } catch (err) { for (const key in defaultPrices) { if (document.getElementById(key)) document.getElementById(key).innerText = defaultPrices[key]; } }
+        }
+        window.saveAdminPricing = async function() {
+            const btn = document.getElementById('savePricingBtn'); btn.innerText = "Saving...";
+            const nP = { 'val-p-and-screen': document.getElementById('edit-p-and-screen').value, 'val-p-and-batt': document.getElementById('edit-p-and-batt').value, 'val-p-and-port': document.getElementById('edit-p-and-port').value, 'val-p-and-soft': document.getElementById('edit-p-and-soft').value, 'val-p-iph-screen': document.getElementById('edit-p-iph-screen').value, 'val-p-iph-batt': document.getElementById('edit-p-iph-batt').value, 'val-p-iph-glass': document.getElementById('edit-p-iph-glass').value, 'val-p-iph-true': document.getElementById('edit-p-iph-true').value };
+            try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing'), nP); for (const key in nP) { if (document.getElementById(key)) document.getElementById(key).innerText = nP[key]; } btn.innerText = "Save to Cloud"; document.getElementById('priceSaveMsg').classList.remove('hidden'); setTimeout(() => document.getElementById('priceSaveMsg').classList.add('hidden'), 3000); } catch (err) { alert("Error: " + err.message); btn.innerText = "Save to Cloud"; }
+        }
+
+        const defaultServices = [{ id: "s1", img: "https://images.unsplash.com/photo-1605170439002-90845e8c0137?q=80&w=400", title_en: "Screen Replacement", title_mr: "स्क्रीन बदलणे", desc_en: "Original LCD & OLED displays.", desc_mr: "ओरिजिनल डिस्प्ले.", order: 1 }];
+        window.loadLiveServices = async function() {
+            try {
+                const snap = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'services')));
+                let s = []; if(snap.empty) s = defaultServices; else snap.forEach(doc => s.push({id: doc.id, ...doc.data()})); s.sort((a,b) => a.order - b.order); window.currentServices = s; renderPublicServices(s);
+            } catch(e) { window.currentServices = defaultServices; renderPublicServices(defaultServices); }
+        }
+        function renderPublicServices(services) {
+            let html = ''; services.forEach(s => { dict[`dyn-s-title-${s.id}`] = { mr: s.title_mr }; dict[`dyn-s-desc-${s.id}`] = { mr: s.desc_mr }; html += `<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover-scale text-left flex flex-col h-full"><img src="${s.img}" class="w-full h-40 object-cover rounded-lg mb-4" onerror="this.src='https://placehold.co/400'"><h3 class="font-bold text-lg mb-1" data-lang="dyn-s-title-${s.id}" data-orig="${s.title_en}">${currentLang === 'mr' ? s.title_mr : s.title_en}</h3><p class="text-sm text-slate-500 flex-1" data-lang="dyn-s-desc-${s.id}" data-orig="${s.desc_en}">${currentLang === 'mr' ? s.desc_mr : s.desc_en}</p></div>`; }); document.getElementById('public-services-container').innerHTML = html;
+        }
+        window.loadAdminServicesList = function() { let html = ''; window.currentServices.forEach(s => { html += `<div class="bg-white border border-slate-200 p-4 rounded-lg"><img src="${s.img}" class="w-full h-24 object-cover rounded mb-2 bg-slate-100" onerror="this.src='https://placehold.co/400x200'"><h5 class="font-bold text-sm text-slate-900">${s.title_en}</h5><div class="flex gap-2 mt-3"><button onclick="editService('${s.id}')" class="flex-1 bg-blue-100 text-blue-700 py-1 rounded text-xs font-bold">Edit</button><button onclick="deleteAdminService('${s.id}')" class="flex-1 bg-red-100 text-red-700 py-1 rounded text-xs font-bold">Delete</button></div></div>`; }); document.getElementById('adminServicesList').innerHTML = html; }
+        window.openServiceForm = function(s = null) { document.getElementById('adminServiceForm').classList.remove('hidden'); document.getElementById('srv-id').value = s?s.id:''; document.getElementById('srv-img').value = s?s.img:''; document.getElementById('srv-title-en').value = s?s.title_en:''; document.getElementById('srv-title-mr').value = s?s.title_mr:''; document.getElementById('srv-desc-en').value = s?s.desc_en:''; document.getElementById('srv-desc-mr').value = s?s.desc_mr:''; document.getElementById('srv-order').value = s?s.order:(window.currentServices.length+1); }
+        window.editService = function(id) { openServiceForm(window.currentServices.find(s => s.id === id)); }
+        window.cancelServiceForm = function() { document.getElementById('adminServiceForm').classList.add('hidden'); }
+        window.saveAdminService = async function() { const data = { img: document.getElementById('srv-img').value, title_en: document.getElementById('srv-title-en').value, title_mr: document.getElementById('srv-title-mr').value, desc_en: document.getElementById('srv-desc-en').value, desc_mr: document.getElementById('srv-desc-mr').value, order: parseInt(document.getElementById('srv-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', document.getElementById('srv-id').value || 'srv-'+Date.now()), data); cancelServiceForm(); loadLiveServices(); loadCurrentAdminData(); } catch(e) { alert("Error: " + e.message); } }
+        window.deleteAdminService = async function(id) { if(confirm("Delete service?")) { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', id)); loadLiveServices(); loadCurrentAdminData(); } }
+
+        const defaultAccessories = [{ id: "a1", img: "https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=300", title_en: "Tough Armor Cases", title_mr: "टफ आर्मर कव्हर", price: "₹ 299", badge: "sale", order: 1 }];
+        window.loadLiveAccessories = async function() {
+            try { const snap = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'accessories'))); let a = []; if(snap.empty) a = defaultAccessories; else snap.forEach(doc => a.push({id: doc.id, ...doc.data()})); a.sort((x,y) => x.order - y.order); window.currentAccessories = a; renderPublicAccessories(a); } catch(e) { window.currentAccessories = defaultAccessories; renderPublicAccessories(defaultAccessories); }
+        }
+        function renderPublicAccessories(accs) { let html = ''; accs.forEach(a => { dict[`dyn-a-title-${a.id}`] = { mr: a.title_mr }; let badgeHtml = a.badge==='sale' ? `<span class="absolute top-2 left-2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">SALE</span>` : (a.badge==='new' ? `<span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-full">NEW</span>` : ''); html += `<div class="bg-slate-50 p-4 rounded-xl border border-slate-100 hover-scale relative text-left h-full flex flex-col">${badgeHtml}<img src="${a.img}" class="w-full h-32 object-cover rounded-lg mb-3" onerror="this.src='https://placehold.co/300'"><h3 class="font-bold text-sm mb-1 flex-1" data-lang="dyn-a-title-${a.id}" data-orig="${a.title_en}">${currentLang === 'mr' ? a.title_mr : a.title_en}</h3><p class="text-blue-600 font-bold text-sm">${a.price}</p></div>`; }); document.getElementById('public-accessories-container').innerHTML = html; }
+        window.loadAdminAccessoriesList = function() { let html = ''; window.currentAccessories.forEach(a => { html += `<div class="bg-white border border-slate-200 p-4 rounded-lg"><img src="${a.img}" class="w-full h-24 object-cover rounded mb-2"><h5 class="font-bold text-sm">${a.title_en}</h5><p class="text-xs text-blue-600 font-bold">${a.price}</p><div class="flex gap-2 mt-3"><button onclick="editAccessory('${a.id}')" class="flex-1 bg-blue-100 text-blue-700 py-1 rounded text-xs font-bold">Edit</button><button onclick="deleteAdminAccessory('${a.id}')" class="flex-1 bg-red-100 text-red-700 py-1 rounded text-xs font-bold">Delete</button></div></div>`; }); document.getElementById('adminAccessoriesList').innerHTML = html; }
+        window.openAccessoryForm = function(a = null) { document.getElementById('adminAccessoryForm').classList.remove('hidden'); document.getElementById('acc-id').value = a?a.id:''; document.getElementById('acc-img').value = a?a.img:''; document.getElementById('acc-title-en').value = a?a.title_en:''; document.getElementById('acc-title-mr').value = a?a.title_mr:''; document.getElementById('acc-price').value = a?a.price:''; document.getElementById('acc-badge').value = a?a.badge:'none'; document.getElementById('acc-order').value = a?a.order:(window.currentAccessories.length+1); }
+        window.editAccessory = function(id) { openAccessoryForm(window.currentAccessories.find(a => a.id === id)); }
+        window.cancelAccessoryForm = function() { document.getElementById('adminAccessoryForm').classList.add('hidden'); }
+        window.saveAdminAccessory = async function() { const data = { img: document.getElementById('acc-img').value, title_en: document.getElementById('acc-title-en').value, title_mr: document.getElementById('acc-title-mr').value, price: document.getElementById('acc-price').value, badge: document.getElementById('acc-badge').value, order: parseInt(document.getElementById('acc-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', document.getElementById('acc-id').value || 'acc-'+Date.now()), data); cancelAccessoryForm(); loadLiveAccessories(); loadCurrentAdminData(); } catch(e) { alert("Error: " + e.message); } }
+        window.deleteAdminAccessory = async function(id) { if(confirm("Delete accessory?")) { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', id)); loadLiveAccessories(); loadCurrentAdminData(); } }
+
+        const defaultUsed = [{ id: "u1", img: "https://images.unsplash.com/photo-1585060544812-6b45742d762f?q=80&w=300", model: "iPhone 12 (128GB)", cond: "Like New (90% Battery)", price: "₹ 24,500", status: "available", order: 1 }];
+        window.loadLiveUsedPhones = async function() {
+            try { const snap = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'used_phones'))); let u = []; if(snap.empty) u = defaultUsed; else snap.forEach(doc => u.push({id: doc.id, ...doc.data()})); u.sort((x,y) => x.order - y.order); window.currentUsedPhones = u; renderPublicUsedPhones(u); } catch(e) { window.currentUsedPhones = defaultUsed; renderPublicUsedPhones(defaultUsed); }
+        }
+        function renderPublicUsedPhones(phones) { 
+            let html = ''; phones.forEach(p => { 
+                let statusBadge = p.status === 'sold' ? `<span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10" data-lang="used-sold">${currentLang === 'mr' ? 'विक्री झाली' : 'Sold Out'}</span>` : '';
+                let opacity = p.status === 'sold' ? 'opacity-70 grayscale-[30%]' : '';
+                let btnHtml = p.status === 'sold' ? `<button disabled class="w-full bg-slate-200 text-slate-500 font-bold py-3 rounded-xl mt-4 cursor-not-allowed uppercase text-sm tracking-wider" data-lang="used-sold">${currentLang === 'mr' ? 'विक्री झाली' : 'Sold Out'}</button>` : `<a href="https://wa.me/919049555270?text=Hello, I am interested in buying the second-hand ${encodeURIComponent(p.model)} listed for ${encodeURIComponent(p.price)}." target="_blank" class="flex justify-center items-center gap-2 w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl mt-4 shadow-md transition transform hover:-translate-y-0.5"><span data-lang="used-buy-btn">${currentLang === 'mr' ? 'चौकशी करा' : 'Inquire on WhatsApp'}</span> 💬</a>`;
+                
+                html += `<div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:shadow-lg transition relative text-left h-full flex flex-col ${opacity}">${statusBadge}<div class="overflow-hidden rounded-xl mb-4"><img src="${p.img}" class="w-full h-48 object-cover bg-slate-100 hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/300'"></div><h3 class="font-bold text-xl text-slate-900 mb-2">${p.model}</h3><p class="text-sm text-slate-600 mb-4 bg-slate-50 p-2 rounded-lg border border-slate-100"><span class="font-bold text-slate-800" data-lang="used-cond-label">${currentLang === 'mr' ? 'स्थिती:' : 'Condition:'}</span> ${p.cond}</p><div class="flex-1"></div><div class="flex justify-between items-end"><p class="text-2xl font-extrabold text-slate-900">${p.price}</p></div>${btnHtml}</div>`; 
+            }); 
+            document.getElementById('public-used-container').innerHTML = html; 
+        }
+        window.loadAdminUsedList = function() { let html = ''; window.currentUsedPhones.forEach(p => { let b = p.status === 'sold' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'; html += `<div class="bg-white border border-slate-200 p-4 rounded-xl flex flex-col"><img src="${p.img}" class="w-full h-32 object-cover rounded-lg mb-3 bg-slate-50"><div class="flex justify-between items-start mb-1"><h5 class="font-bold text-md text-slate-900">${p.model}</h5><span class="text-[10px] uppercase font-bold px-2 py-1 rounded shadow-sm ${b}">${p.status}</span></div><p class="text-xs text-slate-500 mb-2">${p.cond}</p><div class="flex-1"></div><p class="text-lg text-purple-600 font-extrabold mb-3">${p.price}</p><div class="flex gap-2"><button onclick="editUsedPhone('${p.id}')" class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-700 py-2 rounded-lg text-sm font-bold transition shadow-sm">Edit</button><button onclick="deleteAdminUsedPhone('${p.id}')" class="flex-1 bg-red-100 hover:bg-red-200 text-red-700 py-2 rounded-lg text-sm font-bold transition shadow-sm">Delete</button></div></div>`; }); document.getElementById('adminUsedList').innerHTML = html; }
+        window.openUsedForm = function(p = null) { document.getElementById('adminUsedForm').classList.remove('hidden'); document.getElementById('used-id').value = p?p.id:''; document.getElementById('used-img').value = p?p.img:''; document.getElementById('used-model').value = p?p.model:''; document.getElementById('used-cond').value = p?p.cond:''; document.getElementById('used-price').value = p?p.price:''; document.getElementById('used-status').value = p?p.status:'available'; document.getElementById('used-order').value = p?p.order:(window.currentUsedPhones.length+1); }
+        window.editUsedPhone = function(id) { openUsedForm(window.currentUsedPhones.find(p => p.id === id)); }
+        window.cancelUsedForm = function() { document.getElementById('adminUsedForm').classList.add('hidden'); }
+        window.saveAdminUsed = async function() { const btn = document.getElementById('btnSaveUsed'); btn.innerText="Saving..."; const data = { img: document.getElementById('used-img').value, model: document.getElementById('used-model').value, cond: document.getElementById('used-cond').value, price: document.getElementById('used-price').value, status: document.getElementById('used-status').value, order: parseInt(document.getElementById('used-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'used_phones', document.getElementById('used-id').value || 'used-'+Date.now()), data); cancelUsedForm(); loadLiveUsedPhones(); loadCurrentAdminData(); } catch(e) { alert("Error: " + e.message); } finally { btn.innerText="Save Phone"; } }
+        window.deleteAdminUsedPhone = async function(id) { if(confirm("Delete this phone listing?")) { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'used_phones', id)); loadLiveUsedPhones(); loadCurrentAdminData(); } }
+
+        const defaultFaqs = [{ id: "f1", q_en: "Do you use original parts?", q_mr: "तुम्ही ओरिजिनल पार्ट्स वापरता का?", a_en: "Yes! We always prioritize 100% original parts.", a_mr: "होय! आम्ही नेहमी 100% ओरिजिनल पार्ट्स वापरतो.", order: 1 }];
+        window.toggleFaq = function(id) { const c = document.getElementById(`faq-content-${id}`); const i = document.getElementById(`faq-icon-${id}`); c.classList.toggle('hidden'); i.style.transform = c.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)'; }
+        window.loadLiveFaqs = async function() { try { const snap = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'faqs'))); let f = []; if(snap.empty) f = defaultFaqs; else snap.forEach(doc => f.push({id: doc.id, ...doc.data()})); f.sort((a,b) => a.order - b.order); window.currentFaqs = f; renderPublicFaqs(f); } catch(e) { window.currentFaqs = defaultFaqs; renderPublicFaqs(defaultFaqs); } }
+        function renderPublicFaqs(faqs) { let html = ''; faqs.forEach(f => { dict[`dyn-f-q-${f.id}`] = { mr: f.q_mr }; dict[`dyn-f-a-${f.id}`] = { mr: f.a_mr }; html += `<div class="bg-white border border-slate-200 rounded-xl overflow-hidden"><button onclick="toggleFaq('${f.id}')" class="w-full px-6 py-4 flex justify-between items-center"><span class="font-bold text-slate-800 text-left" data-lang="dyn-f-q-${f.id}" data-orig="${f.q_en}">${currentLang === 'mr' ? f.q_mr : f.q_en}</span><svg id="faq-icon-${f.id}" class="faq-icon w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button><div id="faq-content-${f.id}" class="hidden px-6 pb-4 pt-1 bg-slate-50"><p class="text-slate-600 text-sm" data-lang="dyn-f-a-${f.id}" data-orig="${f.a_en}">${currentLang === 'mr' ? f.a_mr : f.a_en}</p></div></div>`; }); document.getElementById('public-faq-container').innerHTML = html; }
+        window.loadAdminFaqsList = function() { let html = ''; window.currentFaqs.forEach(f => { html += `<div class="bg-white border border-slate-200 p-4 rounded-lg flex justify-between items-center"><div><h5 class="font-bold text-sm">${f.q_en}</h5></div><div class="flex gap-2"><button onclick="editFaq('${f.id}')" class="bg-blue-100 text-blue-700 px-3 py-1 rounded text-xs font-bold">Edit</button><button onclick="deleteAdminFaq('${f.id}')" class="bg-red-100 text-red-700 px-3 py-1 rounded text-xs font-bold">Delete</button></div></div>`; }); document.getElementById('adminFaqsList').innerHTML = html; }
+        window.openFaqForm = function(f = null) { document.getElementById('adminFaqForm').classList.remove('hidden'); document.getElementById('faq-id').value = f?f.id:''; document.getElementById('faq-q-en').value = f?f.q_en:''; document.getElementById('faq-q-mr').value = f?f.q_mr:''; document.getElementById('faq-a-en').value = f?f.a_en:''; document.getElementById('faq-a-mr').value = f?f.a_mr:''; document.getElementById('faq-order').value = f?f.order:(window.currentFaqs.length+1); }
+        window.editFaq = function(id) { openFaqForm(window.currentFaqs.find(f => f.id === id)); }
+        window.cancelFaqForm = function() { document.getElementById('adminFaqForm').classList.add('hidden'); }
+        window.saveAdminFaq = async function() { const data = { q_en: document.getElementById('faq-q-en').value, q_mr: document.getElementById('faq-q-mr').value, a_en: document.getElementById('faq-a-en').value, a_mr: document.getElementById('faq-a-mr').value, order: parseInt(document.getElementById('faq-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'faqs', document.getElementById('faq-id').value || 'faq-'+Date.now()), data); cancelFaqForm(); loadLiveFaqs(); loadCurrentAdminData(); } catch(e) { alert("Error: " + e.message); } }
+        window.deleteAdminFaq = async function(id) { if(confirm("Delete FAQ?")) { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'faqs', id)); loadLiveFaqs(); loadCurrentAdminData(); } }
+
+        let selectedStars = 0;
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                selectedStars = this.getAttribute('data-val'); document.getElementById('r-stars').value = selectedStars;
+                document.querySelectorAll('.star').forEach(s => { s.classList.remove('text-yellow-400'); if (s.getAttribute('data-val') <= selectedStars) s.classList.add('text-yellow-400'); });
+            });
+        });
+        document.getElementById('rateSubmitBtn').addEventListener('click', async (e) => {
+            const form = document.getElementById('rateForm'); if(!form.checkValidity()) { form.reportValidity(); return; } hideFormError('rateError');
+            if(selectedStars == 0) { alert("Please select a star rating!"); return; }
+            const btn = document.getElementById('rateSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Publishing..."; btn.disabled = true;
+            const reviewData = { name: document.getElementById('r-name').value, text: document.getElementById('r-text').value, stars: parseInt(selectedStars), date: Date.now() };
+            try { await dbTimeout(setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'reviews', "REV-"+Date.now()), reviewData)); document.getElementById('rateForm').classList.add('hidden'); document.getElementById('rateSuccess').classList.remove('hidden'); injectReviewCard(reviewData, true); } catch (err) { showFormError('rateError', err.message); } finally { btn.innerText = originalText; btn.disabled = false; }
+        });
+
+        const staticReviews = [{n:"Rahul S.", t:"Fixed my iPhone screen fast!", s:5}, {n:"Priya D.", t:"Best mobile shop.", s:5}];
+        function getStars(count) { return "⭐".repeat(count); }
+        function injectReviewCard(rev, isNew = false) {
+            if (!rev) return;
+            const container = document.getElementById('review-container'); const card = document.createElement('div'); card.className = "min-w-[300px] max-w-[300px] bg-white p-5 rounded-2xl shadow-sm border border-slate-100 snap-center relative";
+            let badge = isNew ? `<span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>` : '';
+            const rName = rev.name || rev.n || 'User'; const initial = (typeof rName === 'string' && rName.length > 0) ? rName.charAt(0).toUpperCase() : 'U';
+            card.innerHTML = `${badge}<div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 bg-blue-100 text-blue-700 font-bold rounded-full flex items-center justify-center">${initial}</div><div><h4 class="font-bold text-sm text-slate-800">${rName}</h4><div class="text-xs tracking-widest">${getStars(rev.stars || rev.s || 5)}</div></div></div><p class="text-slate-600 text-sm italic">"${rev.text || rev.t || ''}"</p>`;
+            isNew ? container.prepend(card) : container.appendChild(card);
+        }
+        async function loadLiveReviews() {
+            const container = document.getElementById('review-container'); container.innerHTML = ""; 
+            try { const querySnapshot = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'reviews'))); let cloudReviews = []; querySnapshot.forEach((doc) => { cloudReviews.push(doc.data()); }); cloudReviews.sort((a,b) => b.date - a.date); cloudReviews.forEach(rev => injectReviewCard(rev, true)); } catch (err) { console.log("Reviews fallback:", err.message); }
+            staticReviews.forEach(rev => injectReviewCard(rev));
+        }
 
         window.toggleLanguage = function() {
             currentLang = currentLang === 'en' ? 'mr' : 'en';
             document.querySelectorAll('[data-lang]').forEach(el => {
-                const key = el.getAttribute('data-lang');
-                if (!el.dataset.orig) el.dataset.orig = el.innerHTML; 
+                const key = el.getAttribute('data-lang'); if (!el.dataset.orig) el.dataset.orig = el.innerHTML; 
                 if (currentLang === 'mr' && dict[key] && dict[key].mr) { el.innerHTML = dict[key].mr; } else { el.innerHTML = el.dataset.orig; }
             });
             for(let id in placeholderDict) {
@@ -1164,12 +1120,8 @@
                 }
             }
         }
-        
-        // Initial fallbacks before cloud loads
-        renderPublicServices(defaultServices);
-        renderPublicAccessories(defaultAccessories);
-        staticReviews.forEach(rev => injectReviewCard(rev));
-
+        document.getElementById('cur-year').innerText = new Date().getFullYear();
+        renderPublicServices(defaultServices); renderPublicAccessories(defaultAccessories); renderPublicFaqs(defaultFaqs); staticReviews.forEach(rev => injectReviewCard(rev));
     </script>
 </body>
 </html>
