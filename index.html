@@ -14,14 +14,10 @@
         .hover-scale { transition: transform 0.3s ease; }
         .hover-scale:hover { transform: scale(1.03); }
         
-        /* Modal Animation */
         .modal-active { display: flex !important; animation: fadeIn 0.2s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* FAQ Icon Animation */
         .faq-icon { transition: transform 0.3s ease; }
         
-        /* Invoice Print Styling */
         @media print {
             body * { visibility: hidden; }
             #invoicePrintArea, #invoicePrintArea * { visibility: visible; }
@@ -31,6 +27,19 @@
     </style>
 </head>
 <body class="text-slate-800">
+
+    <div id="toast" class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-xl text-white font-bold text-sm z-[200] transition-opacity duration-300"></div>
+
+    <div id="confirmModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] justify-center items-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl text-center relative">
+            <h3 class="text-xl font-bold mb-2 text-slate-900">Are you sure?</h3>
+            <p class="text-slate-600 mb-6 text-sm" id="confirmMsg">This action cannot be undone.</p>
+            <div class="flex gap-4 justify-center">
+                <button id="confirmYesBtn" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow transition">Yes, Delete</button>
+                <button onclick="document.getElementById('confirmModal').classList.add('hidden')" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-3 rounded-lg transition">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <div id="promo-banner" class="hidden bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center text-xs sm:text-sm py-2 px-4 font-semibold tracking-wide shadow-md z-50 relative">
         <span id="promo-text"></span>
@@ -116,7 +125,6 @@
             <p class="text-slate-500 mb-10" data-lang="services-subtitle">Professional fixes for all brands (Apple, Samsung, OnePlus, Vivo, Oppo, Xiaomi)</p>
             
             <div id="public-services-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <!-- Services load dynamically via JS -->
                 <div class="p-10 text-center text-slate-500 font-bold col-span-full animate-pulse">Loading Services...</div>
             </div>
         </div>
@@ -176,7 +184,6 @@
             <h2 class="text-3xl font-bold text-slate-900 mb-2" data-lang="used-title">Refurbished & Used Phones</h2>
             <p class="text-slate-500 mb-10" data-lang="used-subtitle">Quality tested second-hand phones at the best prices.</p>
             <div id="public-used-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Dynamically loaded -->
                 <div class="p-10 text-center text-slate-500 font-bold col-span-full animate-pulse">Loading Used Phones...</div>
             </div>
         </div>
@@ -204,7 +211,6 @@
                 <button onclick="openModal('rateModal')" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold text-sm shadow-sm hover:bg-blue-700" data-lang="rev-btn">Write a Review</button>
             </div>
             <div class="flex overflow-x-auto gap-4 hide-scrollbar snap-x pb-4" id="review-container">
-                <!-- Reviews injected via JS -->
             </div>
         </div>
     </section>
@@ -213,7 +219,7 @@
         <h2 class="text-2xl font-bold text-white mb-2">Bhakti Mobile & Repairing Center</h2>
         <p class="mb-4">Udgir, Maharashtra - 413517</p>
         <p class="mb-4">📞 +91 9049555270 | 📞 +91 8788131515</p>
-        <p class="text-sm flex items-center justify-center gap-2 cursor-pointer select-none" onclick="handleAdminTap()" title="Tap 5 times for Admin">
+        <p class="text-sm flex items-center justify-center gap-2 cursor-pointer select-none" onclick="handleAdminTap()" title="Secret Admin Trigger">
             &copy; <span id="cur-year">2026</span> Bhakti Mobile. All rights reserved. 
         </p>
     </footer>
@@ -291,7 +297,6 @@
                 <p class="text-2xl font-bold text-blue-600" id="statusDisplay">Checking...</p>
                 <p class="text-slate-600 mt-2 text-sm font-semibold" id="deviceDisplay"></p>
                 
-                <!-- Digital Warranty Card -->
                 <div id="warrantyCard" class="hidden mt-4 w-full bg-green-50 border border-green-200 p-4 rounded-xl shadow-sm text-center">
                     <p class="text-[10px] font-bold text-green-700 uppercase tracking-widest mb-1">Digital Warranty</p>
                     <p class="text-xl font-bold text-green-600" id="warrantyDaysLeft"></p>
@@ -361,6 +366,7 @@
             
             <div class="p-4 sm:p-6 flex-1 overflow-y-auto bg-slate-50 relative">
                 
+                <!-- Admin Bookings Tab -->
                 <div id="adminBookingsView" class="flex-col gap-4">
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-2">
                         <div class="bg-blue-50 border border-blue-100 p-4 rounded-xl text-center shadow-sm">
@@ -399,6 +405,7 @@
                     </div>
                 </div>
 
+                <!-- Admin Buy Leads Tab -->
                 <div id="adminBuyView" class="hidden flex-col gap-4">
                     <h3 class="text-xl font-bold text-slate-800 mb-2">Customer Phones for Sale</h3>
                     <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white flex">
@@ -419,6 +426,7 @@
                     </div>
                 </div>
 
+                <!-- Admin Pricing Tab -->
                 <div id="adminPricingView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col h-full overflow-y-auto">
                     <h3 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Manage Public Pricing</h3>
                     <p class="text-sm text-slate-500 mb-6">Enter prices as text (e.g. "₹800+", "Call for Price"). Changes apply live instantly.</p>
@@ -443,13 +451,12 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="mt-8 pt-4 border-t flex justify-end items-center gap-4">
-                        <span id="priceSaveMsg" class="hidden text-green-600 font-bold">✔ Prices updated successfully!</span>
                         <button onclick="saveAdminPricing()" id="savePricingBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-lg shadow-lg transition">Save to Cloud</button>
                     </div>
                 </div>
 
+                <!-- Admin Services Tab -->
                 <div id="adminServicesView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
                         <div><h3 class="text-xl font-bold text-slate-800">Manage Services</h3></div>
@@ -475,6 +482,7 @@
                     </div>
                 </div>
 
+                <!-- Admin Accessories Tab -->
                 <div id="adminAccessoriesView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
                         <div><h3 class="text-xl font-bold text-slate-800">Manage Accessories</h3></div>
@@ -500,6 +508,7 @@
                     </div>
                 </div>
 
+                <!-- Admin Used Phones Tab -->
                 <div id="adminUsedView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
                         <div><h3 class="text-xl font-bold text-slate-800">Manage Used Phones</h3></div>
@@ -525,6 +534,7 @@
                     </div>
                 </div>
 
+                <!-- Admin FAQs Tab -->
                 <div id="adminFaqsView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
                         <div><h3 class="text-xl font-bold text-slate-800">Manage FAQs</h3></div>
@@ -545,6 +555,7 @@
                     </div>
                 </div>
 
+                <!-- Admin Settings Tab -->
                 <div id="adminSettingsView" class="hidden bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex-col">
                     <h3 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Admin Settings</h3>
                     
@@ -553,7 +564,6 @@
                             <h4 class="font-bold text-blue-800 mb-4">Live Announcement Banner</h4>
                             <p class="text-xs text-blue-600 mb-4">Type a message to show a banner at the top of the website. Clear the box to hide the banner.</p>
                             <input type="text" id="editPromoBanner" placeholder="e.g., 10% Off on Screen Repair!" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-blue-500">
-                            <p id="promoMsg" class="hidden text-green-600 text-sm mb-4 font-bold">✔ Banner Updated!</p>
                             <button onclick="updateBannerSetting()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow-md transition">Update Banner</button>
                         </div>
 
@@ -564,7 +574,6 @@
                             <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Confirm Password</label>
                             <input type="password" id="confirmAdminPass" placeholder="Re-enter new password" class="w-full p-3 border border-slate-300 mb-4 rounded-lg bg-white focus:outline-slate-500">
                             <p id="passErrorMsg" class="hidden text-red-500 text-sm mb-4 font-bold"></p>
-                            <p id="passSuccessMsg" class="hidden text-green-600 text-sm mb-4 font-bold">✔ Password Updated Successfully!</p>
                             <button onclick="updateAdminPassword()" class="w-full bg-slate-800 hover:bg-black text-white font-bold py-3 rounded-lg shadow-md transition">Save New Password</button>
                         </div>
                     </div>
@@ -660,6 +669,7 @@
         window.currentServices = []; window.currentAccessories = []; window.currentFaqs = []; window.currentUsedPhones = [];
         
         let currentLang = 'en';
+        
         const dict = {
             'call-us': { mr: '📞 +९१ ९०४९५५५२७० | +९१ ८७८८१३१५१५' }, 'location': { mr: '📍 उदगीर, महाराष्ट्र' }, 'subtitle': { mr: 'रिपेअरिंग सेंटर' },
             'shop-open': { mr: 'सुरू आहे' }, 'shop-closed': { mr: 'बंद आहे' },
@@ -696,8 +706,31 @@
         let currentAdminPassword = "15151515"; 
         let tapCount = 0; let tapTimer = null;
 
+        // Custom UI notifications replacing alert() and confirm()
+        window.showToast = function(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-xl text-white font-bold text-sm z-[200] transition-opacity duration-300 ${isError ? 'bg-red-600' : 'bg-green-600'}`;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        window.customConfirm = function(msg, onConfirm) {
+            document.getElementById('confirmMsg').innerText = msg;
+            document.getElementById('confirmModal').classList.remove('hidden');
+            const yesBtn = document.getElementById('confirmYesBtn');
+            yesBtn.onclick = () => {
+                document.getElementById('confirmModal').classList.add('hidden');
+                onConfirm();
+            };
+        }
+
         function updateShopStatus() {
-            const now = new Date(); const hour = now.getHours(); 
+            const now = new Date(); 
+            // Calculate IST time
+            const istOffset = 5.5 * 60 * 60 * 1000;
+            const istTime = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + istOffset);
+            const hour = istTime.getHours(); 
             const sText = document.getElementById('shop-text'); const sDot = document.getElementById('shop-dot');
             if(hour >= 9 && hour < 21) {
                 sDot.className = 'w-2 h-2 rounded-full bg-green-500 animate-pulse'; sText.setAttribute('data-lang', 'shop-open');
@@ -725,8 +758,10 @@
 
         window.openModal = function(id) { document.getElementById(id).classList.add('modal-active'); document.getElementById(id).classList.remove('hidden'); }
         window.closeModal = function(id) { document.getElementById(id).classList.remove('modal-active'); document.getElementById(id).classList.add('hidden'); if(id === 'adminLoginModal') document.getElementById('adminLoginError').classList.add('hidden'); }
-        function showFormError(boxId, msg) { const b = document.getElementById(boxId); b.classList.remove('hidden'); b.innerHTML = `<b>Error:</b><br/>${msg}`; }
+        function showFormError(boxId, msg) { const b = document.getElementById(boxId); b.classList.remove('hidden'); b.innerHTML = `<b>Database Error:</b><br/>${msg}<br/><br/><span class="text-xs">Have you clicked 'Create Database' and published your rules in the Firebase Console?</span>`; }
         function hideFormError(boxId) { document.getElementById(boxId).classList.add('hidden'); }
+        
+        // Anti-freeze wrapper with 8 second timeout
         const dbTimeout = (promise, ms = 8000) => { return Promise.race([ promise, new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout: Database missing or unreachable. Did you click 'Create Database' in Firestore?")), ms)) ]); };
 
         window.handleAdminTap = function() {
@@ -759,14 +794,15 @@
 
         window.updateAdminPassword = async function() {
             const newP = document.getElementById('newAdminPass').value; const confP = document.getElementById('confirmAdminPass').value;
-            const err = document.getElementById('passErrorMsg'); const succ = document.getElementById('passSuccessMsg');
-            err.classList.add('hidden'); succ.classList.add('hidden');
+            const err = document.getElementById('passErrorMsg');
+            err.classList.add('hidden');
             if(newP.length < 8) { err.innerText = "Password must be at least 8 characters."; err.classList.remove('hidden'); return; }
             if(newP !== confP) { err.innerText = "Passwords do not match."; err.classList.remove('hidden'); return; }
             
             try {
                 await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'adminAuth'), { password: newP });
-                currentAdminPassword = newP; succ.classList.remove('hidden'); document.getElementById('newAdminPass').value = ''; document.getElementById('confirmAdminPass').value = ''; setTimeout(() => succ.classList.add('hidden'), 3000);
+                currentAdminPassword = newP; document.getElementById('newAdminPass').value = ''; document.getElementById('confirmAdminPass').value = '';
+                showToast("Password Updated Successfully!");
             } catch(e) { err.innerText = "Error: " + e.message; err.classList.remove('hidden'); }
         };
 
@@ -774,10 +810,10 @@
             const txt = document.getElementById('editPromoBanner').value;
             try {
                 await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'banner'), { text: txt });
-                document.getElementById('promoMsg').classList.remove('hidden'); setTimeout(() => document.getElementById('promoMsg').classList.add('hidden'), 3000);
+                showToast("Banner Updated!");
                 if(txt) { document.getElementById('promo-text').innerText = txt; document.getElementById('promo-banner').classList.remove('hidden'); } 
                 else { document.getElementById('promo-banner').classList.add('hidden'); }
-            } catch(e) { alert("Error saving banner: " + e.message); }
+            } catch(e) { showToast("Error saving banner: " + e.message, true); }
         }
 
         let currentActiveTab = 'bookings';
@@ -787,11 +823,12 @@
             tabs.forEach(t => {
                 const btn = document.getElementById(`tab-btn-${t}`); const view = document.getElementById(`admin${t.charAt(0).toUpperCase() + t.slice(1)}View`);
                 if (t === tab) {
-                    btn.classList.replace('bg-slate-700', 'bg-blue-600'); btn.classList.remove('hover:bg-slate-600', 'text-green-400');
-                    view.classList.remove('hidden'); view.classList.add('flex');
+                    btn.classList.replace('bg-slate-700', 'bg-blue-600'); btn.classList.remove('hover:bg-slate-600', 'text-green-400', 'text-purple-400');
+                    view.classList.remove('hidden'); view.classList.add(t === 'pricing' ? 'flex' : (t === 'settings' ? 'flex' : 'flex'));
                 } else {
                     btn.classList.replace('bg-blue-600', 'bg-slate-700'); btn.classList.add('hover:bg-slate-600'); 
                     if(t === 'buy') btn.classList.add('text-green-400');
+                    if(t === 'used') btn.classList.add('text-purple-400');
                     view.classList.add('hidden'); view.classList.remove('flex');
                 }
             });
@@ -810,7 +847,7 @@
         document.getElementById('bookSubmitBtn').addEventListener('click', async (e) => {
             const form = document.getElementById('bookForm'); if(!form.checkValidity()) { form.reportValidity(); return; }
             hideFormError('bookError');
-            const btn = document.getElementById('bookSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Saving..."; btn.disabled = true;
+            const btn = document.getElementById('bookSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Saving to Cloud..."; btn.disabled = true;
             
             const tid = "BMR-" + Math.floor(1000 + Math.random() * 9000);
             const data = { name: document.getElementById('b-name').value, phone: document.getElementById('b-phone').value, device: document.getElementById('b-device').value, issue: document.getElementById('b-issue').value, status: "Received", date: new Date().toISOString() };
@@ -843,14 +880,13 @@
 
             try {
                 const docSnap = await dbTimeout(getDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', tid)));
-                document.getElementById('warrantyCard').classList.add('hidden'); // Reset warranty
+                document.getElementById('warrantyCard').classList.add('hidden');
 
                 if (docSnap.exists()) {
                     const data = docSnap.data();
                     document.getElementById('statusDisplay').innerText = data.status || "In Progress";
                     document.getElementById('deviceDisplay').innerText = `Device: ${data.device}`;
                     
-                    // Warranty Display Logic
                     if (data.status === 'Delivered' && data.warrantyEndsAt) {
                         const daysLeft = Math.ceil((data.warrantyEndsAt - Date.now()) / (1000 * 60 * 60 * 24));
                         const wc = document.getElementById('warrantyCard');
@@ -881,7 +917,7 @@
             if(status === 'Ready for Pickup') msg += "Your device is repaired and ready for pickup! You can visit our shop anytime during working hours.";
             else msg += "You can track your repair live on our website.";
             let cleanPhone = (phone || '').toString().replace(/\D/g, ''); if(cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
-            if(cleanPhone.length >= 10) window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank'); else alert("Invalid phone number.");
+            if(cleanPhone.length >= 10) window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank'); else showToast("Invalid phone number format.", true);
         }
 
         window.openInvoice = function(id, name, phone, device, issue, dateStr) {
@@ -965,7 +1001,7 @@
                 await updateDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'bookings', docId), updateData);
                 btn.innerText = 'Saved!'; btn.classList.replace('bg-green-100', 'bg-blue-100'); btn.classList.replace('text-green-700', 'text-blue-700');
                 setTimeout(() => { btn.innerText = 'Save Update'; btn.classList.replace('bg-blue-100', 'bg-green-100'); btn.classList.replace('text-blue-700', 'text-green-700'); }, 1500);
-            } catch (err) { alert("Error: " + err.message); btn.innerText = 'Failed'; }
+            } catch (err) { showToast("Error saving status: " + err.message, true); btn.innerText = 'Failed'; }
         }
 
         window.loadAdminBuyLeads = async function() {
@@ -995,9 +1031,10 @@
             } catch (err) { table.innerHTML = `<tr><td colspan="5" class="text-center p-10 font-bold text-red-500">Error: ${err.message}</td></tr>`; }
         }
 
-        window.deleteLead = async function(id) {
-            if(!confirm("Clear this lead?")) return;
-            try { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'sell_leads', id)); loadAdminBuyLeads(); } catch(e) { alert("Error: "+e.message); }
+        window.deleteLead = function(id) {
+            customConfirm("Clear this lead?", async () => {
+                try { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'sell_leads', id)); loadAdminBuyLeads(); showToast("Lead cleared"); } catch(e) { showToast("Error: "+e.message, true); }
+            });
         }
 
         const defaultPrices = { 'val-p-and-screen': '₹800+', 'val-p-and-batt': '₹600+', 'val-p-and-port': '₹350+', 'val-p-and-soft': '₹300+', 'val-p-iph-screen': '₹1500+', 'val-p-iph-batt': '₹1200+', 'val-p-iph-glass': '₹1000+', 'val-p-iph-true': '₹500+' };
@@ -1011,10 +1048,21 @@
         window.saveAdminPricing = async function() {
             const btn = document.getElementById('savePricingBtn'); btn.innerText = "Saving...";
             const nP = { 'val-p-and-screen': document.getElementById('edit-p-and-screen').value, 'val-p-and-batt': document.getElementById('edit-p-and-batt').value, 'val-p-and-port': document.getElementById('edit-p-and-port').value, 'val-p-and-soft': document.getElementById('edit-p-and-soft').value, 'val-p-iph-screen': document.getElementById('edit-p-iph-screen').value, 'val-p-iph-batt': document.getElementById('edit-p-iph-batt').value, 'val-p-iph-glass': document.getElementById('edit-p-iph-glass').value, 'val-p-iph-true': document.getElementById('edit-p-iph-true').value };
-            try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing'), nP); for (const key in nP) { if (document.getElementById(key)) document.getElementById(key).innerText = nP[key]; } btn.innerText = "Save to Cloud"; document.getElementById('priceSaveMsg').classList.remove('hidden'); setTimeout(() => document.getElementById('priceSaveMsg').classList.add('hidden'), 3000); } catch (err) { alert("Error: " + err.message); btn.innerText = "Save to Cloud"; }
+            try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'settings', 'pricing'), nP); for (const key in nP) { if (document.getElementById(key)) document.getElementById(key).innerText = nP[key]; } btn.innerText = "Save to Cloud"; showToast("Prices updated successfully!"); } catch (err) { showToast("Error: " + err.message, true); btn.innerText = "Save to Cloud"; }
         }
 
-        const defaultServices = [{ id: "s1", img: "https://images.unsplash.com/photo-1605170439002-90845e8c0137?q=80&w=400", title_en: "Screen Replacement", title_mr: "स्क्रीन बदलणे", desc_en: "Original LCD & OLED displays.", desc_mr: "ओरिजिनल डिस्प्ले.", order: 1 }];
+        const defaultServices = [
+            { id: "s1", img: "https://images.unsplash.com/photo-1605170439002-90845e8c0137?q=80&w=400", title_en: "Screen Replacement", title_mr: "स्क्रीन बदलणे", desc_en: "Original LCD & OLED displays.", desc_mr: "ओरिजिनल डिस्प्ले.", order: 1 },
+            { id: "s2", img: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?q=80&w=400", title_en: "Battery Replacement", title_mr: "बॅटरी बदलणे", desc_en: "Long-lasting original batteries.", desc_mr: "जास्त काळ टिकणाऱ्या ओरिजिनल बॅटरी.", order: 2 },
+            { id: "s3", img: "https://images.unsplash.com/photo-1591337893098-999052b36a18?q=80&w=400", title_en: "Charging Port Repair", title_mr: "चार्जिंग पोर्ट दुरुस्ती", desc_en: "Fix loose or broken ports.", desc_mr: "खराब पोर्ट्सची दुरुस्ती.", order: 3 },
+            { id: "s4", img: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=400", title_en: "Motherboard Repair", title_mr: "मदरबोर्ड दुरुस्ती", desc_en: "Advanced micro-soldering.", desc_mr: "प्रगत मायक्रो-सोल्डरिंग.", order: 4 },
+            { id: "s5", img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=400", title_en: "Water Damage", title_mr: "पाण्यामुळे झालेले नुकसान", desc_en: "Deep cleaning & recovery.", desc_mr: "डीप क्लिनिंग आणि रिकव्हरी.", order: 5 },
+            { id: "s6", img: "https://images.unsplash.com/photo-1601314545564-968600100d83?q=80&w=400", title_en: "Speaker/Mic Repair", title_mr: "स्पीकर / माइक दुरुस्ती", desc_en: "Clear audio restoration.", desc_mr: "स्पष्ट आवाजासाठी दुरुस्ती.", order: 6 },
+            { id: "s7", img: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=400", title_en: "Camera Repair", title_mr: "कॅमेरा दुरुस्ती", desc_en: "Lens and module replacement.", desc_mr: "लेन्स आणि मॉड्यूल बदलणे.", order: 7 },
+            { id: "s8", img: "https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?q=80&w=400", title_en: "Back Glass Repair", title_mr: "बॅक ग्लास दुरुस्ती", desc_en: "Laser back glass removal.", desc_mr: "लेझरद्वारे बॅक ग्लास बदलणे.", order: 8 },
+            { id: "s9", img: "https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?q=80&w=400", title_en: "Software & Unlock", title_mr: "सॉफ्टवेअर आणि अनलॉक", desc_en: "OS updates and FRP unlock.", desc_mr: "ओएस अपडेट आणि एफआरपी अनलॉक.", order: 9 }
+        ];
+        
         window.loadLiveServices = async function() {
             try {
                 const snap = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'services')));
@@ -1028,10 +1076,20 @@
         window.openServiceForm = function(s = null) { document.getElementById('adminServiceForm').classList.remove('hidden'); document.getElementById('srv-id').value = s?s.id:''; document.getElementById('srv-img').value = s?s.img:''; document.getElementById('srv-title-en').value = s?s.title_en:''; document.getElementById('srv-title-mr').value = s?s.title_mr:''; document.getElementById('srv-desc-en').value = s?s.desc_en:''; document.getElementById('srv-desc-mr').value = s?s.desc_mr:''; document.getElementById('srv-order').value = s?s.order:(window.currentServices.length+1); }
         window.editService = function(id) { openServiceForm(window.currentServices.find(s => s.id === id)); }
         window.cancelServiceForm = function() { document.getElementById('adminServiceForm').classList.add('hidden'); }
-        window.saveAdminService = async function() { const data = { img: document.getElementById('srv-img').value, title_en: document.getElementById('srv-title-en').value, title_mr: document.getElementById('srv-title-mr').value, desc_en: document.getElementById('srv-desc-en').value, desc_mr: document.getElementById('srv-desc-mr').value, order: parseInt(document.getElementById('srv-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', document.getElementById('srv-id').value || 'srv-'+Date.now()), data); cancelServiceForm(); loadLiveServices(); loadCurrentAdminData(); } catch(e) { alert("Error: " + e.message); } }
-        window.deleteAdminService = async function(id) { if(confirm("Delete service?")) { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', id)); loadLiveServices(); loadCurrentAdminData(); } }
+        window.saveAdminService = async function() { const data = { img: document.getElementById('srv-img').value, title_en: document.getElementById('srv-title-en').value, title_mr: document.getElementById('srv-title-mr').value, desc_en: document.getElementById('srv-desc-en').value, desc_mr: document.getElementById('srv-desc-mr').value, order: parseInt(document.getElementById('srv-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', document.getElementById('srv-id').value || 'srv-'+Date.now()), data); cancelServiceForm(); loadLiveServices(); loadCurrentAdminData(); showToast("Service saved"); } catch(e) { showToast("Error: " + e.message, true); } }
+        window.deleteAdminService = function(id) { customConfirm("Delete service?", async () => { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'services', id)); loadLiveServices(); loadCurrentAdminData(); showToast("Service deleted"); }); }
 
-        const defaultAccessories = [{ id: "a1", img: "https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=300", title_en: "Tough Armor Cases", title_mr: "टफ आर्मर कव्हर", price: "₹ 299", badge: "sale", order: 1 }];
+        const defaultAccessories = [
+            { id: "a1", img: "https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=300", title_en: "Tough Armor Cases", title_mr: "टफ आर्मर कव्हर", price: "₹ 299+", badge: "sale", order: 1 },
+            { id: "a2", img: "https://images.unsplash.com/photo-1588602528751-2911bca096ff?q=80&w=300", title_en: "Tempered Glass", title_mr: "टेम्पर्ड ग्लास", price: "₹ 99+", badge: "none", order: 2 },
+            { id: "a3", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=300", title_en: "Fast Adapters", title_mr: "फास्ट चार्जर", price: "₹ 499+", badge: "new", order: 3 },
+            { id: "a4", img: "https://images.unsplash.com/photo-1506161480112-588cecc586b6?q=80&w=300", title_en: "Data Cables", title_mr: "डेटा केबल्स", price: "₹ 150+", badge: "none", order: 4 },
+            { id: "a5", img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=300", title_en: "TWS Earbuds", title_mr: "ब्लूटूथ इअरबड्स", price: "₹ 899+", badge: "sale", order: 5 },
+            { id: "a6", img: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?q=80&w=300", title_en: "Power Banks", title_mr: "पॉवर बँक", price: "₹ 999+", badge: "none", order: 6 },
+            { id: "a7", img: "https://images.unsplash.com/photo-1512446816042-444d641267d4?q=80&w=300", title_en: "Car Chargers", title_mr: "कार चार्जर", price: "₹ 349+", badge: "none", order: 7 },
+            { id: "a8", img: "https://images.unsplash.com/photo-1572569433114-bf67ef40d463?q=80&w=300", title_en: "Wired Earphones", title_mr: "वायर्ड इयरफोन्स", price: "₹ 199+", badge: "none", order: 8 }
+        ];
+
         window.loadLiveAccessories = async function() {
             try { const snap = await dbTimeout(getDocs(collection(db, 'artifacts', appIdName, 'public', 'data', 'accessories'))); let a = []; if(snap.empty) a = defaultAccessories; else snap.forEach(doc => a.push({id: doc.id, ...doc.data()})); a.sort((x,y) => x.order - y.order); window.currentAccessories = a; renderPublicAccessories(a); } catch(e) { window.currentAccessories = defaultAccessories; renderPublicAccessories(defaultAccessories); }
         }
@@ -1040,8 +1098,8 @@
         window.openAccessoryForm = function(a = null) { document.getElementById('adminAccessoryForm').classList.remove('hidden'); document.getElementById('acc-id').value = a?a.id:''; document.getElementById('acc-img').value = a?a.img:''; document.getElementById('acc-title-en').value = a?a.title_en:''; document.getElementById('acc-title-mr').value = a?a.title_mr:''; document.getElementById('acc-price').value = a?a.price:''; document.getElementById('acc-badge').value = a?a.badge:'none'; document.getElementById('acc-order').value = a?a.order:(window.currentAccessories.length+1); }
         window.editAccessory = function(id) { openAccessoryForm(window.currentAccessories.find(a => a.id === id)); }
         window.cancelAccessoryForm = function() { document.getElementById('adminAccessoryForm').classList.add('hidden'); }
-        window.saveAdminAccessory = async function() { const data = { img: document.getElementById('acc-img').value, title_en: document.getElementById('acc-title-en').value, title_mr: document.getElementById('acc-title-mr').value, price: document.getElementById('acc-price').value, badge: document.getElementById('acc-badge').value, order: parseInt(document.getElementById('acc-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', document.getElementById('acc-id').value || 'acc-'+Date.now()), data); cancelAccessoryForm(); loadLiveAccessories(); loadCurrentAdminData(); } catch(e) { alert("Error: " + e.message); } }
-        window.deleteAdminAccessory = async function(id) { if(confirm("Delete accessory?")) { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', id)); loadLiveAccessories(); loadCurrentAdminData(); } }
+        window.saveAdminAccessory = async function() { const data = { img: document.getElementById('acc-img').value, title_en: document.getElementById('acc-title-en').value, title_mr: document.getElementById('acc-title-mr').value, price: document.getElementById('acc-price').value, badge: document.getElementById('acc-badge').value, order: parseInt(document.getElementById('acc-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', document.getElementById('acc-id').value || 'acc-'+Date.now()), data); cancelAccessoryForm(); loadLiveAccessories(); loadCurrentAdminData(); showToast("Accessory saved"); } catch(e) { showToast("Error: " + e.message, true); } }
+        window.deleteAdminAccessory = function(id) { customConfirm("Delete accessory?", async () => { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'accessories', id)); loadLiveAccessories(); loadCurrentAdminData(); showToast("Accessory deleted"); }); }
 
         const defaultUsed = [{ id: "u1", img: "https://images.unsplash.com/photo-1585060544812-6b45742d762f?q=80&w=300", model: "iPhone 12 (128GB)", cond: "Like New (90% Battery)", price: "₹ 24,500", status: "available", order: 1 }];
         window.loadLiveUsedPhones = async function() {
@@ -1061,8 +1119,8 @@
         window.openUsedForm = function(p = null) { document.getElementById('adminUsedForm').classList.remove('hidden'); document.getElementById('used-id').value = p?p.id:''; document.getElementById('used-img').value = p?p.img:''; document.getElementById('used-model').value = p?p.model:''; document.getElementById('used-cond').value = p?p.cond:''; document.getElementById('used-price').value = p?p.price:''; document.getElementById('used-status').value = p?p.status:'available'; document.getElementById('used-order').value = p?p.order:(window.currentUsedPhones.length+1); }
         window.editUsedPhone = function(id) { openUsedForm(window.currentUsedPhones.find(p => p.id === id)); }
         window.cancelUsedForm = function() { document.getElementById('adminUsedForm').classList.add('hidden'); }
-        window.saveAdminUsed = async function() { const btn = document.getElementById('btnSaveUsed'); btn.innerText="Saving..."; const data = { img: document.getElementById('used-img').value, model: document.getElementById('used-model').value, cond: document.getElementById('used-cond').value, price: document.getElementById('used-price').value, status: document.getElementById('used-status').value, order: parseInt(document.getElementById('used-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'used_phones', document.getElementById('used-id').value || 'used-'+Date.now()), data); cancelUsedForm(); loadLiveUsedPhones(); loadCurrentAdminData(); } catch(e) { alert("Error: " + e.message); } finally { btn.innerText="Save Phone"; } }
-        window.deleteAdminUsedPhone = async function(id) { if(confirm("Delete this phone listing?")) { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'used_phones', id)); loadLiveUsedPhones(); loadCurrentAdminData(); } }
+        window.saveAdminUsed = async function() { const btn = document.getElementById('btnSaveUsed'); btn.innerText="Saving..."; const data = { img: document.getElementById('used-img').value, model: document.getElementById('used-model').value, cond: document.getElementById('used-cond').value, price: document.getElementById('used-price').value, status: document.getElementById('used-status').value, order: parseInt(document.getElementById('used-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'used_phones', document.getElementById('used-id').value || 'used-'+Date.now()), data); cancelUsedForm(); loadLiveUsedPhones(); loadCurrentAdminData(); showToast("Phone listing saved"); } catch(e) { showToast("Error: " + e.message, true); } finally { btn.innerText="Save Phone"; } }
+        window.deleteAdminUsedPhone = function(id) { customConfirm("Delete this phone listing?", async () => { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'used_phones', id)); loadLiveUsedPhones(); loadCurrentAdminData(); showToast("Listing deleted"); }); }
 
         const defaultFaqs = [{ id: "f1", q_en: "Do you use original parts?", q_mr: "तुम्ही ओरिजिनल पार्ट्स वापरता का?", a_en: "Yes! We always prioritize 100% original parts.", a_mr: "होय! आम्ही नेहमी 100% ओरिजिनल पार्ट्स वापरतो.", order: 1 }];
         window.toggleFaq = function(id) { const c = document.getElementById(`faq-content-${id}`); const i = document.getElementById(`faq-icon-${id}`); c.classList.toggle('hidden'); i.style.transform = c.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)'; }
@@ -1072,8 +1130,8 @@
         window.openFaqForm = function(f = null) { document.getElementById('adminFaqForm').classList.remove('hidden'); document.getElementById('faq-id').value = f?f.id:''; document.getElementById('faq-q-en').value = f?f.q_en:''; document.getElementById('faq-q-mr').value = f?f.q_mr:''; document.getElementById('faq-a-en').value = f?f.a_en:''; document.getElementById('faq-a-mr').value = f?f.a_mr:''; document.getElementById('faq-order').value = f?f.order:(window.currentFaqs.length+1); }
         window.editFaq = function(id) { openFaqForm(window.currentFaqs.find(f => f.id === id)); }
         window.cancelFaqForm = function() { document.getElementById('adminFaqForm').classList.add('hidden'); }
-        window.saveAdminFaq = async function() { const data = { q_en: document.getElementById('faq-q-en').value, q_mr: document.getElementById('faq-q-mr').value, a_en: document.getElementById('faq-a-en').value, a_mr: document.getElementById('faq-a-mr').value, order: parseInt(document.getElementById('faq-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'faqs', document.getElementById('faq-id').value || 'faq-'+Date.now()), data); cancelFaqForm(); loadLiveFaqs(); loadCurrentAdminData(); } catch(e) { alert("Error: " + e.message); } }
-        window.deleteAdminFaq = async function(id) { if(confirm("Delete FAQ?")) { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'faqs', id)); loadLiveFaqs(); loadCurrentAdminData(); } }
+        window.saveAdminFaq = async function() { const data = { q_en: document.getElementById('faq-q-en').value, q_mr: document.getElementById('faq-q-mr').value, a_en: document.getElementById('faq-a-en').value, a_mr: document.getElementById('faq-a-mr').value, order: parseInt(document.getElementById('faq-order').value) || 99 }; try { await setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'faqs', document.getElementById('faq-id').value || 'faq-'+Date.now()), data); cancelFaqForm(); loadLiveFaqs(); loadCurrentAdminData(); showToast("FAQ saved"); } catch(e) { showToast("Error: " + e.message, true); } }
+        window.deleteAdminFaq = function(id) { customConfirm("Delete FAQ?", async () => { await deleteDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'faqs', id)); loadLiveFaqs(); loadCurrentAdminData(); showToast("FAQ deleted"); }); }
 
         let selectedStars = 0;
         document.querySelectorAll('.star').forEach(star => {
@@ -1084,7 +1142,7 @@
         });
         document.getElementById('rateSubmitBtn').addEventListener('click', async (e) => {
             const form = document.getElementById('rateForm'); if(!form.checkValidity()) { form.reportValidity(); return; } hideFormError('rateError');
-            if(selectedStars == 0) { alert("Please select a star rating!"); return; }
+            if(selectedStars == 0) { showToast("Please select a star rating!", true); return; }
             const btn = document.getElementById('rateSubmitBtn'); const originalText = btn.innerText; btn.innerText = "Publishing..."; btn.disabled = true;
             const reviewData = { name: document.getElementById('r-name').value, text: document.getElementById('r-text').value, stars: parseInt(selectedStars), date: Date.now() };
             try { await dbTimeout(setDoc(doc(db, 'artifacts', appIdName, 'public', 'data', 'reviews', "REV-"+Date.now()), reviewData)); document.getElementById('rateForm').classList.add('hidden'); document.getElementById('rateSuccess').classList.remove('hidden'); injectReviewCard(reviewData, true); } catch (err) { showFormError('rateError', err.message); } finally { btn.innerText = originalText; btn.disabled = false; }
